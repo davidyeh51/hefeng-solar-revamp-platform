@@ -1,0 +1,1878 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 fill=%27%230C3A63%27/%3E%3Ccircle cx=%2732%27 cy=%2732%27 r=%2718%27 fill=%27%23E09A2B%27/%3E%3Cpath d=%27M16 48 L48 48 L42 20 L22 20 Z%27 fill=%27%231BB1BF%27 opacity=%270.85%27/%3E%3Cpath d=%27M32 10 L32 16 M10 32 L16 32 M54 32 L48 32%27 stroke=%27%23fff%27 stroke-width=%273%27 stroke-linecap=%27round%27/%3E%3C/svg%3E">
+<title>禾豐牧場 452.6kWp 光伏電廠整改診斷與決策平台｜進能服 6692</title>
+<meta name="description" content="進能服 6692 · 禾豐牧場光伏電廠整改診斷與決策平台：涵蓋 2014-2025 歷年發電劣化分析、21 路 MPPT 離散故障熱圖、現場外觀病徵糾錯、可回收效益階梯拆解、財務模型五大漏洞修正、四大整改方案評比與兩階段決策分流路徑。">
+<!-- Leaflet CSS & JS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<style>
+:root{
+  --blue:#1968AD; --blue-d:#12518A; --blue-dd:#0C3A63; --blue-soft:#E8F1F9;
+  --teal:#1BB1BF; --teal-d:#12818C; --teal-soft:#E2F5F7;
+  --ink:#12293D; --muted:#5B7285; --line:#D9E3EC; --paper:#F4F7FA; --card:#fff;
+  --amber:#E09A2B; --amber-soft:#FCF2DE;
+  --coral:#D95F45; --coral-soft:#FBEAE5;
+  --grey:#9FB1C0; --grey-soft:#EDF1F5;
+  --green:#2E7D32; --green-soft:#E8F5E9;
+  --purple:#6B46C1; --purple-soft:#F3E8FF;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:"Noto Sans TC","Microsoft JhengHei","PingFang TC",system-ui,-apple-system,sans-serif;
+  background:var(--paper); color:var(--ink); line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ---------- top bar ---------- */
+.topbar{
+  position:fixed; top:0; left:0; right:0; z-index:50; height:54px;
+  display:flex; align-items:center; gap:8px; padding:0 20px;
+  background:rgba(255,255,255,.96); backdrop-filter:blur(10px);
+  border-bottom:2px solid var(--blue);
+  box-shadow:0 2px 10px rgba(12,58,99,.06);
+}
+.topbar .brand{display:flex; align-items:center; gap:10px; margin-right:16px; white-space:nowrap; text-decoration:none}
+.topbar .brand .mk{flex:0 0 28px; display:flex; align-items:center}
+.topbar .brand .tx{font-weight:800; font-size:.88rem; letter-spacing:.02em; color:var(--ink); line-height:1.18}
+.topbar .brand .tx small{display:block; font-weight:700; font-size:.66rem; letter-spacing:.08em; color:var(--blue)}
+.topnav{display:flex; gap:4px; flex:1; min-width:0; overflow-x:auto; scrollbar-width:none}
+.topnav::-webkit-scrollbar{display:none}
+.topnav a{
+  text-decoration:none; color:var(--muted); font-size:.84rem; font-weight:600;
+  padding:6px 13px; border-radius:4px; white-space:nowrap; border:1px solid transparent;
+  transition:all .15s ease;
+}
+.topnav a:hover{color:var(--blue); background:var(--blue-soft)}
+.topnav a.active{color:#fff; background:var(--blue); font-weight:700}
+.topbar .meta{font-size:.74rem; color:var(--muted); white-space:nowrap; font-weight:600}
+@media(max-width:1120px){.topbar .meta{display:none}}
+@media(max-width:860px){.topbar .brand .tx{font-size:.78rem}}
+
+/* ---------- views / slides ---------- */
+.view{display:none}
+.view.active{display:block}
+.slide{
+  display:none; min-height:100vh; padding:78px 48px 88px;
+  max-width:1380px; margin:0 auto; flex-direction:column;
+}
+.slide.active{display:flex}
+.slide-header{display:flex; justify-content:space-between; align-items:flex-start; gap:16px; margin-bottom:18px}
+.eyebrow{font-size:.76rem; font-weight:800; letter-spacing:.14em; color:var(--teal-d); text-transform:uppercase; margin-bottom:6px}
+.slide-header h1,.slide-header h2{font-size:clamp(1.35rem,2.6vw,1.95rem); line-height:1.3; font-weight:800; max-width:32em; color:var(--ink)}
+.slide-header h1::after,.slide-header h2::after{
+  content:""; display:block; width:64px; height:4px; margin-top:10px;
+  background:linear-gradient(90deg,var(--blue),var(--teal));
+}
+.slide-header .sub{margin-top:10px; color:var(--muted); font-size:.92rem; max-width:58em; line-height:1.58}
+.flags{display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end}
+.flag{font-size:.72rem; font-weight:700; padding:5px 12px; border-radius:3px; white-space:nowrap}
+.flag.blue{background:var(--blue-soft); color:var(--blue-d)}
+.flag.teal{background:var(--teal-soft); color:var(--teal-d)}
+.flag.amber{background:var(--amber-soft); color:#9a6a10}
+.flag.coral{background:var(--coral-soft); color:#b4432c}
+.flag.green{background:var(--green-soft); color:var(--green)}
+.flag.purple{background:var(--purple-soft); color:var(--purple)}
+.flag.grey{background:var(--grey-soft); color:var(--muted)}
+.slide-body{flex:1; display:flex; flex-direction:column; gap:16px}
+.slide-foot{display:flex; justify-content:space-between; gap:16px; margin-top:20px; padding-top:12px; border-top:1px solid var(--line); font-size:.73rem; color:var(--muted); background:rgba(255,255,255,.7); border-radius:4px; padding-left:12px; padding-right:12px}
+.slide-foot .pageno{white-space:nowrap; font-weight:800; color:var(--blue)}
+
+/* ---------- layout grids ---------- */
+.two-col{display:grid; grid-template-columns:1fr 1fr; gap:18px; align-items:stretch}
+.three-col{display:grid; grid-template-columns:repeat(3,1fr); gap:14px}
+.four-col{display:grid; grid-template-columns:repeat(4,1fr); gap:12px}
+.five-col{display:grid; grid-template-columns:repeat(5,1fr); gap:10px}
+.split-40{display:grid; grid-template-columns:40% 1fr; gap:18px; align-items:start}
+.split-45{display:grid; grid-template-columns:45% 1fr; gap:18px; align-items:start}
+.split-55{display:grid; grid-template-columns:1fr 45%; gap:18px; align-items:start}
+.split-60{display:grid; grid-template-columns:1fr 40%; gap:18px; align-items:start}
+.split-img-right{display:grid; grid-template-columns:1fr 1.15fr; gap:18px; align-items:start}
+.split-img-left{display:grid; grid-template-columns:1.15fr 1fr; gap:18px; align-items:start}
+
+@media(max-width:1050px){
+  .slide{padding:72px 18px 96px}
+  .two-col,.three-col,.four-col,.five-col,.split-40,.split-45,.split-55,.split-60,.split-img-right,.split-img-left{grid-template-columns:1fr}
+}
+
+/* ---------- components ---------- */
+.card{background:var(--card); border:1px solid var(--line); border-top:3px solid var(--blue); border-radius:4px; padding:16px 18px; box-shadow:0 3px 10px rgba(18,41,61,.04)}
+.card.teal{border-top-color:var(--teal)}
+.card.amber{border-top-color:var(--amber)}
+.card.coral{border-top-color:var(--coral)}
+.card.green{border-top-color:var(--green)}
+.card.purple{border-top-color:var(--purple)}
+.card.grey{border-top-color:var(--grey)}
+.card h3{font-size:.98rem; font-weight:800; margin-bottom:8px; color:var(--ink)}
+.card p{font-size:.88rem; color:var(--muted); line-height:1.55}
+
+.metric{border-radius:4px; padding:14px 16px; border:1px solid var(--line); background:#fff; border-left:5px solid var(--blue); box-shadow:0 2px 8px rgba(18,41,61,.03)}
+.metric .k{font-size:clamp(1.35rem,2.2vw,1.9rem); font-weight:900; line-height:1.1; color:var(--blue); font-variant-numeric:tabular-nums}
+.metric .t{font-size:.8rem; color:var(--muted); margin-top:6px; line-height:1.45}
+.metric.teal{border-left-color:var(--teal)} .metric.teal .k{color:var(--teal-d)}
+.metric.amber{border-left-color:var(--amber)} .metric.amber .k{color:#9a6a10}
+.metric.coral{border-left-color:var(--coral)} .metric.coral .k{color:#b4432c}
+.metric.green{border-left-color:var(--green)} .metric.green .k{color:var(--green)}
+.metric.purple{border-left-color:var(--purple)} .metric.purple .k{color:var(--purple)}
+.metric.grey{border-left-color:var(--grey)} .metric.grey .k{color:var(--muted)}
+
+.big-callout{
+  background:linear-gradient(120deg,var(--blue-dd),var(--blue) 62%,var(--teal-d)); color:#fff;
+  border-radius:6px; padding:20px 24px; position:relative; overflow:hidden; box-shadow:0 4px 16px rgba(12,58,99,.15);
+}
+.big-callout .label{font-size:.72rem; letter-spacing:.14em; opacity:.85; font-weight:800; margin-bottom:6px}
+.big-callout .answer{font-size:clamp(1.1rem,2vw,1.45rem); font-weight:800; line-height:1.38}
+.big-callout .more{margin-top:8px; font-size:.88rem; opacity:.94; line-height:1.58}
+
+.table-wrap{background:#fff; border:1px solid var(--line); border-radius:4px; overflow-x:auto; box-shadow:0 3px 12px rgba(7,29,59,.04)}
+table{width:100%; border-collapse:collapse; font-size:.84rem; min-width:560px}
+th{background:var(--blue); color:#fff; text-align:left; font-weight:700; padding:9px 12px; white-space:nowrap; font-size:.82rem}
+th.sub{background:var(--blue-d)}
+td{padding:8px 12px; border-bottom:1px solid #EDF1F5; vertical-align:top}
+tr:last-child td{border-bottom:none}
+tbody tr:nth-child(even){background:#FAFCFE}
+tbody tr:hover{background:#F0F6FC}
+td.num,th.num{text-align:right; font-variant-numeric:tabular-nums}
+td.ctr,th.ctr{text-align:center}
+.hl-row{background:var(--amber-soft) !important}
+.hl-row td{font-weight:700}
+.bad-row{background:var(--coral-soft) !important}
+.good-row{background:var(--green-soft) !important}
+.table-toggle{display:block; width:100%; padding:9px 12px; border:0; border-top:1px solid var(--line); background:var(--blue-soft); color:var(--blue-dd); text-align:left; font:700 .78rem inherit; cursor:pointer}
+.table-toggle:hover{background:#d8e6f5}
+.table-extra{display:none}
+.table-wrap.expanded .table-extra{display:table-row}
+
+/* Image container */
+.fig{background:#fff; border:1px solid var(--line); border-radius:6px; padding:12px; box-shadow:0 3px 12px rgba(18,41,61,.04); display:flex; flex-direction:column}
+.figtitle{font-size:.82rem; font-weight:800; color:var(--blue-dd); margin-bottom:8px; display:flex; align-items:center; gap:6px}
+.fig img{width:100%; height:auto; border-radius:4px; object-fit:cover; display:block}
+.figcap{font-size:.76rem; color:var(--muted); margin-top:8px; line-height:1.45}
+
+/* Photo 4 grid */
+.photo-grid-4{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+.photo-item{background:#fff; border:1px solid var(--line); border-radius:4px; overflow:hidden; box-shadow:0 2px 6px rgba(0,0,0,.04)}
+.photo-item img{width:100%; height:180px; object-fit:cover; display:block}
+.photo-desc{padding:10px 12px}
+.photo-desc b{display:block; font-size:.85rem; color:var(--ink); margin-bottom:4px}
+.photo-desc p{font-size:.76rem; color:var(--muted); line-height:1.4}
+
+/* Map frame */
+#pv-map{width:100%; height:380px; border-radius:4px; z-index:1}
+
+/* Deckbar */
+.deckbar{
+  position:fixed; bottom:0; left:0; right:0; z-index:50; height:52px;
+  background:rgba(255,255,255,.96); backdrop-filter:blur(8px);
+  border-top:1px solid var(--line); box-shadow:0 -2px 10px rgba(12,58,99,.06);
+  display:flex; align-items:center; justify-content:space-between; padding:0 20px;
+}
+.deckbar-left{display:flex; align-items:center; gap:10px}
+.deckbtn{
+  background:#fff; border:1px solid var(--line); color:var(--ink);
+  font-size:.82rem; font-weight:700; padding:6px 14px; border-radius:4px;
+  cursor:pointer; display:flex; align-items:center; gap:6px; transition:all .15s;
+}
+.deckbtn:hover{background:var(--blue-soft); border-color:var(--blue); color:var(--blue)}
+.deckbtn:disabled{opacity:.4; cursor:not-allowed; border-color:var(--line); background:#fff; color:var(--muted)}
+.deckbar-center{display:flex; align-items:center; gap:12px; flex:1; max-width:480px; margin:0 20px}
+.progress-track{flex:1; height:6px; background:var(--grey-soft); border-radius:3px; overflow:hidden}
+.progress-fill{height:100%; background:linear-gradient(90deg,var(--blue),var(--teal)); width:0%; transition:width .2s}
+.counter{font-size:.82rem; font-weight:800; color:var(--blue-dd); white-space:nowrap; font-variant-numeric:tabular-nums}
+.deckbar-right{font-size:.75rem; color:var(--muted); font-weight:600}
+@media(max-width:768px){.deckbar-right{display:none}}
+
+/* Home hero */
+.home-hero{
+  background:linear-gradient(135deg,#071D3B 0%,#0C3A63 50%,#12518A 100%);
+  color:#fff; padding:60px 48px; border-radius:8px; position:relative; overflow:hidden;
+  box-shadow:0 6px 24px rgba(7,29,59,.2); margin-bottom:24px;
+}
+.home-hero .kicker{font-size:.78rem; font-weight:800; letter-spacing:.16em; color:var(--teal); text-transform:uppercase; margin-bottom:10px}
+.home-hero h1{font-size:clamp(1.6rem,3.2vw,2.5rem); font-weight:900; line-height:1.25; margin-bottom:14px; max-width:30em}
+.home-hero .lead{font-size:clamp(.92rem,1.4vw,1.08rem); opacity:.92; max-width:54em; line-height:1.65; margin-bottom:24px}
+.home-hero .hero-tags{display:flex; gap:10px; flex-wrap:wrap}
+.home-hero .hero-tags span{background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.25); padding:5px 12px; border-radius:4px; font-size:.76rem; font-weight:700}
+.hero-deco{position:absolute; right:-40px; bottom:-40px; width:380px; height:380px; opacity:.12; pointer-events:none}
+</style>
+</head>
+<body>
+
+  <!-- Top bar -->
+  <header class="topbar">
+    <a href="#home" class="brand" data-nav="home">
+      <div class="mk">
+        <svg width="26" height="26" viewBox="0 0 64 64">
+          <rect width="64" height="64" rx="8" fill="#0C3A63"/>
+          <circle cx="32" cy="32" r="16" fill="#E09A2B"/>
+          <path d="M16 46 L48 46 L40 22 L24 22 Z" fill="#1BB1BF" opacity="0.9"/>
+          <path d="M32 12 L32 18 M12 32 L18 32 M52 32 L46 32" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="tx">進能服 6692<small>禾豐牧場光電整改決策中樞平台</small></div>
+    </a>
+    <nav class="topnav">
+      <a href="#home" data-nav="home">封面</a>
+      <a href="#p1" data-nav="p1">Part 1 電廠現況與劣化 (4 頁)</a>
+      <a href="#p2" data-nav="p2">Part 2 歸因研判與修復 (3 頁)</a>
+      <a href="#p3" data-nav="p3">Part 3 方案比較與財務漏洞 (4 頁)</a>
+      <a href="#p4" data-nav="p4">Part 4 空間圖資與方法論 (2 頁)</a>
+    </nav>
+    <div class="meta">報告日期：2026/09/11 ｜ 呈閱：董事長、總經理</div>
+  </header>
+
+  <!-- ================= HOME VIEW ================= -->
+  <div class="view active home" id="view-home" style="padding:74px 36px 40px; max-width:1380px; margin:0 auto;">
+    <div class="home-hero">
+      <svg class="hero-deco" viewBox="0 0 200 200">
+        <polygon points="100,10 190,190 10,190" fill="#1BB1BF"/>
+        <circle cx="100" cy="100" r="70" fill="none" stroke="#fff" stroke-width="8"/>
+      </svg>
+      <div class="kicker">8.1.4 整改光伏 × 4.6 運維管理 ｜ 實戰決策研判</div>
+      <h1>禾豐牧場 452.6kWp 豬舍屋頂光電整改診斷研判</h1>
+      <p class="lead">
+        屏東縣麟洛鄉禾豐牧場併聯已逾 12.7 年，年發電量由首年 54.4 萬度重挫至 2025 年 35.5 萬度（累計崩落 −34.7%），近兩年更以年均 −9.4% 急速惡化。本平台完整揭露「單路崩落」與「變流器降載」等離散型缺陷、糾正既有財務模型中「維運費每年多計 5 倍」之致命漏洞，並提出兼具低投入與高彈性之【A+ 精準整改方案】，為管理階層提供最具商業效益之決策依據。
+      </p>
+      <div class="hero-tags">
+        <span>📍 屏東縣麟洛鄉民族路埔圳巷 3 號</span>
+        <span>⚡ 容量 452.625 kWp (高壓 11.4kV 外併)</span>
+        <span>💰 躉售 5.7976 元/度 (至 2033-12-22)</span>
+        <span>🔍 1,932 片多晶模組 + 8 台 3-MPPT 變流器</span>
+      </div>
+    </div>
+
+    <!-- 5 Metrics -->
+    <div class="five-col" style="margin-bottom:22px">
+      <div class="metric coral">
+        <div class="k">-34.7%</div>
+        <div class="t">2014-2025 發電總衰退<br>(年均 -3.81%，為標準 5 倍)</div>
+      </div>
+      <div class="metric coral">
+        <div class="k">433.6 萬</div>
+        <div class="t">累計少發 74.8 萬度<br>(對照 0.7% 基準短收金額)</div>
+      </div>
+      <div class="metric amber">
+        <div class="k">6 / 21 路</div>
+        <div class="t">MPPT RA 低於 50%<br>(極端崩落最低僅 20.1%)</div>
+      </div>
+      <div class="metric green">
+        <div class="k">+52.9 萬/年</div>
+        <div class="t">A+ 精準整改年增收益<br>(RA 拉至 75%，增發 9.1 萬度)</div>
+      </div>
+      <div class="metric teal">
+        <div class="k">10.3% IRR</div>
+        <div class="t">整新模型除錯後實質報酬<br>(原試算因維運費算錯僅 5.7%)</div>
+      </div>
+    </div>
+
+    <!-- Overview Split -->
+    <div class="split-55" style="margin-bottom:22px">
+      <div class="big-callout">
+        <div class="label">EXECUTIVE SUMMARY ｜ 執行決策關鍵結論</div>
+        <div class="answer">發電損失非全場均勻老化，而是「可定位之離散故障」＋「維運合約脫節」！</div>
+        <div class="more">
+          1. <b>現況病徵定位</b>：同一逆變器內最大差距達 60 個百分點（INV4-M1 79.8% vs INV4-M3 20.1%），證實為斷串、熔絲或接頭等低成本可修復故障；風扇堵塞導致 INV6 整台降載。<br>
+          2. <b>財務模型修正</b>：原整新 1-1 期試算檔將維運費年費公式重複連續扣除，每年虛增 5 倍維運成本！修正此單一公式後，IRR 即由 5.68% 躍升至 10.3%（NPV 增近千萬）。<br>
+          3. <b>推薦處置路徑</b>：第 1 個月立即實施【全場 IR/IV/EL 診斷 + 變流器保養 + 清洗對照】；若失效模組 &lt; 3 成，採【A+ 精準整改】（上限 124~159 萬，3年回本）守住高躉售費率至 2033 年！
+        </div>
+      </div>
+      <div class="fig">
+        <div class="figtitle">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          禾豐牧場豬舍金屬屋頂太陽能電廠鳥瞰全景
+        </div>
+        <img src="assets/photo-rooftop-overview.jpg" alt="禾豐牧場豬舍屋頂光電空拍全景" style="height:210px; object-fit:cover">
+        <div class="figcap">屏東麟洛禾豐牧場現場實拍：平舖於三期浪板屋頂，緊鄰畜牧通風口，表面沉積粉塵油氣。</div>
+      </div>
+    </div>
+
+    <!-- Navigation Cards -->
+    <div class="four-col">
+      <div class="card">
+        <h3>Part 1 · 電廠現況與劣化診斷</h3>
+        <p>涵蓋基本產權合約、2014-2025 歷年發電斷崖式下滑、PR 矛盾檢核、21 路 MPPT 熱圖與現勘病徵糾錯。</p>
+        <div style="margin-top:12px"><a href="#p1-1" class="deckbtn" style="display:inline-flex">進入 Part 1 (4 頁) →</a></div>
+      </div>
+      <div class="card teal">
+        <h3>Part 2 · 歸因研判與修復拆解</h3>
+        <p>五大劣質根因矩陣、可回收電量瀑布階梯拆解（年增 9.1 萬度 / 52.9 萬元）、3 年回本上限與 30 天立即行動計畫。</p>
+        <div style="margin-top:12px"><a href="#p2-1" class="deckbtn" style="display:inline-flex">進入 Part 2 (3 頁) →</a></div>
+      </div>
+      <div class="card amber">
+        <h3>Part 3 · 方案比較與財務模型</h3>
+        <p>四大整改方案橫向評比、拆解既有試算五大模型漏洞（維運費多計5倍、913萬未說明支出）、法規限制與兩階段決策樹。</p>
+        <div style="margin-top:12px"><a href="#p3-1" class="deckbtn" style="display:inline-flex">進入 Part 3 (4 頁) →</a></div>
+      </div>
+      <div class="card green">
+        <h3>Part 4 · 空間圖資與方法論</h3>
+        <p>屏東麟洛地理環境互動圖資、浪板壓塊結構實拍、整改光伏標準 5 步可重用研判方法論與附錄待補追蹤清單。</p>
+        <div style="margin-top:12px"><a href="#p4-1" class="deckbtn" style="display:inline-flex">進入 Part 4 (2 頁) →</a></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= PART 1 VIEW ================= -->
+  <div class="view" id="view-p1">
+    <!-- Slide 1.1 -->
+    <section class="slide">
+      <div class="slide-header">
+        <div>
+          <div class="eyebrow">Part 1 · 電廠現況與劣化診斷 1.1</div>
+          <h1>光伏電廠基本資訊與產權架構檢核</h1>
+          <p class="sub">聿豐實業與進金生實業統包維護，兩造代表人為同一人（關係人交易）。高壓 11.4kV 外併，享 2013 年優厚躉售費率 5.7976 元/度，合約設計暗藏清潔與維護責任脫節之制度漏洞。</p>
+        </div>
+        <div class="flags">
+          <span class="flag blue">452.625 kWp</span>
+          <span class="flag teal">躉售 5.7976 元</span>
+          <span class="flag coral">維運無人對 PR 負責</span>
+        </div>
+      </div>
+      <div class="slide-body">
+        <div class="split-55">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width:22%">項目</th>
+                  <th style="width:48%">合約內容與工程現況</th>
+                  <th style="width:30%">查證依據與邊界條件</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>案場名稱與地址</b></td>
+                  <td>禾豐牧場（養豬場）豬舍屋頂型光電<br>屏東縣麟洛鄉民族路埔圳巷 3 號</td>
+                  <td>【查證】裝置合約書</td>
+                </tr>
+                <tr class="hl-row">
+                  <td><b>業主與統包維護</b></td>
+                  <td>甲方：聿豐實業股份有限公司<br>乙方：進金生實業股份有限公司</td>
+                  <td>【查證】兩造代表人同一人，簽章頁吻合</td>
+                </tr>
+                <tr>
+                  <td><b>裝置容量與併聯</b></td>
+                  <td>452.625 kWp｜模組 1,932 片｜變流器 8 台<br>三相三線，高壓外併 11.4 kV</td>
+                  <td>【查證】併聯日 2013-12-23（已運轉 12.7 年）</td>
+                </tr>
+                <tr class="good-row">
+                  <td><b>躉售費率與期限</b></td>
+                  <td><b style="color:var(--green);font-size:.95rem">5.7976 元／度</b>（至 2033-12-22）</td>
+                  <td>【計算】自報告日剩約 7 年 3 個月黃金期</td>
+                </tr>
+                <tr>
+                  <td><b>建置成本交叉驗證</b></td>
+                  <td>光電 2,215.7 萬 + 鋼構浪板 1,300 萬 = <b>3,515.7 萬</b>未稅（3,691.5 萬含稅）</td>
+                  <td>【查證】光電統包與慶憲工業鋼構兩約吻合</td>
+                </tr>
+                <tr>
+                  <td><b>建物分布</b></td>
+                  <td>豬舍 1、2+4、5、6、8、9、10、11、12 屋頂（配置圖黃框）；豬舍 3、7 未設</td>
+                  <td>【查證】現場配置圖；3、7 棟現況【待確認】</td>
+                </tr>
+                <tr class="bad-row">
+                  <td><b>保固維護條款漏洞</b></td>
+                  <td>保固 5 年（至 2018 底），每 6 個月巡檢一次；日常模組清潔歸業主；零件另計</td>
+                  <td>【查證】合約 4.4.5；無發電量 KPI 保證</td>
+                </tr>
+                <tr>
+                  <td><b>既有維運費用</b></td>
+                  <td>2019 年起 15 萬元／年（折合約 331 元／kWp／年）</td>
+                  <td>【查證】行動計畫財務表</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="fig">
+            <div class="figtitle">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              案場高空廣角實拍與屋頂陣列舖設
+            </div>
+            <img src="assets/photo-rooftop-overview.jpg" alt="屋頂陣列高空全景" style="height:250px; object-fit:cover">
+            <div class="figcap"><b>配置觀察</b>：多晶模組以鋁夾具緊貼金屬浪板平舖。低傾角導致雨水自清能力極差，模組背面無通風散熱間隙，加劇高溫劣化與微環境腐蝕。</div>
+          </div>
+        </div>
+        <div class="three-col" style="margin-top:4px">
+          <div class="card">
+            <h3>🏢 關係人交易治理機制</h3>
+            <p>聿豐與進金生代表人同一人，後續若採整新（方案 B）或資產出售（方案 C），必須委託第三方出具客觀公允之估價與技術報告，避免關係人利益輸送爭議。</p>
+          </div>
+          <div class="card coral">
+            <h3>⚠️ 維運合約致命制度盲區</h3>
+            <p>合約規定「清潔歸業主、巡檢半年一次、零件另計」，導致維護廠商無動力主動修繕斷串，業主亦缺乏專業清洗設備，形成「無人對發電量負責」之惡性循環。</p>
+          </div>
+          <div class="card teal">
+            <h3>⏳ 剩餘 7.25 年高躉售紅利</h3>
+            <p>5.7976 元高電價尚有約 7 年 3 個月。任何整改或修復方案應優先把握這段高電價期快速回本，而非冒然轉進 2033 年後不可測之綠電交易市場。</p>
+          </div>
+        </div>
+      </div>
+      <div class="slide-foot">
+        <div>來源：聿豐(禾豐牧場)裝置合約書 2013-10-17 ｜ 慶憲工業鋼構合約 2013-07-15</div>
+        <div class="pageno">1.1</div>
+      </div>
+    </section>
+
+    <!-- Slide 1.2 -->
+    <section class="slide">
+      <div class="slide-header">
+        <div>
+          <div class="eyebrow">Part 1 · 電廠現況與劣化診斷 1.2</div>
+          <h1>歷年發電趨勢與加速衰退：累計短收 433 萬元</h1>
+          <p class="sub">2014 年首年日照表現達 3.29 kWh/kWp/日，完全符合能源局屏東基準值。但 11 年間發電量由 54.4 萬度重跌至 35.5 萬度，近兩年衰退急遽加速至年均 −9.44%，遠超 0.7% 正常老化常態。</p>
+        </div>
+        <div class="flags">
+          <span class="flag coral">11 年總跌 -34.7%</span>
+          <span class="flag amber">近兩年加速 -9.44%/年</span>
+          <span class="flag purple">累計缺口 74.8 萬度</span>
+        </div>
+      </div>
+      <div class="slide-body">
+        <div class="split-img-left">
+          <div class="fig">
+            <div class="figtitle">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+              圖1 禾豐電廠歷年年發電量 vs 合理衰減基準 (2014-2025)
+            </div>
+            <img src="assets/chart-generation-trend.png" alt="年發電量 vs 合理衰減基準圖" style="height:280px; object-fit:contain; background:#fff">
+            <div class="figcap">實績柱狀圖對照 0.7%/年衰退虛線：自 2016 年起發電量即全面跌破基準線，2023-2025 出現顯著的懸崖式二次崩落。</div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>年度</th>
+                  <th class="num">發電量 (度)</th>
+                  <th class="num">kWh/kWp/日</th>
+                  <th class="num">年增率</th>
+                  <th class="num">相對 2014</th>
+                  <th class="num">與基準缺口</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="good-row">
+                  <td><b>2014</b></td>
+                  <td class="num">544,000</td>
+                  <td class="num">3.29</td>
+                  <td class="num">—</td>
+                  <td class="num">100.0%</td>
+                  <td class="num">0</td>
+                </tr>
+                <tr>
+                  <td><b>2015</b></td>
+                  <td class="num">537,519</td>
+                  <td class="num">3.25</td>
+                  <td class="num">-1.2%</td>
+                  <td class="num">98.8%</td>
+                  <td class="num">2,673</td>
+                </tr>
+                <tr class="bad-row">
+                  <td><b>2016</b></td>
+                  <td class="num">480,701</td>
+                  <td class="num">2.91</td>
+                  <td class="num"><b>-10.6%</b></td>
+                  <td class="num">88.4%</td>
+                  <td class="num">55,710</td>
+                </tr>
+                <tr>
+                  <td><b>2017</b></td>
+                  <td class="num">466,452</td>
+                  <td class="num">2.82</td>
+                  <td class="num">-3.0%</td>
+                  <td class="num">85.7%</td>
+                  <td class="num">66,204</td>
+                </tr>
+                <tr>
+                  <td><b>2018</b></td>
+                  <td class="num">468,866</td>
+                  <td class="num">2.84</td>
+                  <td class="num">+0.5%</td>
+                  <td class="num">86.2%</td>
+                  <td class="num">60,061</td>
+                </tr>
+                <tr>
+                  <td><b>2019</b></td>
+                  <td class="num">450,849</td>
+                  <td class="num">2.73</td>
+                  <td class="num">-3.8%</td>
+                  <td class="num">82.9%</td>
+                  <td class="num">74,376</td>
+                </tr>
+                <tr class="hl-row">
+                  <td><b>2020</b></td>
+                  <td class="num">502,055</td>
+                  <td class="num">3.04</td>
+                  <td class="num"><b>+11.4%</b></td>
+                  <td class="num">92.3%</td>
+                  <td class="num">19,493</td>
+                </tr>
+                <tr>
+                  <td><b>2021</b></td>
+                  <td class="num">462,066</td>
+                  <td class="num">2.80</td>
+                  <td class="num">-8.0%</td>
+                  <td class="num">84.9%</td>
+                  <td class="num">55,831</td>
+                </tr>
+                <tr>
+                  <td><b>2022</b></td>
+                  <td class="num">440,095</td>
+                  <td class="num">2.66</td>
+                  <td class="num">-4.8%</td>
+                  <td class="num">80.9%</td>
+                  <td class="num">74,177</td>
+                </tr>
+                <tr>
+                  <td><b>2023</b></td>
+                  <td class="num">432,807</td>
+                  <td class="num">2.62</td>
+                  <td class="num">-1.7%</td>
+                  <td class="num">79.6%</td>
+                  <td class="num">77,865</td>
+                </tr>
+                <tr class="bad-row">
+                  <td><b>2024</b></td>
+                  <td class="num">394,173</td>
+                  <td class="num">2.39</td>
+                  <td class="num"><b>-8.9%</b></td>
+                  <td class="num">72.5%</td>
+                  <td class="num">112,924</td>
+                </tr>
+                <tr class="bad-row">
+                  <td><b>2025</b></td>
+                  <td class="num">354,964</td>
+                  <td class="num">2.15</td>
+                  <td class="num"><b>-9.9%</b></td>
+                  <td class="num">65.3%</td>
+                  <td class="num">148,584</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="three-col" style="margin-top:4px">
+          <div class="card green">
+            <h3>✅ 首年表現正常，排除原始先天設計缺陷</h3>
+            <p>2014 年發電達 3.29 kWh/kWp/日，與能源局屏東基準完全一致。證實初始容量、併網匹配無重大失誤，發電問題完全源於運轉期間之「設備劣化與維護缺失」。</p>
+          </div>
+          <div class="card amber">
+            <h3>📉 三階段劣化軌跡：近兩年加速惡化</h3>
+            <p>2014–18 年均 −3.65%（保固期內）→ 2018–23 年均 −1.59%（平緩期）→ <b>2023–25 加速至年均 −9.44%</b>。此型態強烈指向故障累積（斷串、變流器老化）未及時處理之特徵。</p>
+          </div>
+          <div class="card coral">
+            <h3>💸 累計短收 433.6 萬，2025 單年短收 86 萬</h3>
+            <p>相較於 0.7% 標準衰減，11 年累計少發 74.8 萬度（損失 433.6 萬）；2025 年單年缺口已達 14.9 萬度（年損 86.1 萬元）。若放任不理，未來 7 年將再損失近 600 萬元！</p>
+          </div>
+        </div>
+      </div>
+      <div class="slide-foot">
+        <div>來源：行動計畫 20251222 歷年運轉實績 ｜ 衍生欄位運算</div>
+        <div class="pageno">1.2</div>
+      </div>
+    </section>
+
+    <!-- Slide 1.3 -->
+    <section class="slide">
+      <div class="slide-header">
+        <div>
+          <div class="eyebrow">Part 1 · 電廠現況與劣化診斷 1.3</div>
+          <h1>PR 檢核與 MPPT 離散熱圖：落差達 60%</h1>
+          <p class="sub">文件記載之 PR 由 80% 跌至 60% 存在數據自相矛盾（依發電量推算實質 PR 僅 52~58%）。現勘 21 路 MPPT 發電比（RA）呈現極端離散：最高 87.6%、最低僅 20.1%，證實並非日照天候問題，而是設備層級故障！</p>
+        </div>
+        <div class="flags">
+          <span class="flag amber">文件 PR 存在矛盾</span>
+          <span class="flag coral">RA 最低僅 20.1%</span>
+          <span class="flag blue">同台落差 60%</span>
+        </div>
+      </div>
+      <div class="slide-body">
+        <div class="split-55">
+          <div class="fig">
+            <div class="figtitle">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+              圖2 各逆變器 MPPT 發電比 (RA) 矩陣熱度圖（2025.04 現勘）
+            </div>
+            <img src="assets/chart-mppt-ra-heatmap.png" alt="MPPT RA 發電比熱圖" style="height:270px; object-fit:contain; background:#fff">
+            <div class="figcap">21 路 MPPT 實測發電比矩陣：深藍為健康路（>70%），淡藍與粗體字為嚴重異常路（&lt;50%）。INV5 曾因改設計未列入測試。</div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>型態類別</th>
+                  <th>代表路數與數值</th>
+                  <th>核心病徵特徵</th>
+                  <th>最可能工程成因研判</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="bad-row">
+                  <td><b>A 單路崩落</b></td>
+                  <td><b>INV4-M3 (20.1%)</b><br><b>INV2-M1 (36.9%)</b></td>
+                  <td>同一台逆變器其他路正常，單一路落差達 40~60 百分點</td>
+                  <td><b>離散型故障</b>：串列斷線、熔絲熔斷、MC4 接頭燒燬或整串模組開路。<b>修復成本極低、效益最大！</b></td>
+                </tr>
+                <tr class="hl-row">
+                  <td><b>B 整台均勻偏低</b></td>
+                  <td><b>INV6 (49.2~52.6%)</b><br>極差僅 3.5%</td>
+                  <td>全機 3 路 MPPT 一致性低落於 50% 上下</td>
+                  <td><b>逆變器本體故障</b>：散熱風扇嚴重堵塞引發過溫降載、內部參數設定偏差或 AC 側限流。</td>
+                </tr>
+                <tr>
+                  <td><b>C 多路中度偏低</b></td>
+                  <td>INV1-M2/M3 (57/52%)<br>INV7-M2/M3 (47/49%)</td>
+                  <td>發電比普遍落於 45%~60% 區間</td>
+                  <td><b>連續型衰退</b>：EVA 褐化、隱裂蝸牛紋、畜舍排風油垢積累等物理性老化。需清洗試驗與重組。</td>
+                </tr>
+                <tr class="good-row">
+                  <td><b>D 健康標竿</b></td>
+                  <td><b>INV8-M1 (87.6%)</b><br>INV3-M1 (85.2%)</td>
+                  <td>同屋頂、同氣候條件下依然維持 80%~88% 高效發電</td>
+                  <td><b>關鍵鐵證</b>：強烈證明案場發電下滑完全來自「設備與串列故障」，絕非地理日照不佳！</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="three-col" style="margin-top:4px">
+          <div class="card coral">
+            <h3>🔬 PR 數值矛盾深度解構</h3>
+            <p>簡報宣稱 PR 由 80% 降至 60%（比例 0.75），但發電量比實為 35.5/54.4 = 0.653！若 2014 PR=80%，反推 2025 實質 PR 僅約 <b>52%~58%</b>。數據不可追溯，整改前須建立屏東氣象測站基準線。</p>
+          </div>
+          <div class="card amber">
+            <h3>⚡ MPPT1 普遍優於 MPPT2/3</h3>
+            <p>統計顯示 MPPT1 平均 RA 達 68.6%，而 MPPT2/3 平均僅 54.2%！高度懷疑各 MPPT 併接之串數不對稱，或是初期更換不同模組型號時混接失配所導致，需調閱串列單線圖核實。</p>
+          </div>
+          <div class="card green">
+            <h3>🎯 鎖定 A、B 類為優先整改目標</h3>
+            <p>單路崩落（A 類）與 INV6 降載（B 類）合計占所有可回收發電量的 <b>45.1%</b>！這兩類屬於「低成本、高槓桿」之離散型維修，僅需幾萬至十餘萬元即可大幅釋放被壓抑的綠電收益。</p>
+          </div>
+        </div>
+      </div>
+      <div class="slide-foot">
+        <div>來源：案場現勘-禾豐.pptx (2025.04) RA 監控實測數據 ｜ 統計回歸分析</div>
+        <div class="pageno">1.3</div>
+      </div>
+    </section>
+
+    <!-- Slide 1.4 -->
+    <section class="slide">
+      <div class="slide-header">
+        <div>
+          <div class="eyebrow">Part 1 · 電廠現況與劣化診斷 1.4</div>
+          <h1>現場病徵研判與外觀糾錯：現場診斷實錄</h1>
+          <p class="sub">現場勘查標註「熱斑」實為 EVA 樹脂黃化/褐化；「蝸牛紋」為電池片隱裂銀漿化學反應；平舖模組邊緣沉積畜舍油垢與青苔；變流器散熱格柵幾近完全堵塞，是造成降載之主要元兇。</p>
+        </div>
+        <div class="flags">
+          <span class="flag coral">糾正誤診：EVA 褐化非熱斑</span>
+          <span class="flag amber">隱裂蝸牛紋</span>
+          <span class="flag grey">風扇堵塞引發降載</span>
+        </div>
+      </div>
+      <div class="slide-body">
+        <div class="split-img-left">
+          <div class="photo-grid-4">
+            <div class="photo-item">
+              <img src="assets/photo-eva-browning.jpg" alt="EVA 褐化">
+              <div class="photo-desc">
+                <b>① 修正誤判：實為 EVA 褐化 (非熱斑)</b>
+                <p>每片電池中央呈均勻褐色、邊緣略藍，為封裝材長期受高溫與紫外線降解，造成透光率下降與不可逆之電流失配。</p>
+              </div>
+            </div>
+            <div class="photo-item">
+              <img src="assets/photo-snail-trails.jpg" alt="蝸牛紋隱裂">
+              <div class="photo-desc">
+                <b>② 蝸牛紋：電池片大面積隱裂</b>
+                <p>表面樹枝狀變色紋路，係水氣透入隱裂縫隙與銀漿銀離子反應產生。成因多為清潔踩踏、浪板微變形或施工應力。</p>
+              </div>
+            </div>
+            <div class="photo-item">
+              <img src="assets/photo-frame-moss-sludge.jpg" alt="邊框青苔油垢">
+              <div class="photo-desc">
+                <b>③ 低傾角表面油垢與邊框青苔</b>
+                <p>平舖於金屬浪板且傾角過低，水排不掉造成下緣沉積油膜與青苔。畜牧排風中之氨氣與油脂加劇污垢黏著。</p>
+              </div>
+            </div>
+            <div class="photo-item">
+              <img src="assets/photo-inverter-fan-clogged.jpg" alt="風扇油垢堵塞">
+              <div class="photo-desc">
+                <b>④ 變流器風扇格柵嚴重堵塞</b>
+                <p>吸入飼料粉塵與油氣，散熱網罩已被厚重油垢完全封死，機內熱量無法散逸，直接觸發變流器過溫降載機制。</p>
+              </div>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>病徵項目</th>
+                  <th>現勘外觀特徵</th>
+                  <th>破壞物理機制</th>
+                  <th>建議檢測手段與處置</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="hl-row">
+                  <td><b>EVA 黃化／褐化</b><br><small>(原告誤標熱斑)</small></td>
+                  <td>電池片中央均勻泛褐，深淺與批次型號高度相關</td>
+                  <td>光化學降解產生共軛多烯烴結構，不可逆遮光，造成短路電流 Isc 下降與串列失配</td>
+                  <td>無人機紅外線熱像（IR）掃描排除真實熱斑；IV 曲線測量電流降幅；按健康度重新分串</td>
+                </tr>
+                <tr class="bad-row">
+                  <td><b>蝸牛紋 (Snail Trails)</b></td>
+                  <td>大面積網狀或樹枝狀白色/深色銀漿析出軌跡</td>
+                  <td>矽晶片受應力開裂（隱裂），水氣透入背板與醋酸腐蝕銀電極，使電池局部失效</td>
+                  <td>抽樣進行電致發光（EL）檢測，判定隱裂嚴重度與黑斑比例；嚴重者更換或退出串列</td>
+                </tr>
+                <tr>
+                  <td><b>框緣青苔與畜舍油膜</b></td>
+                  <td>下緣積垢帶、金屬鋁框生長青苔、玻璃覆蓋油膜</td>
+                  <td>低傾角導致積水淤泥，畜禽飼料粉塵與排風油脂遇熱凝結，降低光透射率 5%~15%</td>
+                  <td>嚴禁人工踩踏；實施純水專用軟刷清洗試驗；評估於下緣安裝導水排泥夾</td>
+                </tr>
+                <tr class="bad-row">
+                  <td><b>變流器風扇油垢堵塞</b></td>
+                  <td>進氣格柵被黑灰色油垢、蜘蛛網與粉塵堵死</td>
+                  <td>散熱風阻激增、內部 IGBT 結溫飆高，觸發自動降載限制發電（如 INV6 均勻偏低）</td>
+                  <td><b>立即可做</b>：拆卸散熱網罩進行工業溶劑清洗、風扇更換或加裝防塵濾網</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="slide-foot">
+        <div>來源：案場現勘-禾豐.pptx (2025.04) 現場照片 ｜ 光電缺陷物理分析</div>
+        <div class="pageno">1.4</div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ================= PART 2 VIEW ================= -->
+  <div class="view" id="view-p2">
+    <!-- Slide 2.1 -->
+    <section class="slide">
+      <div class="slide-header">
+        <div>
+          <div class="eyebrow">Part 2 · 歸因研判與修復拆解 2.1</div>
+          <h1>發電劣化五大根因矩陣：排序與可修復性</h1>
+          <p class="sub">依現場證據強度、影響幅度與可修復難易度全面排序。模組老化不可逆，但串列斷線、變流器散熱與管理合約脫節具極高修復槓桿，是立即挽回發電損失的核心關鍵。</p>
+        </div>
+        <div class="flags">
+          <span class="flag coral">5 大根因立體透視</span>
+          <span class="flag green">低成本修復占 45%</span>
+          <span class="flag blue">管理契約重組</span>
+        </div>
+      </div>
+      <div class="slide-body">
+        <!-- SVG Causality Diagram -->
+        <div class="fig" style="padding:10px 14px">
+          <div class="figtitle">禾豐電廠發電能力衰減因果關聯分析架構 (Fishbone / Root Cause Chain)</div>
+          <svg viewBox="0 0 1180 130" role="img" aria-label="因果關聯分析圖">
+            <defs>
+              <marker id="ar2" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8z" fill="#1968AD"/></marker>
+            </defs>
+            <g text-anchor="middle">
+              <rect x="10" y="25" width="210" height="75" rx="5" fill="#E8F1F9" stroke="#1968AD" stroke-width="2"/>
+              <text x="115" y="52" font-size="14" font-weight="800" fill="#12293D">① 模組劣化與失配</text>
+              <text x="115" y="74" font-size="11" fill="#5B7285">EVA 褐化 + 隱裂 + 混型號</text>
+              <text x="115" y="90" font-size="11" font-weight="700" fill="#D95F45">連續型衰退 (重組或更換)</text>
+
+              <rect x="250" y="25" width="210" height="75" rx="5" fill="#FBEAE5" stroke="#D95F45" stroke-width="2"/>
+              <text x="355" y="52" font-size="14" font-weight="800" fill="#12293D">② 串列級離散故障</text>
+              <text x="355" y="74" font-size="11" fill="#5B7285">熔絲斷 / 接頭燒 / 斷串</text>
+              <text x="355" y="90" font-size="11" font-weight="700" fill="#2E7D32">單路崩落 (低成本高修復)</text>
+
+              <rect x="490" y="25" width="210" height="75" rx="5" fill="#FCF2DE" stroke="#E09A2B" stroke-width="2"/>
+              <text x="595" y="52" font-size="14" font-weight="800" fill="#12293D">③ 變流器降載老化</text>
+              <text x="595" y="74" font-size="11" fill="#5B7285">風扇嚴重油垢 + 12.7年機齡</text>
+              <text x="595" y="90" font-size="11" font-weight="700" fill="#2E7D32">整台偏低 (清潔保養即見效)</text>
+
+              <rect x="730" y="25" width="210" height="75" rx="5" fill="#E2F5F7" stroke="#1BB1BF" stroke-width="2"/>
+              <text x="835" y="52" font-size="14" font-weight="800" fill="#12293D">④ 畜舍微環境髒污</text>
+              <text x="835" y="74" font-size="11" fill="#5B7285">低傾角 + 排風油垢 + 青苔</text>
+              <text x="835" y="90" font-size="11" font-weight="700" fill="#12818C">清洗納管 (軟刷純水試驗)</text>
+
+              <rect x="970" y="25" width="200" height="75" rx="5" fill="#0C3A63"/>
+              <text x="1070" y="52" font-size="14" font-weight="800" fill="#fff">⑤ 制度與合約缺陷</text>
+              <text x="1070" y="74" font-size="11" fill="#8FD9E4">巡檢半年/次、無發電告警</text>
+              <text x="1070" y="90" font-size="11" font-weight="700" fill="#FCF2DE">改簽 PR/可用率 KPI 合約</text>
+
+              <g stroke="#1968AD" stroke-width="2" marker-end="url(#ar2)">
+                <path d="M220 62 h25"/><path d="M460 62 h25"/><path d="M700 62 h25"/><path d="M940 62 h25"/>
+              </g>
+            </g>
+          </svg>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th style="width:6%">序</th>
+                <th style="width:28%">發電不佳核心原因</th>
+                <th style="width:34%">現場主要佐證</th>
+                <th style="width:12%" class="ctr">證據強度</th>
+                <th style="width:20%">可修復性與處置策略</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="ctr"><b>1</b></td>
+                <td><b>模組劣化與失配</b><br><small>EVA 褐化、隱裂蝸牛紋、多晶/單晶混型號</small></td>
+                <td>現勘照片明確；RA 多路中度偏低（45-60%）；年均衰減 -3.81% 達常態 5 倍</td>
+                <td class="ctr"><span class="flag coral">強</span></td>
+                <td><b>部分可修復</b>：失效者汰換；健康舊模組按型號分串重組，消除失配。</td>
+              </tr>
+              <tr class="good-row">
+                <td class="ctr"><b>2</b></td>
+                <td><b>串列級離散故障</b><br><small>斷串、熔絲熔斷、MC4 接頭燒燬、旁路二極體擊穿</small></td>
+                <td>RA 單路斷崖式崩落：INV4-M3 (20.1%)、INV2-M1 (36.9%)，同台其他路正常</td>
+                <td class="ctr"><span class="flag amber">中</span></td>
+                <td><b style="color:var(--green)">極高，成本極低</b>：更換保險絲、壓接接頭，即可立即解鎖 40~60% 發電。</td>
+              </tr>
+              <tr class="good-row">
+                <td class="ctr"><b>3</b></td>
+                <td><b>逆變器降載與老化</b><br><small>散熱風扇油垢堵塞引發熱降載；機齡達 12.7 年</small></td>
+                <td>風扇照片顯示濾網格柵封死；INV6 三路發電比一致均勻偏低 (49~52%)</td>
+                <td class="ctr"><span class="flag amber">中</span></td>
+                <td><b style="color:var(--green)">極高</b>：清潔保養立即恢復；若內部損壞，全場汰換約 90 萬元（8 台）。</td>
+              </tr>
+              <tr>
+                <td class="ctr"><b>4</b></td>
+                <td><b>畜舍環境表面髒污</b><br><small>金屬屋面低傾角自清差、排風油脂粉塵黏著、框緣青苔</small></td>
+                <td>現勘照片見明顯油垢薄膜與積泥帶；合約清潔歸業主，但無任何清洗紀錄</td>
+                <td class="ctr"><span class="flag blue">存在:強</span></td>
+                <td><b>高</b>：以 1 台陣列做純水清洗對照試驗，確認增益後納入每季定期洗滌。</td>
+              </tr>
+              <tr class="hl-row">
+                <td class="ctr"><b>5</b></td>
+                <td><b>管理制度與維運合約缺陷</b><br><small>無串列電流告警、巡檢半年一次、零件另計</small></td>
+                <td>合約條款欠缺激勵；2023-2025 年加速下滑達 −9.44%/年卻無人主動處置</td>
+                <td class="ctr"><span class="flag coral">強</span></td>
+                <td><b>制度重組</b>：加裝智慧監控、改簽以 PR 與可用率為 KPI 之專業運維合約。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="slide-foot">
+        <div>來源：禾豐牧場整改診斷研判 v1 ｜ 根因矩陣與工程驗證</div>
+        <div class="pageno">2.1</div>
+      </div>
+    </section>
+
+    <!-- Slide 2.2 -->
+    <section class="slide">
+      <div class="slide-header">
+        <div>
+          <div class="eyebrow">Part 2 · 歸因研判與修復拆解 2.2</div>
+          <h1>可回收量階梯拆解：年增 53 萬元、3 年回本上限</h1>
+          <p class="sub">以將各路 MPPT RA 發電比拉回 75% 為整改目標。經精準模型試算，全場每年可增發 91,300 度電（年增約 52.9 萬元）。其中單路崩落與變流器清潔等低成本修復占 45%，若以 3 年投資回收為基準，整改總預算上限為 124~159 萬元。</p>
+        </div>
+        <div class="flags">
+          <span class="flag green">年增 +91,300 度</span>
+          <span class="flag teal">+52.9 萬元/年收益</span>
+          <span class="flag amber">預算上限 124~159 萬</span>
+        </div>
+      </div>
+      <div class="slide-body">
+        <div class="split-55">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>損失型態</th>
+                  <th class="num">可回收 RA 點數</th>
+                  <th class="ctr">占比</th>
+                  <th class="num">年增發電 (度)</th>
+                  <th class="num">年增收益 (元)</th>
+                  <th>修復性質與工程工法</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="good-row">
+                  <td><b>A 單路崩落 (2路)</b><br><small>INV4-M3, INV2-M1</small></td>
+                  <td class="num"><b>4.43</b></td>
+                  <td class="ctr"><b>25.5%</b></td>
+                  <td class="num">約 23,300</td>
+                  <td class="num">約 135,000</td>
+                  <td><b>低成本修復</b>：查修斷串、更換熔絲、重接 MC4 接頭</td>
+                </tr>
+                <tr class="good-row">
+                  <td><b>B INV6 整台偏低</b><br><small>三路 49~52% 均勻低落</small></td>
+                  <td class="num"><b>3.39</b></td>
+                  <td class="ctr"><b>19.6%</b></td>
+                  <td class="num">約 17,900</td>
+                  <td class="num">約 104,000</td>
+                  <td><b>低成本修復</b>：風扇濾網深度清潔、排熱保養、參數重校</td>
+                </tr>
+                <tr>
+                  <td><b>C 連續型損失</b><br><small>其餘多路 45~60%</small></td>
+                  <td class="num"><b>9.53</b></td>
+                  <td class="ctr"><b>54.9%</b></td>
+                  <td class="num">約 50,100</td>
+                  <td class="num">約 290,000</td>
+                  <td><b>中度投入</b>：模組清洗試驗、舊模組按型號分串重組、抽換失效片</td>
+                </tr>
+                <tr class="hl-row">
+                  <td><b>合計增益</b><br><small>平均 RA 59.0% → 76.4%</small></td>
+                  <td class="num"><b>17.35</b></td>
+                  <td class="ctr"><b>100.0%</b></td>
+                  <td class="num"><b>約 91,300</b></td>
+                  <td class="num"><b>約 529,000</b></td>
+                  <td><b>至 2033 剩餘 7.25 年累計收益約 384 萬元！</b></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Waterfall Chart SVG -->
+          <div class="fig">
+            <div class="figtitle">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg>
+              可回收發電量階梯增益瀑布拆解 (kWh/年)
+            </div>
+            <svg viewBox="0 0 540 240" role="img" aria-label="瀑布圖">
+              <!-- Grid lines -->
+              <line x1="60" y1="30" x2="500" y2="30" stroke="#EDF1F5" stroke-width="1"/>
+              <line x1="60" y1="80" x2="500" y2="80" stroke="#EDF1F5" stroke-width="1"/>
+              <line x1="60" y1="130" x2="500" y2="130" stroke="#EDF1F5" stroke-width="1"/>
+              <line x1="60" y1="180" x2="500" y2="180" stroke="#EDF1F5" stroke-width="1"/>
+              
+              <!-- Bars -->
+              <!-- Base 2025 -->
+              <rect x="70" y="70" width="60" height="110" fill="#9FB1C0" rx="3"/>
+              <text x="100" y="62" text-anchor="middle" font-size="12" font-weight="800" fill="#12293D">35.5 萬</text>
+              <text x="100" y="200" text-anchor="middle" font-size="11" fill="#5B7285">現況基準</text>
+
+              <!-- +A -->
+              <rect x="155" y="47" width="55" height="23" fill="#D95F45" rx="3"/>
+              <text x="182" y="40" text-anchor="middle" font-size="11" font-weight="800" fill="#D95F45">+2.33 萬</text>
+              <text x="182" y="200" text-anchor="middle" font-size="11" fill="#5B7285">A 單路崩落</text>
+
+              <!-- +B -->
+              <rect x="235" y="29" width="55" height="18" fill="#E09A2B" rx="3"/>
+              <text x="262" y="22" text-anchor="middle" font-size="11" font-weight="800" fill="#E09A2B">+1.79 萬</text>
+              <text x="262" y="200" text-anchor="middle" font-size="11" fill="#5B7285">B INV6保養</text>
+
+              <!-- +C -->
+              <rect x="315" y="-21" width="55" height="50" fill="#1BB1BF" rx="3"/>
+              <text x="342" y="-28" text-anchor="middle" font-size="11" font-weight="800" fill="#1BB1BF">+5.01 萬</text>
+              <text x="342" y="200" text-anchor="middle" font-size="11" fill="#5B7285">C 重組清洗</text>
+
+              <!-- Total Target -->
+              <rect x="410" y="-21" width="65" height="201" fill="#1968AD" rx="3"/>
+              <text x="442" y="-28" text-anchor="middle" font-size="13" font-weight="900" fill="#1968AD">44.6 萬度</text>
+              <text x="442" y="200" text-anchor="middle" font-size="11" font-weight="800" fill="#12293D">A+ 目標 (RA 76%)</text>
+            </svg>
+            <div class="figcap">註：各 MPPT 容量按均等 19kWp 設算，INV5 占 1/8 且維持現況。增發度數以 5.7976 元躉售計算。</div>
+          </div>
+        </div>
+
+        <div class="three-col" style="margin-top:4px">
+          <div class="card teal">
+            <h3>💰 投資回本敏感度試算</h3>
+            <p>若要求 <b>3 年投資回收</b>，A+ 整改總投入應嚴格控制在 <b>124~159 萬元以內</b>（年增 41.2~52.9 萬 × 3 年）。若僅執行 A、B 類極簡修復，預算在 20~30 萬內即可於半年內回本！</p>
+          </div>
+          <div class="card green">
+            <h3>📈 剩餘 7.25 年累計滾動效應</h3>
+            <p>至 2033 年 12 月躉售期滿，A+ 方案累計可為業主與維運方創造 <b>300 萬～384 萬元</b> 之增量現金流，同時將資產維持在隨時可整新或出售之最佳工況。</p>
+          </div>
+          <div class="card coral">
+            <h3>⚖️ 成本效益邊界防線</h3>
+            <p>若全場診斷後發現失效電池片超過 3 成，或是浪板鋼構已無法支撐 7 年以上，則應立即停止對 C 類大規模更換模組，轉由評估整新（方案 B）或出售（方案 C）。</p>
+          </div>
+        </div>
+      </div>
+      <div class="slide-foot">
+        <div>來源：禾豐牧場整改診斷研判 v1 ｜ 可回收量數值模型</div>
+        <div class="pageno">2.2</div>
+      </div>
+    </section>
+
+    <!-- Slide 2.3 -->
+    <section class="slide">
+      <div class="slide-header">
+        <div>
+          <div class="eyebrow">Part 2 · 歸因研判與修復拆解 2.3</div>
+          <h1>第 1 個月立即行動清單：30 天低成本查證排程</h1>
+          <p class="sub">無論最終董事會決定走向維持現況、精準整改、全面整新或出售電廠，第 1 個月皆必須立即實施「全場無人機 IR/IV/EL 診斷、逆變器散熱保養、清洗對照試驗與日照基準重構」。此為所有後續商業決策唯一可靠的基礎。</p>
+        </div>
+        <div class="flags">
+          <span class="flag blue">30 天黃金視窗</span>
+          <span class="flag green">不論選何案皆必做</span>
+          <span class="flag purple">產出客觀估值依據</span>
+        </div>
+      </div>
+      <div class="slide-body">
+        <!-- Gantt Flow SVG -->
+        <div class="fig" style="padding:10px 14px">
+          <div class="figtitle">第 1 個月立即行動五大工作包 30 天實施排程 (30-Day Action Schedule)</div>
+          <svg viewBox="0 0 1180 110" role="img" aria-label="立即行動排程圖">
+            <g text-anchor="middle">
+              <!-- Week bars -->
+              <rect x="50" y="10" width="250" height="24" fill="#E8F1F9" rx="3"/><text x="175" y="26" font-size="11" font-weight="700" fill="#1968AD">Week 1 (Day 1-7)</text>
+              <rect x="330" y="10" width="250" height="24" fill="#E8F1F9" rx="3"/><text x="455" y="26" font-size="11" font-weight="700" fill="#1968AD">Week 2 (Day 8-14)</text>
+              <rect x="610" y="10" width="250" height="24" fill="#E8F1F9" rx="3"/><text x="735" y="26" font-size="11" font-weight="700" fill="#1968AD">Week 3 (Day 15-21)</text>
+              <rect x="890" y="10" width="250" height="24" fill="#E8F1F9" rx="3"/><text x="1015" y="26" font-size="11" font-weight="700" fill="#1968AD">Week 4 (Day 22-30)</text>
+
+              <!-- Tasks -->
+              <rect x="50" y="45" width="240" height="22" fill="#1968AD" rx="3"/><text x="170" y="60" font-size="10.5" font-weight="700" fill="#fff">① 歷史發電數據與單線圖補齊</text>
+              <rect x="180" y="73" width="380" height="22" fill="#D95F45" rx="3"/><text x="370" y="88" font-size="10.5" font-weight="700" fill="#fff">② 全場無人機 IR 熱像 + 串列 IV 掃描 + 抽樣 EL</text>
+              <rect x="330" y="45" width="260" height="22" fill="#E09A2B" rx="3"/><text x="460" y="60" font-size="10.5" font-weight="700" fill="#fff">③ 變流器風扇清洗與機內測溫</text>
+              <rect x="610" y="45" width="260" height="22" fill="#1BB1BF" rx="3"/><text x="740" y="60" font-size="10.5" font-weight="700" fill="#fff">④ 單台變流器陣列清洗對照試驗</text>
+              <rect x="750" y="73" width="390" height="22" fill="#2E7D32" rx="3"/><text x="945" y="88" font-size="10.5" font-weight="700" fill="#fff">⑤ 屏東測站 PR 基準重構 + 修正財務模型向董事會報告</text>
+            </g>
+          </svg>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th style="width:18%">行動項目</th>
+                <th style="width:40%">核心工作內容與技術規格</th>
+                <th style="width:24%">實質交付成果</th>
+                <th style="width:18%">預期決策效益</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><b>1. 歷史資料補齊</b></td>
+                <td>調閱 2014-2025 逐月/逐台變流器發電量、確認 2025 統計截止日、查證模組型號規格與單線圖</td>
+                <td>完整電廠技術履歷表、單線拓撲圖</td>
+                <td>建立無爭議之分析基準線</td>
+              </tr>
+              <tr class="hl-row">
+                <td><b>2. 全場全維度診斷</b></td>
+                <td>無人機紅外線熱像（IR）全場航拍；各串 Voc/Isc 及 IV 曲線掃描；每型號抽樣 20 片做 EL 隱裂檢驗；絕緣阻抗量測</td>
+                <td>失效模組清單、斷串位置圖、隱裂嚴重度分級報告</td>
+                <td>精準定位 Type A 斷串與模組健康度分布</td>
+              </tr>
+              <tr class="good-row">
+                <td><b>3. 逆變器深度保養</b></td>
+                <td>拆解 8 台變流器風扇網罩、工業溶劑除油清洗、導熱膏檢查、讀取內建故障日誌與運行溫度</td>
+                <td>變流器健康診斷書、INV6 降載修復確認</td>
+                <td>立即消除 Type B 降載（預估增益 19.6%）</td>
+              </tr>
+              <tr>
+                <td><b>4. 模組清洗對照試驗</b></td>
+                <td>選取 1 台狀況適中之逆變器陣列，以軟刷加純水徹底洗滌，與相鄰未清洗陣列比對連續 14 天發電比</td>
+                <td>髒污損失量化係數、最佳清洗週期建議</td>
+                <td>評估長期清洗之投入產出比</td>
+              </tr>
+              <tr class="good-row">
+                <td><b>5. 屏東日照基準重構</b></td>
+                <td>串接中央氣象署屏東測站或衛星日照數據，重新回溯計算 2014-2025 逐月溫度修正後 PR</td>
+                <td>標準化 PR 基準曲線、除錯後財務試算表</td>
+                <td>為方案 B/C 估值提供權威背書</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="slide-foot">
+        <div>來源：禾豐牧場整改診斷報告 v1 第 5.1 節 ｜ 立即行動排程表</div>
+        <div class="pageno">2.3</div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ================= PART 3 VIEW ================= -->
+  <div class="view" id="view-p3">
+    <!-- Slide 3.1 -->
+    <section class="slide">
+      <div class="slide-header">
+        <div>
+          <div class="eyebrow">Part 3 · 方案比較與財務模型 3.1</div>
+          <h1>四大整改方案橫向綜合評比：投入、效益與退場</h1>
+          <p class="sub">既有文件僅列出維持現況 (A)、整新 (B) 與資產出售 (C)。本報告首創並推薦【方案 A+ 精準整改】，以百萬級輕量投資啟動修復，兼具即時現金流、低風險與保留後續決策彈性之多重優勢。</p>
+        </div>
+        <div class="flags">
+          <span class="flag blue">方案 A (現況)</span>
+          <span class="flag green">推薦方案 A+ (精準整改)</span>
+          <span class="flag amber">方案 B (整新)</span>
+          <span class="flag purple">方案 C (出售租賃)</span>
+        </div>
+      </div>
+      <div class="slide-body">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th style="width:14%">方案名稱</th>
+                <th style="width:24%">實施內容與投入成本</th>
+                <th style="width:20%">預期年收益與 IRR</th>
+                <th style="width:24%">主要風險與潛在障礙</th>
+                <th style="width:18%">本報告專業審查意見</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><b>A 維持現況</b><br><small>放任自然衰退</small></td>
+                <td>投入成本：<b>0 元</b><br>僅維持每半年一次例行巡檢與現狀監控</td>
+                <td>剩餘 8 年售電總收入：<br>按年跌 10% 約 <b>1,055 萬</b><br>按年跌 3.8% 約 1,388 萬</td>
+                <td>衰減持續加速（近兩年達 -9.4%）；12.7年變流器將陸續燒機損壞；模組隱裂擴大</td>
+                <td><span class="flag coral">不可取</span><br>資產價值持續失血，7 年累積少收數百萬元</td>
+              </tr>
+              <tr class="good-row">
+                <td><b>A+ 精準整改</b><br><small><b>(本報告首創推薦)</b></small></td>
+                <td>投入成本：<b>約 124~159 萬元</b><br>30天診斷 + 修斷串 + 舊模組重組 + 變流器保養 + PR KPI 合約</td>
+                <td><b>年增 41~53 萬元</b><br>(剩餘 7.25 年累計約 300~384 萬)<br><b>3 年內完全回本</b></td>
+                <td>若全場失效模組比例過高（>30%），則重組邊際效益遞減</td>
+                <td><span class="flag green">最優先推薦</span><br>投入低、風險極小、完全可逆，亦為後續 B/C 方案估值之基礎</td>
+              </tr>
+              <tr>
+                <td><b>B 整新 1-1 期</b><br><small>全場拆除重建</small></td>
+                <td>投入成本：<b>1,581 萬 ～ 2,044 萬</b><br>1,028片 440W (452kWp) + 4台 100kW 變流器 + 廢模組回收</td>
+                <td>文件 IRR 5.68%<br><b>修正公式後實質約 10.3%</b><br>年發電約 49.5~52 萬度</td>
+                <td><b>屋頂壽命嚴重錯配</b>：合約綁定 20 年（至 2046 年），屆時豬舍浪板已達 33 年高齡！每延遲 1 年少賺 96 萬躉售差價</td>
+                <td><span class="flag amber">暫緩決定</span><br>需先確認豬舍結構耐風性；若屋頂無法撐 20 年，該案在商業上不成立</td>
+              </tr>
+              <tr>
+                <td><b>C 資產管理</b><br><small>設備出售 + 屋頂出租</small></td>
+                <td>業主投入：<b>0 元</b><br>出售舊電廠設備，並出租屋頂 20 年（由買方擴建至 1.1MW）</td>
+                <td>出售舊設備獲利約 <b>900 萬</b><br>+ 20 年租金收入約 2,406 萬元</td>
+                <td>出售價格與目前嚴重衰退之發電能力脫鉤；屬關係人交易易生定價爭議；擴充 1.1MW 同受饋線容量與屋頂壽命硬約束</td>
+                <td><span class="flag purple">列為備選</span><br>先做 A+ 改善體質，能大幅提升向買方議價與出售估值之籌碼</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="three-col" style="margin-top:4px">
+          <div class="card green">
+            <h3>🛡️ A+ 方案的「看跌期權」商業價值</h3>
+            <p>A+ 方案僅需百餘萬即可鎖定每年 50 萬高躉售增益。若 1~2 年後豬舍需要翻修或台電釋出新饋線，隨時可無縫切換至方案 B 或方案 C，完全不受 20 年長約套牢。</p>
+          </div>
+          <div class="card coral">
+            <h3>⚠️ 方案 B 隱含之「每延後 1 年少收 96 萬」</h3>
+            <p>整新後之增量發電享有 5.7976 元躉售價僅到 2033 年底。決策與施工每延後 1 年，就永遠失去約 16.5 萬度的增量高價躉售收入（折合約 <b>95.7 萬元／年</b>）！</p>
+          </div>
+          <div class="card amber">
+            <h3>⚖️ 方案 C 關係人公允定價紅線</h3>
+            <p>聿豐與進金生為同一法定代表人。以 900 萬出售設備給資產管理方若無公正客觀之發電能力與第三方查核報告，可能在稅務或股東權益層面衍生治理爭端。</p>
+          </div>
+        </div>
+      </div>
+      <div class="slide-foot">
+        <div>來源：禾豐牧場重整成本效益分析 (2025.12) ｜ 資產管理方案 (2026.05) ｜ 綜合評比</div>
+        <div class="pageno">3.1</div>
+      </div>
+    </section>
+
+    <!-- Slide 3.2 -->
+    <section class="slide">
+      <div class="slide-header">
+        <div>
+          <div class="eyebrow">Part 3 · 方案比較與財務模型 3.2</div>
+          <h1>既有試算模型五大漏洞剖析：維運費多計 5 倍</h1>
+          <p class="sub">深度查核既有 Excel 試算檔（1-1 期與 1-2 期成本效益分析），發現維運費公式存在致命邏輯錯誤，每年重複連續多計 5 倍維運費！僅僅修正此項錯誤，整新 1-1 期之無融資 IRR 即由 5.68% 飆升至 10.3%，NPV 暴增近千萬。</p>
+        </div>
+        <div class="flags">
+          <span class="flag coral">維運費每年多計 5 倍</span>
+          <span class="flag amber">913 萬未說明加項</span>
+          <span class="flag green">IRR 5.7% → 10.3%</span>
+        </div>
+      </div>
+      <div class="slide-body">
+        <div class="split-55">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>漏洞項目</th>
+                  <th>原試算檔錯誤邏輯與發現</th>
+                  <th>實質衝擊與金額扭曲</th>
+                  <th>修正建議與真實數值</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="bad-row">
+                  <td><b>① 維運費公式乘積錯誤</b></td>
+                  <td>Item Master 維運費公式寫為 <code>kWp × 426 × 5</code>，備註「$426/kWp，四巡二洗／year」。但在現金流量表卻<b>每年逐年扣除</b>！</td>
+                  <td>Y1~5 每年虛增 <b>5 倍維運費</b>；Y6 起每年虛增 <b>2.75 倍</b>！嚴重低估專案獲利能力。</td>
+                  <td><b>只修正此單一錯誤：</b><br>1-1 期 IRR 由 <b>5.68% → 10.3%</b><br>NPV(3%) 由 496 萬 → <b>1,473 萬元</b>！<br>1-2 期 IRR 由 10.6% → <b>15.2%</b></td>
+                </tr>
+                <tr class="hl-row">
+                  <td><b>② 整新總額不明加項</b></td>
+                  <td>1-1 期成本公式為 <code>25,000 × kWp + 9,132,552</code>。該筆 <b>913.3 萬元</b>加項在工作表無任何註解或發票憑證。</td>
+                  <td>12/22 比較表突然將投入改為 1,580.8 萬（整新 1,130.8 萬 + 回收 200 萬 + 原案 NPV 250 萬），同一方案出現 3 個版本！</td>
+                  <td>若 913 萬元非實際工程支出，整新之實質 IRR 將再大幅衝高；董事會決策前必須核實。</td>
+                </tr>
+                <tr>
+                  <td><b>③ 衰減假設自相矛盾</b></td>
+                  <td>12/02 簡報以年衰退 <b>1%</b> 設算，得出剩餘效益 1,529 萬；但 12/15、12/22 行動計畫卻以年衰退 <b>10%</b> 投射（1,055 萬）。</td>
+                  <td>同一基準在不同簡報相差 <b>519 萬元</b>，造成比較基礎嚴重漂移。</td>
+                  <td>統一以實測回歸曲線年衰退 <b>3.81%</b> 或建立屏東測站模型為準。</td>
+                </tr>
+                <tr>
+                  <td><b>④ 發電基準不一致</b></td>
+                  <td>比較表稱「原案 PR 60%、年發電 22.7 萬度」，實為衰減 10% 之 8 年平均；但整新後卻列 49.5 萬度（首年 52.0 萬度）。</td>
+                  <td>以「衰減後 8 年均值」對比「整新首年最高峰」，造成原案被過度貶低約 5%~10%。</td>
+                  <td>採統一之 8 年累計現金流折現（NPV）進行對稱比較。</td>
+                </tr>
+                <tr>
+                  <td><b>⑤ IRR 說法前後衝突</b></td>
+                  <td>12/02 簡報列整新 IRR 為 <b>5.68%</b>（無融資）；12/22 比較表整新 IRR 卻標示為 <b>14.97%</b>。</td>
+                  <td>未說明 14.97% 是否導入銀行專案融資（槓桿）或調整了資本支出。</td>
+                  <td>財務模型必須嚴格揭露「無融資（Unlevered）」與「含融資（Levered）」之計算假設。</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Sensitivity Chart SVG -->
+          <div class="fig">
+            <div class="figtitle">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M16 8l-8 8"/><path d="M8 8h8v8"/></svg>
+              維運費公式修正前後：IRR 與 NPV (3%) 敏感度比較
+            </div>
+            <svg viewBox="0 0 540 260" role="img" aria-label="財務修正對比圖">
+              <!-- Grid lines -->
+              <line x1="60" y1="40" x2="500" y2="40" stroke="#EDF1F5" stroke-width="1"/>
+              <line x1="60" y1="100" x2="500" y2="100" stroke="#EDF1F5" stroke-width="1"/>
+              <line x1="60" y1="160" x2="500" y2="160" stroke="#EDF1F5" stroke-width="1"/>
+              <line x1="60" y1="210" x2="500" y2="210" stroke="#EDF1F5" stroke-width="1"/>
+              
+              <!-- IRR Group -->
+              <text x="145" y="235" text-anchor="middle" font-size="12" font-weight="800" fill="#12293D">專案 IRR (無融資)</text>
+              <rect x="80" y="145" width="55" height="65" fill="#9FB1C0" rx="3"/>
+              <text x="107" y="137" text-anchor="middle" font-size="12" font-weight="700" fill="#5B7285">5.68%</text>
+              <text x="107" y="175" text-anchor="middle" font-size="10" fill="#fff">原試算</text>
+
+              <rect x="150" y="90" width="55" height="120" fill="#1968AD" rx="3"/>
+              <text x="177" y="82" text-anchor="middle" font-size="13" font-weight="900" fill="#1968AD">10.3%</text>
+              <text x="177" y="150" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">修正後</text>
+
+              <!-- NPV Group -->
+              <text x="375" y="235" text-anchor="middle" font-size="12" font-weight="800" fill="#12293D">專案 NPV @ 3% (萬元)</text>
+              <rect x="310" y="155" width="55" height="55" fill="#9FB1C0" rx="3"/>
+              <text x="337" y="147" text-anchor="middle" font-size="12" font-weight="700" fill="#5B7285">496 萬</text>
+              <text x="337" y="185" text-anchor="middle" font-size="10" fill="#fff">原試算</text>
+
+              <rect x="380" y="55" width="55" height="155" fill="#2E7D32" rx="3"/>
+              <text x="407" y="47" text-anchor="middle" font-size="13" font-weight="900" fill="#2E7D32">1,473 萬</text>
+              <text x="407" y="135" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">修正後</text>
+            </svg>
+            <div class="figcap"><b>關鍵發現</b>：原試算模型嚴重低估了整新案的財務可行性！修正公式錯誤後，整新案實為高報酬投資（IRR 10.3%）；然而決定其生死者並非財務回報，而是「豬舍屋頂能否再撐 20 年」的結構風險。</div>
+          </div>
+        </div>
+      </div>
+      <div class="slide-foot">
+        <div>來源：禾豐牧場重整1-1期成本效益分析.xlsx ｜ 公式稽核與重新建模</div>
+        <div class="pageno">3.2</div>
+      </div>
+    </section>
+
+    <!-- Slide 3.3 -->
+    <section class="slide">
+      <div class="slide-header">
+        <div>
+          <div class="eyebrow">Part 3 · 方案比較與財務模型 3.3</div>
+          <h1>法規、電網與結構硬約束：七大行政閘門檢核</h1>
+          <p class="sub">光電整改絕非僅止於工程更換模組，必須依序通過能源署發電設備變更登記、台電原費率沿用修約、高壓 11.4kV 系統衝擊更新、以及最核心的「33 年豬舍結構安全評估與技師簽證」。</p>
+        </div>
+        <div class="flags">
+          <span class="flag coral">屋頂結構已 12.7 年</span>
+          <span class="flag blue">台電原費率沿用函釋</span>
+          <span class="flag amber">華為逆變器資安檢核</span>
+        </div>
+      </div>
+      <div class="slide-body">
+        <!-- Process flow SVG -->
+        <div class="fig" style="padding:10px 14px">
+          <div class="figtitle">光電設備變更與整新行政審查五大閘門 (Regulatory Gates)</div>
+          <svg viewBox="0 0 1180 110" role="img" aria-label="法規審查五大閘門">
+            <defs>
+              <marker id="ar3" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8z" fill="#1968AD"/></marker>
+            </defs>
+            <g text-anchor="middle">
+              <rect x="20" y="20" width="200" height="70" rx="5" fill="#E8F1F9" stroke="#1968AD" stroke-width="2"/>
+              <text x="120" y="48" font-size="13.5" font-weight="800" fill="#12293D">① 結構技師簽證</text>
+              <text x="120" y="70" font-size="11" fill="#5B7285">浪板荷重、C型鋼鏽蝕評估</text>
+
+              <rect x="260" y="20" width="200" height="70" rx="5" fill="#E2F5F7" stroke="#1BB1BF" stroke-width="2"/>
+              <text x="360" y="48" font-size="13.5" font-weight="800" fill="#12293D">② 台電系統衝擊</text>
+              <text x="360" y="70" font-size="11" fill="#5B7285">11.4kV 保護協調重核</text>
+
+              <rect x="500" y="20" width="200" height="70" rx="5" fill="#FCF2DE" stroke="#E09A2B" stroke-width="2"/>
+              <text x="600" y="48" font-size="13.5" font-weight="800" fill="#12293D">③ 能源署設備變更</text>
+              <text x="600" y="70" font-size="11" fill="#5B7285">更換模組/變流器登記</text>
+
+              <rect x="740" y="20" width="200" height="70" rx="5" fill="#FBEAE5" stroke="#D95F45" stroke-width="2"/>
+              <text x="840" y="48" font-size="13.5" font-weight="800" fill="#12293D">④ 原費率沿用修約</text>
+              <text x="840" y="70" font-size="11" fill="#5B7285">台電 5.7976 元維持確認函</text>
+
+              <rect x="980" y="20" width="180" height="70" rx="5" fill="#0C3A63"/>
+              <text x="1070" y="48" font-size="13.5" font-weight="800" fill="#fff">⑤ 廢模組合法回收</text>
+              <text x="1070" y="70" font-size="11" fill="#8FD9E4">1,932 片環境部列管代碼</text>
+
+              <g stroke="#1968AD" stroke-width="2" marker-end="url(#ar3)">
+                <path d="M220 55 h35"/><path d="M460 55 h35"/><path d="M700 55 h35"/><path d="M940 55 h35"/>
+              </g>
+            </g>
+          </svg>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th style="width:18%">硬約束法規面向</th>
+                <th style="width:40%">核心規範與檢核要件</th>
+                <th style="width:24%">專案潛在風險點</th>
+                <th style="width:18%">前置確認作為</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="hl-row">
+                <td><b>1. 原躉售費率沿用性</b></td>
+                <td>更換模組容量不超過原核定 452.625 kWp（整新案為 452.32 kWp），是否保證維持 5.7976 元至 2033 年？</td>
+                <td>若台電判定為「新設案場」而適用現行 3.7~4.2 元費率，則整新案即刻破產</td>
+                <td><b>正式發文</b>取得台電與能源署設備變更維持原費率書面函釋</td>
+              </tr>
+              <tr class="bad-row">
+                <td><b>2. 屋頂結構與耐風壽命</b></td>
+                <td>豬舍屋頂隨 2013 年光電新建，已歷經 12.7 年高溫與氨氣腐蝕。若整新簽訂 20 年約，至約 2046 年屋頂將達 33 年高齡！</td>
+                <td>颱風吹襲掀頂、浪板鏽穿漏水、畜牧保險拒保；中途若換浪板需全場拆卸，費用驚人</td>
+                <td>聘請合格結構技師進行浪板超音波測厚與鋼構安全簽證</td>
+              </tr>
+              <tr>
+                <td><b>3. 高壓 11.4kV 併聯</b></td>
+                <td>變流器由 8 台改為 4 台 100kW 大容量機種，高壓開關箱比流比壓器（CT/PT）與保護繼電器需重新校調。</td>
+                <td>保護協調未符規範遭台電暫停併聯或跳脫事故</td>
+                <td>電機技師重新出具系統衝擊檢討與保護協調圖</td>
+              </tr>
+              <tr class="hl-row">
+                <td><b>4. 逆變器廠牌與資安</b></td>
+                <td>既有整新方案擬採「華為 Huawei」100kW 逆變器。台電針對關鍵基礎設施之陸製資通訊設備管制日趨嚴格。</td>
+                <td>若台電審查資安受阻，將面臨採購延宕或被迫換機損失</td>
+                <td>評估台達電（Delta）或陽光電源（Sungrow）台版認證機型作為替代備案</td>
+              </tr>
+              <tr>
+                <td><b>5. 廢棄模組回收責任</b></td>
+                <td>拆除 1,932 片舊模組需依環境部廢棄物清理法及再生能源條例，交付合格回收體系處理（文件估 200 萬元）。</td>
+                <td>非法棄置之巨額環保罰款與企業 ESG 商譽受損</td>
+                <td>取得環境部模組回收管制聯單與合法處置憑證</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="slide-foot">
+        <div>來源：禾豐牧場整改診斷報告 v1 第 5.5 節 ｜ 電業法規與工程結構檢核</div>
+        <div class="pageno">3.3</div>
+      </div>
+    </section>
+
+    <!-- Slide 3.4 -->
+    <section class="slide">
+      <div class="slide-header">
+        <div>
+          <div class="eyebrow">Part 3 · 方案比較與財務模型 3.4</div>
+          <h1>兩階段決策路徑與分流門檻：科學化動態導航</h1>
+          <p class="sub">拒絕在資訊不足時冒然投入千萬元整新。以「第 1 個月診斷排錯」為出發點，設定「失效模組是否達 30%」與「屋頂能否支撐 20 年」為核心分流門檻，引導董事會走向最具效益之確定路徑。</p>
+        </div>
+        <div class="flags">
+          <span class="flag blue">M1: 診斷與修模型</span>
+          <span class="flag green">3 成失效分流門檻</span>
+          <span class="flag purple">M2: 執行選定方案</span>
+        </div>
+      </div>
+      <div class="slide-body">
+        <!-- SVG Decision Tree -->
+        <div class="fig" style="padding:12px 16px">
+          <div class="figtitle">禾豐牧場整改專案兩階段決策導航樹 (Two-Stage Decision Tree)</div>
+          <svg viewBox="0 0 1180 200" role="img" aria-label="決策樹流程圖">
+            <defs>
+              <marker id="ar4" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8z" fill="#1968AD"/></marker>
+            </defs>
+            <g text-anchor="middle">
+              <!-- Stage 1 -->
+              <rect x="20" y="70" width="220" height="70" rx="6" fill="#0C3A63"/>
+              <text x="130" y="98" font-size="14" font-weight="900" fill="#fff">第 1 個月：雙軌前置行動</text>
+              <text x="130" y="122" font-size="11" fill="#8FD9E4">① 全場 IR/IV/EL 診斷 + 變流器清潔<br>② 修正財務模型 (修正維運費錯誤)</text>
+
+              <!-- Arrow to Gate -->
+              <path d="M240 105 h70" stroke="#1968AD" stroke-width="2.5" marker-end="url(#ar4)"/>
+
+              <!-- Decision Gate Diamond -->
+              <polygon points="410,50 510,105 410,160 310,105" fill="#FCF2DE" stroke="#E09A2B" stroke-width="2.5"/>
+              <text x="410" y="98" font-size="13" font-weight="900" fill="#9a6a10">核心分流門檻</text>
+              <text x="410" y="118" font-size="11" font-weight="700" fill="#12293D">失效模組 &lt; 30%？</text>
+              <text x="410" y="134" font-size="10" fill="#5B7285">且屋頂可再撐 7 年</text>
+
+              <!-- Branch 1: YES -> A+ -->
+              <path d="M410 50 v-25 h160" stroke="#2E7D32" stroke-width="2.5" marker-end="url(#ar4)"/>
+              <text x="480" y="18" font-size="11" font-weight="800" fill="#2E7D32">【是】損耗以斷串/髒污為主</text>
+
+              <rect x="580" y="5" width="270" height="50" rx="5" fill="#E8F5E9" stroke="#2E7D32" stroke-width="2"/>
+              <text x="715" y="27" font-size="13" font-weight="900" fill="#2E7D32">啟動【A+ 精準整改方案】</text>
+              <text x="715" y="44" font-size="10.5" fill="#5B7285">投入 124~159 萬，年增 53 萬，撐至 2033 滿約</text>
+
+              <!-- Branch 2: NO -> Gate 2 -->
+              <path d="M410 160 v25 h70" stroke="#D95F45" stroke-width="2.5" marker-end="url(#ar4)"/>
+              <text x="450" y="198" font-size="11" font-weight="800" fill="#D95F45">【否】劣化超標</text>
+
+              <polygon points="580,150 670,185 580,220 490,185" fill="#FBEAE5" stroke="#D95F45" stroke-width="2"/>
+              <text x="580" y="182" font-size="11" font-weight="800" fill="#b4432c">屋頂評估可撐 20 年？</text>
+
+              <!-- Gate 2 -> B or C -->
+              <path d="M670 185 h80" stroke="#1968AD" stroke-width="2" marker-end="url(#ar4)"/>
+              <rect x="760" y="160" width="380" height="50" rx="5" fill="#F4F7FA" stroke="#1968AD" stroke-width="1.5"/>
+              <text x="950" y="180" font-size="12" font-weight="800" fill="#12293D">可撐 20 年 → 採【修正後模型執行方案 B 整新】(IRR 10.3%)</text>
+              <text x="950" y="198" font-size="11" font-weight="700" fill="#6B46C1">無法撐 20 年 → 採【方案 C 出售設備並出租屋頂】(以A+體質高價議約)</text>
+
+              <!-- Final Note -->
+              <rect x="880" y="15" width="280" height="70" rx="5" fill="#F3E8FF" stroke="#6B46C1" stroke-width="1.5"/>
+              <text x="1020" y="38" font-size="11.5" font-weight="800" fill="#6B46C1">全方案共通保障機制</text>
+              <text x="1020" y="56" font-size="10" fill="#5B7285">加裝串列監控與日照計、全面改簽<br>以 PR / 可用率 KPI 計價之運維合約</text>
+            </g>
+          </svg>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th style="width:16%">時程階段</th>
+                <th style="width:34%">關鍵執行動作與驗證指標</th>
+                <th style="width:28%">分流判斷條件與決策門檻</th>
+                <th style="width:22%">選定方案與落地路徑</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="hl-row">
+                <td><b>第 1 個月</b><br><small>(前置驗證期)</small></td>
+                <td>執行 5.1 立即行動：全場無人機 IR 熱像、IV/EL 檢測、變流器除塵、清洗試驗；修正財務模型並調閱逐月數據。</td>
+                <td>—<br><small>(產出真實發電能力與屋頂剩餘壽命報告)</small></td>
+                <td><b>全方案共用前置作業</b></td>
+              </tr>
+              <tr class="good-row">
+                <td><b>第 2 個月</b><br><small>(決策分流期)</small></td>
+                <td>依據無人機 IR 與 EL 報告，統計嚴重失效電池片比例；依結構技師簽證判定浪板與鋼構剩餘壽命。</td>
+                <td><b>【條件 A】</b>失效模組比例 &lt; 30%，且損失集中於斷串、變流器與髒污；屋頂可穩健支撐 7 年。</td>
+                <td><b>實施【A+ 精準整改】</b><br>預算 124~159 萬，鎖定 5.7976 元高躉售至 2033 年。</td>
+              </tr>
+              <tr>
+                <td><b>第 2 個月備選</b><br><small>(結構可行分流)</small></td>
+                <td>若模組劣化大於 30%，但結構技師確認屋頂與鋼構現況良好，能安全承載新系統運轉 20 年。</td>
+                <td><b>【條件 B】</b>浪板結構良好、台電確認設備變更可沿用原費率。</td>
+                <td><b>實施【修正後方案 B 整新】</b><br>確認 913 萬非必要支出後以 IRR 10.3%+ 推進。</td>
+              </tr>
+              <tr class="bad-row">
+                <td><b>第 2 個月退場</b><br><small>(資產防禦分流)</small></td>
+                <td>若模組劣化嚴重且屋頂浪板已顯著腐蝕，無法承擔 20 年整新契約之天災掀頂風險。</td>
+                <td><b>【條件 C】</b>屋頂無法撐 20 年，或業主不願承擔資本支出。</td>
+                <td><b>實施【方案 C 資產出售】</b><br>以 A+ 診斷數據作為作價依據，溢價出售並出租屋頂。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="slide-foot">
+        <div>來源：禾豐牧場整改診斷報告 v1 第 5.6 節 ｜ 兩階段決策架構</div>
+        <div class="pageno">3.4</div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ================= PART 4 VIEW ================= -->
+  <div class="view" id="view-p4">
+    <!-- Slide 4.1 -->
+    <section class="slide">
+      <div class="slide-header">
+        <div>
+          <div class="eyebrow">Part 4 · 空間圖資與方法論 4.1</div>
+          <h1>屏東麟洛地理環境與微氣候拓撲圖資</h1>
+          <p class="sub">案場位於屏東縣麟洛鄉民族路埔圳巷 3 號，屬典型南台灣高日照但高溫高濕之畜牧聚落。低傾角直鎖金屬屋面貼合設計，使模組常年遭受畜舍排風油氣、氨氣腐蝕與嚴重熱島效應夾擊。</p>
+        </div>
+        <div class="flags">
+          <span class="flag blue">屏東麟洛畜牧聚落</span>
+          <span class="flag amber">高溫高濕 + 氨氣油腐</span>
+          <span class="flag teal">直鎖式浪板腳座</span>
+        </div>
+      </div>
+      <div class="slide-body">
+        <div class="split-55">
+          <div class="fig">
+            <div class="figtitle">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
+              屏東麟洛禾豐牧場案場位置與周邊電力環境 (Interactive Map)
+            </div>
+            <div id="pv-map"></div>
+            <div class="figcap">座標約 22.6515°N, 120.5280°E。高壓 11.4kV 引接至周邊台電饋線；鄰近中央氣象署屏東測站。</div>
+          </div>
+
+          <div class="fig">
+            <div class="figtitle">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+              現場金屬浪板壓塊結構與直鎖式基座實拍
+            </div>
+            <img src="assets/photo-module-rail-corrugated.jpg" alt="浪板固定細節" style="height:230px; object-fit:cover">
+            <div class="figcap"><b>結構診斷</b>：鋁軌壓塊直接鎖固於浪板波峰。模組背面與金屬屋面幾無通風間隙，夏季背板溫度常飆破 65°C，加劇 EVA 褐化與功率熱損。</div>
+          </div>
+        </div>
+
+        <div class="table-wrap" style="margin-top:4px">
+          <table>
+            <thead>
+              <tr>
+                <th>微環境影響維度</th>
+                <th>麟洛畜牧現場環境實況</th>
+                <th>對光電系統之物理劣化機制</th>
+                <th>整改因應技術規格對策</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="hl-row">
+                <td><b>畜舍通風與油脂油膜</b></td>
+                <td>緊鄰養豬場大通風口，排風富含飼料微粉、豬隻體脂油氣與氨氣（NH3）</td>
+                <td>油氣附著於模組玻璃表面，黏結飛塵形成耐水性頑固油膜；降低透光率且雨水無法沖刷</td>
+                <td>普通清水沖洗無效；需採用中性無腐蝕光電專用去油清潔劑與軟刷試驗</td>
+              </tr>
+              <tr class="bad-row">
+                <td><b>屋頂平舖無散熱風道</b></td>
+                <td>模組沿金屬浪板坡度平舖，傾角約 3~5 度，背部淨空極度狹窄</td>
+                <td>無煙囪散熱效應，熱量聚積於浪板與模組間，模組工作溫度高於地面型 10~15°C，每升高 1°C 功率損耗約 0.4%</td>
+                <td>整新時應評估抬升腳座傾角至 10~12 度，建立對流通風道並提升自清排水角度</td>
+              </tr>
+              <tr>
+                <td><b>高鹽霧與化學酸蝕</b></td>
+                <td>高溫高濕（年均濕度 >75%），畜舍周邊含硫與含氨氣體瀰漫</td>
+                <td>加速鋁框陽極氧化層劣化、侵蝕金屬螺栓與自攻螺絲；接地端子氧化造成接地電阻超標</td>
+                <td>全面巡檢緊固件鍍鋅層厚度，接地線端子重新除鏽並加塗防蝕黃油絕緣膠</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="slide-foot">
+        <div>來源：現場現勘圖資 ｜ 中央氣象署屏東氣象站數據 ｜ 農業設施光電微環境研究</div>
+        <div class="pageno">4.1</div>
+      </div>
+    </section>
+
+    <!-- Slide 4.2 -->
+    <section class="slide">
+      <div class="slide-header">
+        <div>
+          <div class="eyebrow">Part 4 · 空間圖資與方法論 4.2</div>
+          <h1>5 步可重用整改方法論與待補資料清單</h1>
+          <p class="sub">總結禾豐牧場整改診斷實戰經驗，提煉出進能服「整改光伏標準 5 步研判方法論」，可無縫複製至後續所有老舊電廠評估專案。同時列明現場尚缺之 9 大核心技術資料追蹤清單。</p>
+        </div>
+        <div class="flags">
+          <span class="flag blue">整改標準 5 步法</span>
+          <span class="flag green">模組化決策工具</span>
+          <span class="flag amber">9 大待補資料清單</span>
+        </div>
+      </div>
+      <div class="slide-body">
+        <!-- Reusable 5-step SVG -->
+        <div class="fig" style="padding:10px 14px">
+          <div class="figtitle">進能服 6692 整改光伏標準研判 5 步方法論 (Reusable Revamp Methodology)</div>
+          <svg viewBox="0 0 1180 110" role="img" aria-label="5步整改方法論">
+            <defs>
+              <marker id="ar5" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8z" fill="#1968AD"/></marker>
+            </defs>
+            <g text-anchor="middle">
+              <rect x="15" y="20" width="210" height="70" rx="5" fill="#E8F1F9" stroke="#1968AD" stroke-width="2"/>
+              <text x="120" y="46" font-size="13.5" font-weight="900" fill="#12293D">Step 1 能源局基準對照</text>
+              <text x="120" y="68" font-size="11" fill="#5B7285">以首年 kWh/kWp/日<br>排除原始先天設計瑕疵</text>
+
+              <rect x="250" y="20" width="210" height="70" rx="5" fill="#E2F5F7" stroke="#1BB1BF" stroke-width="2"/>
+              <text x="355" y="46" font-size="13.5" font-weight="900" fill="#12293D">Step 2 累計損失量化</text>
+              <text x="355" y="68" font-size="11" fill="#5B7285">對照 0.7% 合理衰退線<br>算出累計少發度數與金額</text>
+
+              <rect x="485" y="20" width="210" height="70" rx="5" fill="#FCF2DE" stroke="#E09A2B" stroke-width="2"/>
+              <text x="590" y="46" font-size="13.5" font-weight="900" fill="#12293D">Step 3 同機同氣候解耦</text>
+              <text x="590" y="68" font-size="11" fill="#5B7285">比對同台 MPPT 差異<br>分出單路崩落/降載/連續</text>
+
+              <rect x="720" y="20" width="210" height="70" rx="5" fill="#E8F5E9" stroke="#2E7D32" stroke-width="2"/>
+              <text x="825" y="46" font-size="13.5" font-weight="900" fill="#12293D">Step 4 標竿反推預算上限</text>
+              <text x="825" y="68" font-size="11" fill="#5B7285">以健康路反推回收潛能<br>以 3 年回本嚴設 Capex 上限</text>
+
+              <rect x="955" y="20" width="210" height="70" rx="5" fill="#0C3A63"/>
+              <text x="1060" y="46" font-size="13.5" font-weight="900" fill="#fff">Step 5 財務模型嚴格審核</text>
+              <text x="1060" y="68" font-size="11" fill="#8FD9E4">檢查維運費公式單位<br>抓出不明加項與衰減矛盾</text>
+
+              <g stroke="#1968AD" stroke-width="2" marker-end="url(#ar5)">
+                <path d="M225 55 h25"/><path d="M460 55 h25"/><path d="M695 55 h25"/><path d="M930 55 h25"/>
+              </g>
+            </g>
+          </svg>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th style="width:6%">項次</th>
+                <th style="width:34%">附錄 B：現場資料缺漏項目</th>
+                <th style="width:38%">資料核心用途與工程分析價值</th>
+                <th style="width:22%">調閱追蹤窗口與現況</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="bad-row">
+                <td class="ctr">1</td>
+                <td><b>2014–2025 逐月（逐日）發電量明細</b></td>
+                <td>區分 2016 與 2020 年發電波動究竟為氣候日照還是設備跳脫；釐清 2025 統計截止月份</td>
+                <td>進金生監控維運伺服器 / 台電抄表單</td>
+              </tr>
+              <tr class="bad-row">
+                <td class="ctr">2</td>
+                <td><b>各 MPPT / 串列電流歷史資料與 RA 定義</b></td>
+                <td>精準定位 Type A 單路崩落發生之確切起點日（何時熔絲斷裂？）；確認 RA 分母定義</td>
+                <td>維運部門監控系統匯出檔</td>
+              </tr>
+              <tr>
+                <td class="ctr">3</td>
+                <td><b>模組型號分布圖與原廠功率保固書</b></td>
+                <td>確認 1,932 片混接型號規格；若衰退超出保固曲線（10年90%/25年80%），啟動原廠求償</td>
+                <td>合約設備請購單與出廠檢驗證明</td>
+              </tr>
+              <tr>
+                <td class="ctr">4</td>
+                <td><b>變流器型號、AC 額定與故障紀錄</b></td>
+                <td>檢核 DC/AC 容量比是否超配；讀取 INV6 過溫降載警報代碼與內部結溫</td>
+                <td>現場機銘板實拍 / 原廠維修日誌</td>
+              </tr>
+              <tr class="hl-row">
+                <td class="ctr">5</td>
+                <td><b>完整單線圖（SLD）與串列組態圖</b></td>
+                <td>掌握每路 MPPT 併接串數與保護熔絲規格，核對是否存在不對稱串接失配</td>
+                <td>機電竣工圖面資料庫</td>
+              </tr>
+              <tr>
+                <td class="ctr">6</td>
+                <td><b>INV5 改設計之工程內容與履歷</b></td>
+                <td>釐清為何 2025.04 現勘排除 INV5；確認所更換單晶模組之規格與運轉表現</td>
+                <td>工程設計變更聯絡單（ECO）</td>
+              </tr>
+              <tr>
+                <td class="ctr">7</td>
+                <td><b>歷年清洗與每半年巡檢工作單</b></td>
+                <td>量化過去清洗頻率對發電之即時提升幅度；查驗是否有定期除塵除油紀錄</td>
+                <td>業主聿豐保養紀錄 / 進金生巡檢工單</td>
+              </tr>
+              <tr class="hl-row">
+                <td class="ctr">8</td>
+                <td><b>屋頂結構現況安全鑑定報告</b></td>
+                <td>測定浪板厚度與 C 型鋼鏽蝕率，提供方案 B 整新 20 年契約可行性之絕對依據</td>
+                <td>委請結構技師進行現場探傷測厚</td>
+              </tr>
+              <tr>
+                <td class="ctr">9</td>
+                <td><b>氣象署屏東測站逐時日照資料</b></td>
+                <td>建立標準溫度修正後 PR 基準線，作為整改工程完成前後驗收績效（KPI）之客觀標竿</td>
+                <td>交通部中央氣象署觀測資料庫（CODiS）</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="slide-foot">
+        <div>來源：禾豐牧場整改診斷報告 v1 附錄 A 與附錄 B ｜ 整改標準方法論</div>
+        <div class="pageno">4.2</div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Deck bar (Slide controls) -->
+  <div class="deckbar" id="deckbar" style="display:none">
+    <div class="deckbar-left">
+      <button class="deckbtn" id="btnPrev" type="button">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+        上一頁
+      </button>
+      <button class="deckbtn" id="btnNext" type="button">
+        下一頁
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+    <div class="deckbar-center">
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="counter" id="counter">1 / 4</div>
+    </div>
+    <div class="deckbar-right">
+      <span style="background:var(--grey-soft); padding:3px 8px; border-radius:3px; font-family:monospace">← / →</span> 換頁 ｜ <span style="background:var(--grey-soft); padding:3px 8px; border-radius:3px; font-family:monospace">Home</span> 回封面
+    </div>
+  </div>
+
+  <script>
+  (function(){
+    var parts = {
+      p1: [].slice.call(document.querySelectorAll('#view-p1 .slide')),
+      p2: [].slice.call(document.querySelectorAll('#view-p2 .slide')),
+      p3: [].slice.call(document.querySelectorAll('#view-p3 .slide')),
+      p4: [].slice.call(document.querySelectorAll('#view-p4 .slide'))
+    };
+    var order = ['p1','p2','p3','p4'];
+    var state = { view:'home', idx:0 };
+    var last = { p1:0, p2:0, p3:0, p4:0 };
+    var views = {
+      home: document.getElementById('view-home'),
+      p1: document.getElementById('view-p1'),
+      p2: document.getElementById('view-p2'),
+      p3: document.getElementById('view-p3'),
+      p4: document.getElementById('view-p4')
+    };
+    var deckbar = document.getElementById('deckbar');
+    var fill = document.getElementById('progressFill');
+    var counter = document.getElementById('counter');
+    var btnPrev = document.getElementById('btnPrev');
+    var btnNext = document.getElementById('btnNext');
+
+    function render(){
+      Object.keys(views).forEach(function(k){
+        if(views[k]) views[k].classList.toggle('active', k===state.view);
+      });
+      var navs = document.querySelectorAll('[data-nav]');
+      for(var i=0;i<navs.length;i++){
+        navs[i].classList.toggle('active', navs[i].getAttribute('data-nav')===state.view);
+      }
+      if(state.view==='home'){
+        deckbar.style.display='none';
+      } else {
+        deckbar.style.display='flex';
+        var slides = parts[state.view];
+        if(slides && slides.length){
+          slides.forEach(function(s,i){ s.classList.toggle('active', i===state.idx); });
+          counter.textContent = (state.idx+1)+' / '+slides.length;
+          fill.style.width = ((state.idx+1)/slides.length*100)+'%';
+          last[state.view]=state.idx;
+          btnPrev.disabled = (state.view===order[0] && state.idx===0);
+          btnNext.disabled = (state.view===order[order.length-1] && state.idx===slides.length-1);
+        }
+      }
+      window.scrollTo(0,0);
+      initMapIfNeeded();
+    }
+
+    function goHash(hash){
+      hash = (hash||'#home').replace('#','');
+      if(hash==='home'||hash===''){ state.view='home'; render(); return; }
+      var m = hash.match(/^(p1|p2|p3|p4)-(\d+)$/);
+      if(m){
+        var v=m[1], i=parseInt(m[2],10)-1;
+        if(parts[v] && parts[v][i]){ state.view=v; state.idx=i; render(); return; }
+      }
+      if(parts[hash]){
+        state.view=hash; state.idx=last[hash]||0; render(); return;
+      }
+      state.view='home'; render();
+    }
+
+    window.addEventListener('hashchange', function(){ goHash(location.hash); });
+
+    function prev(){
+      if(state.view==='home') return;
+      if(state.idx>0){
+        state.idx--;
+        location.hash='#'+state.view+'-'+(state.idx+1);
+      } else {
+        var pos = order.indexOf(state.view);
+        if(pos>0){
+          var prevView = order[pos-1];
+          var prevIdx = parts[prevView].length-1;
+          state.view = prevView; state.idx = prevIdx;
+          location.hash='#'+prevView+'-'+(prevIdx+1);
+        } else {
+          location.hash='#home';
+        }
+      }
+    }
+
+    function next(){
+      if(state.view==='home'){
+        location.hash='#p1-1';
+        return;
+      }
+      var slides = parts[state.view];
+      if(state.idx < slides.length-1){
+        state.idx++;
+        location.hash='#'+state.view+'-'+(state.idx+1);
+      } else {
+        var pos = order.indexOf(state.view);
+        if(pos < order.length-1){
+          var nextView = order[pos+1];
+          state.view = nextView; state.idx = 0;
+          location.hash='#'+nextView+'-1';
+        }
+      }
+    }
+
+    btnPrev.addEventListener('click', prev);
+    btnNext.addEventListener('click', next);
+
+    window.addEventListener('keydown', function(e){
+      if(e.target && (e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA')) return;
+      if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '){
+        e.preventDefault(); next();
+      } else if(e.key==='ArrowLeft'||e.key==='PageUp'){
+        e.preventDefault(); prev();
+      } else if(e.key==='Home'){
+        e.preventDefault(); location.hash='#home';
+      }
+    });
+
+    var mapInitialized = false;
+    function initMapIfNeeded(){
+      if(state.view==='p4' && !mapInitialized && document.getElementById('pv-map')){
+        mapInitialized = true;
+        setTimeout(function(){
+          var map = L.map('pv-map', {zoomControl:true, scrollWheelZoom:false}).setView([22.6515, 120.5280], 14);
+          L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; OpenStreetMap contributors'
+          }).addTo(map);
+
+          var hefengLat = 22.6515, hefengLng = 120.5280;
+          var subLat = 22.6620, subLng = 120.5360; // 周邊變電所
+          var weatherLat = 22.6730, weatherLng = 120.4880; // 屏東氣象站
+
+          function makePin(color, title, desc){
+            var h = '<div style="background:'+color+';color:#fff;padding:6px 12px;border-radius:6px;font-weight:800;white-space:nowrap;border:2px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,0.35);font-size:12px;text-align:center;">'+title+(desc?'<br><small style="font-weight:600;opacity:0.9;font-size:10px">'+desc+'</small>':'')+'</div>';
+            return L.divIcon({className:'custom-pin', html:h, iconSize:[170,44], iconAnchor:[85,44]});
+          }
+
+          L.marker([hefengLat, hefengLng], {icon: makePin('#1968AD', '📍 禾豐牧場光電廠', '452.6kWp 豬舍屋頂')}).addTo(map);
+          L.marker([subLat, subLng], {icon: makePin('#1BB1BF', '⚡ 台電 11.4kV 引接饋線', '高壓外併點')}).addTo(map);
+          L.marker([weatherLat, weatherLng], {icon: makePin('#E09A2B', '⛅ 氣象署屏東氣象測站', 'PR 與日照基準')}).addTo(map);
+
+          L.circle([hefengLat, hefengLng], {radius: 1200, color: '#1968AD', fillColor: '#1968AD', fillOpacity: 0.08, weight: 1.5, dashArray: '4,6'}).addTo(map);
+
+          L.polyline([[hefengLat, hefengLng], [subLat, subLng]], {color: '#1BB1BF', weight: 3, dashArray: '6,6', opacity: 0.85}).addTo(map);
+          map.invalidateSize();
+        }, 150);
+      }
+    }
+
+    goHash(location.hash);
+  })();
+
+  /* Table expansion toggle */
+  document.querySelectorAll('.table-wrap').forEach(function(wrap){
+    var rows = Array.prototype.slice.call(wrap.querySelectorAll('tbody tr'));
+    if(rows.length <= 6) return;
+    rows.slice(6).forEach(function(row){ row.classList.add('table-extra'); });
+    var button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'table-toggle';
+    button.textContent = '▼ 展開完整數據明細（共 ' + rows.length + ' 筆資料）';
+    button.addEventListener('click', function(){
+      var open = wrap.classList.toggle('expanded');
+      button.textContent = open ? '▲ 收合資料明細' : '▼ 展開完整數據明細（共 ' + rows.length + ' 筆資料）';
+    });
+    wrap.appendChild(button);
+  });
+  </script>
+</body>
+</html>
