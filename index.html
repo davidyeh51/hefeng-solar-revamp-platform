@@ -220,7 +220,7 @@ td.ctr,th.ctr{text-align:center}
       <a href="#p2" data-nav="p2">Part 2 歸因研判與修復 (3 頁)</a>
       <a href="#p3" data-nav="p3">Part 3 方案比較與財務漏洞 (4 頁)</a>
       <a href="#p4" data-nav="p4">Part 4 空間圖資與方法論 (2 頁)</a>
-      <a href="#p5" data-nav="p5">Part 5 最新發電監控數據 (3 頁)</a>
+      <a href="#p5" data-nav="p5">Part 5 最新發電監控數據 (4 頁)</a>
     </nav>
     <div class="meta">報告日期：2026/09/11 ｜ 呈閱：董事長、總經理</div>
   </header>
@@ -314,8 +314,8 @@ td.ctr,th.ctr{text-align:center}
       </div>
       <div class="card purple">
         <h3>Part 5 · 最新發電監控分析</h3>
-        <p><b>2026/05–09 實測</b>：8台逆變器同儕評比、INV7/6 斷串少發 45%、月可多發 6,550度 (+24%) 與 1000V 防弧安全。</p>
-        <div style="margin-top:12px"><a href="#p5-1" class="deckbtn" style="display:inline-flex">Part 5 (3 頁) →</a></div>
+        <p><b>2026/05–09 實測＋氣象署屏東站驗證</b>：日射計可信、整廠 PR 僅 49%；INV7/6 固定斷串、8 月下旬豪雨後 INV5/7/8 新故障；每月可多發 6,550–12,300 度。</p>
+        <div style="margin-top:12px"><a href="#p5-1" class="deckbtn" style="display:inline-flex">Part 5 (4 頁) →</a></div>
       </div>
     </div>
   </div>
@@ -1823,76 +1823,70 @@ td.ctr,th.ctr{text-align:center}
       <div class="slide-header">
         <div>
           <div class="eyebrow">Part 5 · 最新發電監控數據分析 5.1</div>
-          <h1>2026 最新整廠運轉概況：PR 僅 45–57% 全面低迷</h1>
-          <p class="sub">依據 2026/05–2026/09 最新監控平台匯出數據（Ho-Feng），整廠 PR 僅 45.6%～56.8%（健康屋頂案場常態應為 75%～80%），日發電小時僅 1.41～2.47 h/日。5 個月累計發電 12.2 萬度，證實電廠非但未見好轉，更持續深陷全場積污、設備跳機與斷串之多重惡性循環。</p>
+          <h1>日射計經氣象署屏東站驗證可信：整廠 PR 僅 49%，是真實偏低</h1>
+          <p class="sub">以中央氣象署屏東站（距案場 3.6 km）逐日日射量交叉驗證，電廠日射計讀值是測站的 0.89–1.02 倍，基準可信。改用測站日射量重算，2026/05–09 整廠 PR 僅 49.3%（健康案場 75–80%），5 個月比健康標準短收約 6.4 萬度，以躉售 5.7976 元／度計約 37 萬元。</p>
         </div>
         <div class="flags">
-          <span class="flag coral">整廠 PR 僅 45~57%</span>
-          <span class="flag amber">發電小時僅 1.4~2.5h</span>
-          <span class="flag blue">2026 最新實時數據</span>
+          <span class="flag coral">整廠 PR 僅 49%</span>
+          <span class="flag blue">日射計比值 0.89–1.02</span>
+          <span class="flag green">氣象署屏東站 3.6 km</span>
         </div>
       </div>
       <div class="slide-body">
         <div class="split-55">
-          <!-- SVG Dual-Axis Chart -->
           <div class="fig">
             <div class="figtitle">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-              2026 年 5–9 月整廠月發電量 (kWh) 與整廠 PR (%) 趨勢圖
+              電廠日射計 vs 氣象署測站：月平均日射量（kWh/m²/日）
             </div>
-            <svg viewBox="0 0 540 260" role="img" aria-label="5-9月發電與PR趨勢圖">
-              <!-- Grid lines -->
-              <line x1="50" y1="30" x2="490" y2="30" stroke="#EDF1F5" stroke-width="1"/>
-              <line x1="50" y1="80" x2="490" y2="80" stroke="#EDF1F5" stroke-width="1"/>
-              <line x1="50" y1="130" x2="490" y2="130" stroke="#EDF1F5" stroke-width="1"/>
-              <line x1="50" y1="180" x2="490" y2="180" stroke="#EDF1F5" stroke-width="1"/>
-              <line x1="50" y1="210" x2="490" y2="210" stroke="#D9E3EC" stroke-width="1.5"/>
+            <svg viewBox="0 0 540 260" role="img" aria-label="電廠日射計與屏東站、高雄站月平均日射量比較">
+              <rect x="60" y="7" width="10" height="10" fill="#1968AD" rx="2"/>
+              <text x="74" y="16" font-size="10.5" fill="#12293D">電廠日射計</text>
+              <rect x="150" y="7" width="10" height="10" fill="#1BB1BF" rx="2"/>
+              <text x="164" y="16" font-size="10.5" fill="#12293D">屏東站 3.6 km</text>
+              <rect x="258" y="7" width="10" height="10" fill="#9FB1C0" rx="2"/>
+              <text x="272" y="16" font-size="10.5" fill="#5B7285">高雄站 28 km（沿海，僅對照）</text>
 
-              <!-- Target Healthy line (75%) -->
-              <line x1="50" y1="50" x2="490" y2="50" stroke="#2E7D32" stroke-width="2" stroke-dasharray="6,4"/>
-              <text x="495" y="54" font-size="10.5" font-weight="700" fill="#2E7D32">健康標準 PR 75%</text>
+              <line x1="50" y1="60" x2="500" y2="60" stroke="#EDF1F5" stroke-width="1"/>
+              <line x1="50" y1="110" x2="500" y2="110" stroke="#EDF1F5" stroke-width="1"/>
+              <line x1="50" y1="160" x2="500" y2="160" stroke="#EDF1F5" stroke-width="1"/>
+              <line x1="50" y1="210" x2="500" y2="210" stroke="#D9E3EC" stroke-width="1.5"/>
+              <text x="44" y="64" text-anchor="end" font-size="10" fill="#5B7285">6</text>
+              <text x="44" y="114" text-anchor="end" font-size="10" fill="#5B7285">4</text>
+              <text x="44" y="164" text-anchor="end" font-size="10" fill="#5B7285">2</text>
 
-              <!-- Bars (Generation kWh / 1000) -->
-              <!-- May: 32.85k -->
-              <rect x="75" y="81" width="45" height="129" fill="#1968AD" rx="3"/>
-              <text x="97" y="75" text-anchor="middle" font-size="11" font-weight="800" fill="#12293D">32,850</text>
-              <text x="97" y="228" text-anchor="middle" font-size="11" fill="#5B7285">05 月</text>
-
-              <!-- Jun: 26.64k -->
-              <rect x="160" y="105" width="45" height="105" fill="#1968AD" rx="3"/>
-              <text x="182" y="99" text-anchor="middle" font-size="11" font-weight="800" fill="#12293D">26,637</text>
-              <text x="182" y="228" text-anchor="middle" font-size="11" fill="#5B7285">06 月 (梅雨)</text>
-
-              <!-- Jul: 34.62k -->
-              <rect x="245" y="74" width="45" height="136" fill="#1968AD" rx="3"/>
-              <text x="267" y="68" text-anchor="middle" font-size="11" font-weight="800" fill="#12293D">34,621</text>
-              <text x="267" y="228" text-anchor="middle" font-size="11" fill="#5B7285">07 月</text>
-
-              <!-- Aug: 19.82k -->
-              <rect x="330" y="132" width="45" height="78" fill="#D95F45" rx="3"/>
-              <text x="352" y="126" text-anchor="middle" font-size="11" font-weight="800" fill="#D95F45">19,815</text>
-              <text x="352" y="228" text-anchor="middle" font-size="11" fill="#5B7285">08 月 (驟降)</text>
-
-              <!-- Sep (11d): 8.20k -->
-              <rect x="415" y="177" width="45" height="33" fill="#9FB1C0" rx="3"/>
-              <text x="437" y="171" text-anchor="middle" font-size="11" font-weight="800" fill="#5B7285">8,200</text>
-              <text x="437" y="228" text-anchor="middle" font-size="11" fill="#5B7285">09 月 (11天)</text>
-
-              <!-- PR Line (Amber dots & line) -->
-              <polyline points="97,120 182,95 267,108 352,105 437,120" fill="none" stroke="#E09A2B" stroke-width="3"/>
-              <circle cx="97" cy="120" r="4.5" fill="#E09A2B" stroke="#fff" stroke-width="2"/>
-              <circle cx="182" cy="95" r="4.5" fill="#E09A2B" stroke="#fff" stroke-width="2"/>
-              <circle cx="267" cy="108" r="4.5" fill="#E09A2B" stroke="#fff" stroke-width="2"/>
-              <circle cx="352" cy="105" r="4.5" fill="#E09A2B" stroke="#fff" stroke-width="2"/>
-              <circle cx="437" cy="120" r="4.5" fill="#E09A2B" stroke="#fff" stroke-width="2"/>
-
-              <text x="97" y="137" text-anchor="middle" font-size="10.5" font-weight="900" fill="#9a6a10">45.6%</text>
-              <text x="182" y="85" text-anchor="middle" font-size="10.5" font-weight="900" fill="#9a6a10">56.8%</text>
-              <text x="267" y="96" text-anchor="middle" font-size="10.5" font-weight="900" fill="#9a6a10">51.0%</text>
-              <text x="352" y="93" text-anchor="middle" font-size="10.5" font-weight="900" fill="#9a6a10">52.4%</text>
-              <text x="437" y="137" text-anchor="middle" font-size="10.5" font-weight="900" fill="#9a6a10">45.5%</text>
+              <!-- May -->
+              <rect x="63" y="81.5" width="20" height="128.5" fill="#1968AD" rx="2"/>
+              <rect x="85" y="83.75" width="20" height="126.25" fill="#1BB1BF" rx="2"/>
+              <rect x="107" y="44.25" width="20" height="165.75" fill="#9FB1C0" rx="2"/>
+              <text x="84" y="75" text-anchor="middle" font-size="10.5" font-weight="800" fill="#12293D">1.02</text>
+              <text x="95" y="228" text-anchor="middle" font-size="11" fill="#5B7285">05 月</text>
+              <!-- Jun -->
+              <rect x="151" y="123.75" width="20" height="86.25" fill="#1968AD" rx="2"/>
+              <rect x="173" y="112.75" width="20" height="97.25" fill="#1BB1BF" rx="2"/>
+              <rect x="195" y="89.75" width="20" height="120.25" fill="#9FB1C0" rx="2"/>
+              <text x="172" y="106" text-anchor="middle" font-size="10.5" font-weight="900" fill="#D95F45">0.89</text>
+              <text x="183" y="228" text-anchor="middle" font-size="11" fill="#5B7285">06 月</text>
+              <!-- Jul -->
+              <rect x="239" y="89.25" width="20" height="120.75" fill="#1968AD" rx="2"/>
+              <rect x="261" y="88.75" width="20" height="121.25" fill="#1BB1BF" rx="2"/>
+              <rect x="283" y="69.25" width="20" height="140.75" fill="#9FB1C0" rx="2"/>
+              <text x="260" y="82" text-anchor="middle" font-size="10.5" font-weight="800" fill="#12293D">1.00</text>
+              <text x="271" y="228" text-anchor="middle" font-size="11" fill="#5B7285">07 月</text>
+              <!-- Aug -->
+              <rect x="327" y="142.75" width="20" height="67.25" fill="#1968AD" rx="2"/>
+              <rect x="349" y="143.75" width="20" height="66.25" fill="#1BB1BF" rx="2"/>
+              <rect x="371" y="116.25" width="20" height="93.75" fill="#9FB1C0" rx="2"/>
+              <text x="348" y="136" text-anchor="middle" font-size="10.5" font-weight="800" fill="#12293D">1.02</text>
+              <text x="359" y="228" text-anchor="middle" font-size="11" fill="#5B7285">08 月</text>
+              <!-- Sep -->
+              <rect x="415" y="119.5" width="20" height="90.5" fill="#1968AD" rx="2"/>
+              <rect x="437" y="115.25" width="20" height="94.75" fill="#1BB1BF" rx="2"/>
+              <rect x="459" y="87.5" width="20" height="122.5" fill="#9FB1C0" rx="2"/>
+              <text x="436" y="109" text-anchor="middle" font-size="10.5" font-weight="800" fill="#12293D">0.95</text>
+              <text x="447" y="228" text-anchor="middle" font-size="11" fill="#5B7285">09 月 (1–10日)</text>
             </svg>
-            <div class="figcap">藍柱為月發電量 (kWh)；黃線為整廠 PR (%)；綠色虛線為同緯度健康電廠基準線 PR 75%。</div>
+            <div class="figcap">柱上數字為「電廠日射計 ÷ 屏東站」比值，穩定在 1.0 左右，日射計可信。高雄站在沿海，日射量比屏東平原高 20–40%，拿它比對會誤判日射計偏低，不採用。</div>
           </div>
 
           <div class="table-wrap">
@@ -1900,84 +1894,92 @@ td.ctr,th.ctr{text-align:center}
               <thead>
                 <tr>
                   <th>月份</th>
-                  <th class="num">發電量 (kWh)</th>
-                  <th class="num">發電小時 (h/日)</th>
-                  <th class="num">日射量 (kWh/m²/日)</th>
-                  <th class="num">整廠 PR</th>
-                  <th>運轉狀態診斷</th>
+                  <th class="num">發電 (kWh)</th>
+                  <th class="num">電廠日射</th>
+                  <th class="num">屏東站</th>
+                  <th class="num">比值</th>
+                  <th class="num">平台 PR</th>
+                  <th class="num">重算 PR</th>
                 </tr>
               </thead>
               <tbody>
-                <tr class="bad-row">
-                  <td><b>2026/05</b></td>
-                  <td class="num">32,850</td>
-                  <td class="num">2.34</td>
-                  <td class="num">5.14</td>
-                  <td class="num"><b style="color:var(--coral)">45.6%</b></td>
-                  <td>日照最高（5.14h）但 PR 最低，溫度熱損與多機跳脫</td>
-                </tr>
-                <tr class="good-row">
-                  <td><b>2026/06</b></td>
-                  <td class="num">26,637</td>
-                  <td class="num">1.96</td>
-                  <td class="num">3.45</td>
-                  <td class="num"><b style="color:var(--green)">56.8%</b></td>
-                  <td>梅雨季氣溫降低使 PR 略升，但 INV1/5 濕氣跳機</td>
-                </tr>
                 <tr>
-                  <td><b>2026/07</b></td>
-                  <td class="num">34,621</td>
-                  <td class="num">2.47</td>
-                  <td class="num">4.83</td>
-                  <td class="num">51.0%</td>
-                  <td>盛夏發電量最高峰，但高溫壓抑 PR 僅維持 51%</td>
-                </tr>
-                <tr class="bad-row">
-                  <td><b>2026/08</b></td>
-                  <td class="num">19,815</td>
-                  <td class="num">1.41</td>
-                  <td class="num">2.69</td>
-                  <td class="num">52.4%</td>
-                  <td>發電量驟降至 1.98 萬度，日射計讀值異常偏低待校準</td>
+                  <td><b>2026/05</b><br><small>晴 13 天</small></td>
+                  <td class="num">32,850</td>
+                  <td class="num">5.14</td>
+                  <td class="num">5.05</td>
+                  <td class="num">1.02</td>
+                  <td class="num">45.6%</td>
+                  <td class="num">46.3%*</td>
                 </tr>
                 <tr class="hl-row">
-                  <td><b>2026/09</b><br><small>(截至 9/11，11天)</small></td>
+                  <td><b>2026/06</b><br><small>梅雨 1,532 mm</small></td>
+                  <td class="num">26,637</td>
+                  <td class="num">3.45</td>
+                  <td class="num">3.89</td>
+                  <td class="num"><b style="color:var(--coral)">0.89</b></td>
+                  <td class="num">56.8%</td>
+                  <td class="num"><b>50.4%</b></td>
+                </tr>
+                <tr>
+                  <td><b>2026/07</b><br><small>晴 14 天</small></td>
+                  <td class="num">34,621</td>
+                  <td class="num">4.83</td>
+                  <td class="num">4.85</td>
+                  <td class="num">1.00</td>
+                  <td class="num">51.0%</td>
+                  <td class="num">50.9%</td>
+                </tr>
+                <tr>
+                  <td><b>2026/08</b><br><small>雨 1,750 mm，無晴天</small></td>
+                  <td class="num">19,815</td>
+                  <td class="num">2.69</td>
+                  <td class="num">2.65</td>
+                  <td class="num">1.02</td>
+                  <td class="num">52.4%</td>
+                  <td class="num">53.2%</td>
+                </tr>
+                <tr class="bad-row">
+                  <td><b>2026/09</b><br><small>截至 9/11；9/1–3 豪雨</small></td>
                   <td class="num">8,200</td>
-                  <td class="num">1.65</td>
                   <td class="num">3.62</td>
-                  <td class="num"><b style="color:var(--coral)">45.5%</b></td>
-                  <td>INV8 發生新異常驟降 -22%，拖累全場跌破 46%</td>
+                  <td class="num">3.79</td>
+                  <td class="num">0.95</td>
+                  <td class="num">45.5%</td>
+                  <td class="num"><b style="color:var(--coral)">43.5%*</b></td>
                 </tr>
                 <tr class="good-row">
-                  <td><b>合計／平均</b></td>
-                  <td class="num"><b>122,123</b></td>
-                  <td class="num"><b>1.97</b></td>
-                  <td class="num"><b>3.95</b></td>
-                  <td class="num"><b style="color:var(--blue)">50.3%</b></td>
-                  <td><b>相較健康標準 75%，5 個月短收約 5.9 萬度電！</b></td>
+                  <td><b>合計／加權</b><br><small>短收 6.4 萬度（37 萬元）</small></td>
+                  <td class="num"><b>122,124</b></td>
+                  <td class="num">—</td>
+                  <td class="num">—</td>
+                  <td class="num">—</td>
+                  <td class="num">—</td>
+                  <td class="num"><b style="color:var(--blue)">49.3%</b></td>
                 </tr>
               </tbody>
             </table>
+            <div class="figcap" style="padding:0 12px 10px">日射單位 kWh/m²/日。重算 PR ＝ 發電小時 ÷ 屏東站日射量，不依賴電廠日射計；合計列為比健康 PR 75% 短收的電量。＊5 月資料不完整（約 28 天）；9 月為部分月份。</div>
           </div>
         </div>
 
         <div class="three-col" style="margin-top:4px">
           <div class="card coral">
-            <h3>🔴 整廠 PR 僅 50%：全場均勻偏低警訊</h3>
-            <p>健康案場 PR 一般在 75%～80%。禾豐電廠全場平均 PR 僅 50.3%，表現最好的逆變器平均也只有 63%，證實電廠同時存在「全場共通性嚴重積污/高溫」與「個別逆變器離散故障」。</p>
+            <h3>✅ 日射計可信，PR 偏低是真的</h3>
+            <p>電廠日射計與 3.6 km 外屏東站的比值在 0.89–1.02。只有 6 月略低，讓平台 6 月 PR（56.8%）被高估，實際約 50%。問題不在量測，而在電廠本身。</p>
           </div>
           <div class="card amber">
-            <h3>⚡ 8 月異常驟降與日射計偏差</h3>
-            <p>8 月發電量跌至不足 2 萬度，發電小時僅 1.41 h/日，日射量記錄僅 2.69 kWh/m²/日。需確認現場日射計安裝方位（POA 斜面或 GHI 水平）與受污程度，避免基準失真。</p>
+            <h3>☀️ 天氣不是主因</h3>
+            <p>7 月有 14 個晴天，PR 仍只有 51%。平均最高溫 31–34 °C，溫度損失約 8–10%，這部分本來就包含在健康 PR 75–80% 的標準裡，解釋不了 25 個百分點的落差。</p>
           </div>
           <div class="card teal">
-            <h3>🌧️ 氣候與雨季誘發之絕緣阻抗跳脫</h3>
-            <p>6 月梅雨與 9 月初陣雨期間，INV1 與 INV5 均出現明顯發電深跌，乾燥後自癒。強烈指出豬舍高濕環境與氨氣已侵蝕 DC 端子絕緣外皮，觸發 Riso 低絕緣保護停機。</p>
+            <h3>🌧️ 積污也不是主因</h3>
+            <p>8 月下了 1,750 mm、9 月初又 268 mm，雨水足以沖洗組件，但 9 月 PR 不升反降。養豬場油污薄膜不易被雨沖掉，仍建議做一次清洗對照，但不列為主因。</p>
           </div>
         </div>
       </div>
       <div class="slide-foot">
-        <div>來源：電站運轉效率-禾豐.csv ｜ 禾豐電廠發電分析.md (2026-09-11) ｜ 監控代號 Ho-Feng</div>
+        <div>來源：電站運轉效率-禾豐.csv ｜ 中央氣象署 CODiS 屏東站 C2R170、高雄站 467441 逐日日射量 ｜ 禾豐電廠發電分析.md v1.2</div>
         <div class="pageno">5.1</div>
       </div>
     </section>
@@ -1987,72 +1989,76 @@ td.ctr,th.ctr{text-align:center}
       <div class="slide-header">
         <div>
           <div class="eyebrow">Part 5 · 最新發電監控數據分析 5.2</div>
-          <h1>8 台逆變器同儕評比：INV7/6 嚴重少發 45%、INV8 崩跌</h1>
-          <p class="sub">透過同儕橫向比較（Peer-to-Peer），排除大氣天候日照干擾。INV7 與 INV6 長期穩定少發 38%～45%，符合 2~3 串組串斷路特徵；INV8 在 7~9 月急遽惡化，9 月單月崩跌 -22.2%；INV1、INV5 則於梅雨及雨季呈現典型受潮絕緣跳脫（Riso）。</p>
+          <h1>8 台逆變器同儕評比：INV7/6 固定斷串，INV5/7/8 於 9 月再崩</h1>
+          <p class="sub">改以屏東站日射量計算各逆變器 PR（不依賴電廠日射計）。INV7、INV6 在 6–8 月穩定只有基準的 55–63%，符合 2–3 串組串未併入；9 月全場下降，其中 INV8（−25%）、INV7（−22%）、INV5（−19%）遠超其他台。</p>
         </div>
         <div class="flags">
-          <span class="flag coral">🔴 INV7 最慘烈 (29.3%)</span>
-          <span class="flag coral">🔴 INV6 斷串 38%</span>
-          <span class="flag amber">🟠 INV8 驟降 -22%</span>
-          <span class="flag blue">🟡 INV1/5 濕氣跳脫</span>
+          <span class="flag coral">🔴 INV7 僅 35%</span>
+          <span class="flag coral">🔴 INV6 斷串 37%</span>
+          <span class="flag coral">🔴 INV8 9 月 −25%</span>
+          <span class="flag amber">🟠 INV5 9 月 −19%</span>
         </div>
       </div>
       <div class="slide-body">
         <div class="split-55">
-          <!-- Horizontal Bar Comparison SVG -->
           <div class="fig">
             <div class="figtitle">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-              8 台逆變器平均 PR (5–9月) 橫向對比圖（基準線 INV2 61.9%）
+              各逆變器 PR：6–8 月平均 vs 9 月（以屏東站日射量，%）
             </div>
-            <svg viewBox="0 0 540 260" role="img" aria-label="8台逆變器PR長條圖">
-              <line x1="75" y1="20" x2="75" y2="225" stroke="#D9E3EC" stroke-width="1.5"/>
-              <line x1="330" y1="15" x2="330" y2="230" stroke="#2E7D32" stroke-width="2" stroke-dasharray="4,4"/>
-              <text x="330" y="12" text-anchor="middle" font-size="10.5" font-weight="800" fill="#2E7D32">基準 INV2 (61.9%)</text>
+            <svg viewBox="0 0 540 260" role="img" aria-label="各逆變器6到8月平均PR與9月PR比較">
+              <line x1="75" y1="20" x2="75" y2="230" stroke="#D9E3EC" stroke-width="1.5"/>
+              <line x1="375" y1="20" x2="375" y2="230" stroke="#2E7D32" stroke-width="1.5" stroke-dasharray="4,4"/>
+              <text x="375" y="15" text-anchor="middle" font-size="10" font-weight="800" fill="#2E7D32">健康 PR 75%</text>
 
-              <!-- INV4: 63.2% -->
-              <text x="68" y="38" text-anchor="end" font-size="11" font-weight="700" fill="#12293D">INV4</text>
-              <rect x="75" y="26" width="260" height="17" fill="#9FB1C0" rx="3"/>
-              <text x="342" y="39" font-size="11" font-weight="800" fill="#5B7285">63.2% (容量疑設低)</text>
+              <text x="68" y="42" text-anchor="end" font-size="11" font-weight="700" fill="#12293D">INV4</text>
+              <rect x="75" y="28" width="258.4" height="9" fill="#1968AD" rx="2"/>
+              <rect x="75" y="38" width="228" height="9" fill="#9FB1C0" rx="2"/>
+              <text x="339" y="42" font-size="10.5" fill="#5B7285">64.6 → 57.0（−12%）</text>
 
-              <!-- INV2: 61.9% -->
-              <text x="68" y="63" text-anchor="end" font-size="11" font-weight="700" fill="#12293D">INV2</text>
-              <rect x="75" y="51" width="255" height="17" fill="#1BB1BF" rx="3"/>
-              <text x="337" y="64" font-size="11" font-weight="900" fill="#1BB1BF">61.9% (健康基準)</text>
+              <text x="68" y="67" text-anchor="end" font-size="11" font-weight="700" fill="#12293D">INV2</text>
+              <rect x="75" y="53" width="254.8" height="9" fill="#1968AD" rx="2"/>
+              <rect x="75" y="63" width="224.8" height="9" fill="#9FB1C0" rx="2"/>
+              <text x="336" y="67" font-size="10.5" fill="#5B7285">63.7 → 56.2（−12%）</text>
 
-              <!-- INV3: 56.7% -->
-              <text x="68" y="88" text-anchor="end" font-size="11" font-weight="700" fill="#12293D">INV3</text>
-              <rect x="75" y="76" width="233" height="17" fill="#1968AD" rx="3"/>
-              <text x="315" y="89" font-size="11" font-weight="700" fill="#1968AD">56.7%</text>
+              <text x="68" y="92" text-anchor="end" font-size="11" font-weight="700" fill="#12293D">INV3</text>
+              <rect x="75" y="78" width="231.2" height="9" fill="#1968AD" rx="2"/>
+              <rect x="75" y="88" width="201.6" height="9" fill="#9FB1C0" rx="2"/>
+              <text x="312" y="92" font-size="10.5" fill="#5B7285">57.8 → 50.4（−13%）</text>
 
-              <!-- INV1: 50.1% -->
-              <text x="68" y="113" text-anchor="end" font-size="11" font-weight="700" fill="#12293D">INV1</text>
-              <rect x="75" y="101" width="206" height="17" fill="#E09A2B" rx="3"/>
-              <text x="288" y="114" font-size="11" font-weight="700" fill="#9a6a10">50.1% (梅雨掉電)</text>
+              <text x="68" y="117" text-anchor="end" font-size="11" font-weight="700" fill="#12293D">INV5</text>
+              <rect x="75" y="103" width="208.8" height="9" fill="#1968AD" rx="2"/>
+              <rect x="75" y="113" width="168.8" height="9" fill="#D95F45" rx="2"/>
+              <text x="290" y="117" font-size="10.5" font-weight="800" fill="#D95F45">52.2 → 42.2（−19%）</text>
 
-              <!-- INV5: 49.8% -->
-              <text x="68" y="138" text-anchor="end" font-size="11" font-weight="700" fill="#12293D">INV5</text>
-              <rect x="75" y="126" width="205" height="17" fill="#E09A2B" rx="3"/>
-              <text x="287" y="139" font-size="11" font-weight="700" fill="#9a6a10">49.8% (梅雨掉電)</text>
+              <text x="68" y="142" text-anchor="end" font-size="11" font-weight="700" fill="#12293D">INV1</text>
+              <rect x="75" y="128" width="204.8" height="9" fill="#1968AD" rx="2"/>
+              <rect x="75" y="138" width="193.2" height="9" fill="#9FB1C0" rx="2"/>
+              <text x="286" y="142" font-size="10.5" fill="#5B7285">51.2 → 48.3（−6%）</text>
 
-              <!-- INV8: 48.4% -->
-              <text x="68" y="163" text-anchor="end" font-size="11" font-weight="700" fill="#12293D">INV8</text>
-              <rect x="75" y="151" width="199" height="17" fill="#D95F45" rx="3"/>
-              <text x="281" y="164" font-size="11" font-weight="900" fill="#D95F45">48.4% (9月暴跌-22%)</text>
+              <text x="68" y="167" text-anchor="end" font-size="11" font-weight="700" fill="#12293D">INV8</text>
+              <rect x="75" y="153" width="202" height="9" fill="#1968AD" rx="2"/>
+              <rect x="75" y="163" width="152" height="9" fill="#D95F45" rx="2"/>
+              <text x="283" y="167" font-size="10.5" font-weight="800" fill="#D95F45">50.5 → 38.0（−25%）</text>
 
-              <!-- INV6: 39.6% -->
-              <text x="68" y="188" text-anchor="end" font-size="11" font-weight="700" fill="#12293D">INV6</text>
-              <rect x="75" y="176" width="163" height="17" fill="#D95F45" rx="3"/>
-              <text x="245" y="189" font-size="11" font-weight="900" fill="#D95F45">39.6% (斷串 38%)</text>
+              <text x="68" y="192" text-anchor="end" font-size="11" font-weight="700" fill="#12293D">INV6</text>
+              <rect x="75" y="178" width="161.6" height="9" fill="#1968AD" rx="2"/>
+              <rect x="75" y="188" width="138" height="9" fill="#9FB1C0" rx="2"/>
+              <text x="243" y="192" font-size="10.5" fill="#5B7285">40.4 → 34.5（−15%）</text>
 
-              <!-- INV7: 34.5% -->
-              <text x="68" y="213" text-anchor="end" font-size="11" font-weight="700" fill="#12293D">INV7</text>
-              <rect x="75" y="201" width="142" height="17" fill="#b4432c" rx="3"/>
-              <text x="224" y="214" font-size="11" font-weight="900" fill="#b4432c">34.5% (斷串 45%)</text>
+              <text x="68" y="217" text-anchor="end" font-size="11" font-weight="700" fill="#12293D">INV7</text>
+              <rect x="75" y="203" width="141.6" height="9" fill="#1968AD" rx="2"/>
+              <rect x="75" y="213" width="110.8" height="9" fill="#D95F45" rx="2"/>
+              <text x="223" y="217" font-size="10.5" font-weight="800" fill="#D95F45">35.4 → 27.7（−22%）</text>
 
-              <text x="270" y="248" text-anchor="middle" font-size="10.5" fill="#5B7285">資料有效 PR (%) 橫向同儕對照</text>
+              <rect x="120" y="240" width="10" height="9" fill="#1968AD" rx="2"/>
+              <text x="134" y="248" font-size="10.5" fill="#12293D">6–8 月平均</text>
+              <rect x="220" y="240" width="10" height="9" fill="#D95F45" rx="2"/>
+              <text x="234" y="248" font-size="10.5" fill="#12293D">9 月（異常下降）</text>
+              <rect x="340" y="240" width="10" height="9" fill="#9FB1C0" rx="2"/>
+              <text x="354" y="248" font-size="10.5" fill="#12293D">9 月</text>
             </svg>
-            <div class="figcap">同屋頂、同氣候環境下，INV7 與 INV6 嚴重落後基準線逾 22~27 個百分點，具高度離散性。</div>
+            <div class="figcap">INV2、INV3、INV4 在 9 月也下降約 12%，屬全場共同下降（其中約 5% 是資料假象，見 5.3）；INV5、INV7、INV8 比同儕多掉 7–13 個百分點。</div>
           </div>
 
           <div class="table-wrap">
@@ -2060,104 +2066,95 @@ td.ctr,th.ctr{text-align:center}
               <thead>
                 <tr>
                   <th>逆變器</th>
-                  <th class="num">05月</th>
                   <th class="num">06月</th>
                   <th class="num">07月</th>
                   <th class="num">08月</th>
                   <th class="num">09月</th>
-                  <th class="num">平均PR</th>
-                  <th class="ctr">相對表現</th>
-                  <th>故障樹判定與特徵</th>
+                  <th class="num">6–8月平均</th>
+                  <th class="ctr">相對 INV4<br><small>6–8月→9月</small></th>
+                  <th>研判</th>
                 </tr>
               </thead>
               <tbody>
                 <tr class="bad-row">
                   <td><b>🔴 INV7</b></td>
-                  <td class="num">36.1</td>
-                  <td class="num">36.4</td>
-                  <td class="num">35.4</td>
-                  <td class="num">35.3</td>
-                  <td class="num"><b>29.3</b></td>
-                  <td class="num"><b>34.5%</b></td>
-                  <td class="ctr"><b style="color:var(--coral)">0.49</b></td>
-                  <td><b>組串斷路＋積污</b>：全場最低且持續崩落，至少 2~3 串斷線</td>
+                  <td class="num">35.5</td>
+                  <td class="num">34.8</td>
+                  <td class="num">35.9</td>
+                  <td class="num"><b>27.7</b></td>
+                  <td class="num"><b>35.4</b></td>
+                  <td class="ctr"><b style="color:var(--coral)">0.55→0.49</b></td>
+                  <td><b>組串斷路＋豪雨後新增故障</b>：原本就有組串未併入，9 月再掉</td>
+                </tr>
+                <tr class="bad-row">
+                  <td><b>🔴 INV8</b></td>
+                  <td class="num">50.4</td>
+                  <td class="num">50.1</td>
+                  <td class="num">51.0</td>
+                  <td class="num"><b>38.0</b></td>
+                  <td class="num">50.5</td>
+                  <td class="ctr"><b style="color:var(--coral)">0.78→0.67</b></td>
+                  <td><b>9 月突降</b>：5–8 月穩定，豪雨後組串脫落或進水</td>
                 </tr>
                 <tr class="bad-row">
                   <td><b>🔴 INV6</b></td>
-                  <td class="num">42.7</td>
-                  <td class="num">39.8</td>
-                  <td class="num">39.8</td>
-                  <td class="num">40.2</td>
-                  <td class="num">35.7</td>
-                  <td class="num"><b>39.6%</b></td>
-                  <td class="ctr"><b style="color:var(--coral)">0.62</b></td>
-                  <td><b>組串斷路</b>：階梯式固定短少 38%，不隨季節變化，熔絲斷或DC開關跳</td>
+                  <td class="num">40.4</td>
+                  <td class="num">38.3</td>
+                  <td class="num">42.6</td>
+                  <td class="num">34.5</td>
+                  <td class="num"><b>40.4</b></td>
+                  <td class="ctr"><b style="color:var(--coral)">0.63→0.61</b></td>
+                  <td><b>組串斷路</b>：固定損失約 37%，相當於 2–3 串未併入</td>
                 </tr>
                 <tr class="hl-row">
-                  <td><b>🟠 INV8</b></td>
-                  <td class="num">50.9</td>
-                  <td class="num">51.4</td>
-                  <td class="num">51.2</td>
-                  <td class="num">49.0</td>
-                  <td class="num"><b>39.4</b></td>
-                  <td class="num"><b>48.4%</b></td>
-                  <td class="ctr">0.66</td>
-                  <td><b>新發異常</b>：7~9 月急跌，9 月單月驟降 <b>−22.2%</b>，疑新斷串脫落</td>
-                </tr>
-                <tr>
                   <td><b>🟠 INV5</b></td>
-                  <td class="num">52.1</td>
-                  <td class="num">46.1</td>
-                  <td class="num">53.4</td>
-                  <td class="num">53.2</td>
-                  <td class="num">44.3</td>
-                  <td class="num">49.8%</td>
-                  <td class="ctr">0.74</td>
-                  <td><b>接地／絕緣故障</b>：6 月梅雨及 9 月雨季低發，乾季自癒（Riso 跳機）</td>
+                  <td class="num">49.9</td>
+                  <td class="num">52.5</td>
+                  <td class="num">54.3</td>
+                  <td class="num"><b>42.2</b></td>
+                  <td class="num">52.2</td>
+                  <td class="ctr">0.81→0.74</td>
+                  <td><b>接地／絕緣故障</b>：豪雨後絕緣劣化或組串問題</td>
                 </tr>
                 <tr>
                   <td><b>🟡 INV1</b></td>
-                  <td class="num">49.5</td>
-                  <td class="num">44.5</td>
-                  <td class="num">52.5</td>
-                  <td class="num">53.4</td>
-                  <td class="num">50.7</td>
-                  <td class="num">50.1%</td>
-                  <td class="ctr">0.85</td>
-                  <td><b>接地／絕緣故障</b>：6 月梅雨跌至 44.5%，之後回升至 53%，受潮跳機</td>
+                  <td class="num">47.6</td>
+                  <td class="num">51.7</td>
+                  <td class="num">54.3</td>
+                  <td class="num">48.3</td>
+                  <td class="num">51.2</td>
+                  <td class="ctr">0.79→0.85</td>
+                  <td><b>次要</b>：6 月可能有單次停機，9 月降幅與全場同步</td>
                 </tr>
                 <tr class="good-row">
                   <td><b>🟢 INV3</b></td>
-                  <td class="num">56.7</td>
-                  <td class="num">57.9</td>
-                  <td class="num">57.4</td>
-                  <td class="num">58.4</td>
-                  <td class="num">53.2</td>
-                  <td class="num">56.7%</td>
-                  <td class="ctr">0.89</td>
-                  <td><b>輕微損失</b>：穩定維持 0.90 基準，輕微積污與局部老化</td>
+                  <td class="num">57.3</td>
+                  <td class="num">56.5</td>
+                  <td class="num">59.6</td>
+                  <td class="num">50.4</td>
+                  <td class="num">57.8</td>
+                  <td class="ctr">0.89→0.88</td>
+                  <td><b>輕微損失</b></td>
                 </tr>
                 <tr class="good-row">
                   <td><b>⭐ INV2</b></td>
-                  <td class="num">59.9</td>
-                  <td class="num">62.4</td>
-                  <td class="num">63.4</td>
-                  <td class="num">64.6</td>
-                  <td class="num">59.3</td>
-                  <td class="num"><b>61.9%</b></td>
-                  <td class="ctr"><b>0.99</b></td>
-                  <td><b>健康基準標竿</b>：表現穩健，採為全場可回收電量之推估基準</td>
+                  <td class="num">62.5</td>
+                  <td class="num">62.8</td>
+                  <td class="num">65.7</td>
+                  <td class="num">56.2</td>
+                  <td class="num"><b>63.7</b></td>
+                  <td class="ctr"><b>0.99→0.99</b></td>
+                  <td><b>可回收電量基準</b></td>
                 </tr>
                 <tr>
                   <td><b>❓ INV4</b></td>
-                  <td class="num">62.6</td>
-                  <td class="num">64.1</td>
-                  <td class="num">64.2</td>
-                  <td class="num">65.2</td>
-                  <td class="num">59.7</td>
-                  <td class="num">63.2%</td>
+                  <td class="num">64.0</td>
+                  <td class="num">63.5</td>
+                  <td class="num">66.4</td>
+                  <td class="num">57.0</td>
+                  <td class="num">64.6</td>
                   <td class="ctr">1.00</td>
-                  <td><b>容量疑設低</b>：容量 43.9kWp 疑被低估灌高 PR，暫不列為基準</td>
+                  <td><b>容量疑設低</b>：43.9 kWp 可能灌高 PR，不當基準</td>
                 </tr>
               </tbody>
             </table>
@@ -2166,21 +2163,21 @@ td.ctr,th.ctr{text-align:center}
 
         <div class="three-col" style="margin-top:4px">
           <div class="card coral">
-            <h3>🔴 斷路 vs 遮蔭：階梯固定損失特徵</h3>
-            <p>INV6 與 INV7 的損失比率各月極度穩定（比基準少 38% 與 45%）。遮蔭損失會隨太陽高度角（月份季節）大幅變化，而此處呈現「完全恆定」短少，100% 符合「固定有 2~3 串組串未併入發電」。</p>
+            <h3>🔴 斷路 vs 遮蔭：固定比例的損失</h3>
+            <p>INV6、INV7 每月的損失比例幾乎不變。遮蔭損失會隨太陽角度（季節）改變，固定比例的損失比較符合「有 2–3 串組串沒發電」。</p>
           </div>
           <div class="card amber">
-            <h3>📉 INV8 正處於快速惡化進行式</h3>
-            <p>INV8 相對基準由 5 月的 0.81 驟跌至 9 月的 0.66（PR 從 51% 暴跌至 39.4%），降幅達 −22.2% 為全場之最！若為瞬間跳水則屬新斷串，若為逐日平滑下滑則為積污，需調閱日報表確認。</p>
+            <h3>🔄 與初版判定的差異</h3>
+            <p>INV8 在 5–8 月其實穩定（相對 INV4 約 0.78），是 9 月才突降，不是逐月惡化。INV1、INV5：8 月比 6 月更濕（雨日 23 天 vs 15 天）卻沒掉電，「潮濕跳機」降為次要。</p>
           </div>
           <div class="card teal">
-            <h3>⚙️ 排除逆變器限功率削峰（Clipping）</h3>
-            <p>日平均發電僅 1.41～2.47 小時，整廠 PR 僅 50% 左右，逆變器遠未達滿載運轉上限。因此完全排除 AC 側削峰或限功率因素，問題全然鎖定在 DC 直流側與絕緣接地防護。</p>
+            <h3>⚙️ 排除逆變器削峰</h3>
+            <p>日平均發電只有 1.4–2.5 小時，逆變器遠未滿載，不是限功率的問題。損失集中在直流側組串與絕緣。</p>
           </div>
         </div>
       </div>
       <div class="slide-foot">
-        <div>來源：INV1-8變流器效率-禾豐.csv ｜ 逆變器同儕評比與故障樹 ｜ 5.2</div>
+        <div>來源：INV1-8變流器效率-禾豐.csv ｜ 中央氣象署 CODiS 屏東站 C2R170 ｜ 逆變器同儕評比與故障樹 ｜ 5.2</div>
         <div class="pageno">5.2</div>
       </div>
     </section>
@@ -2190,143 +2187,157 @@ td.ctr,th.ctr{text-align:center}
       <div class="slide-header">
         <div>
           <div class="eyebrow">Part 5 · 最新發電監控數據分析 5.3</div>
-          <h1>可回收量精準拆解：月增 6,550 度 (+24%) 與 1000V 防弧安全</h1>
-          <p class="sub">以健康的 INV2（PR 62%）為可回收基準，全場 6~8 月平均每月可多發 6,550 度（增益達 +24%），5~8 月累計已短收 25,600 度！INV7 與 INV6 即占可回收總量的一半。現場查修需嚴格遵守 IEC 62446-1 檢測規範與 1000V DC 高壓安全操作。</p>
+          <h1>8 月下旬連續豪雨後，9 月 INV5/7/8 出現新故障</h1>
+          <p class="sub">屏東站 8/20–25 連續 6 天豪雨（累計 1,130 mm），8/28–9/3 又下了約 570 mm，9/4 起轉晴。9 月 INV8、INV7、INV5 的 PR 比 6–8 月平均掉了 19–25%，遠超同儕約 12% 的降幅，時間點緊接在豪雨之後，研判為進水造成組串脫落或絕緣劣化。</p>
         </div>
         <div class="flags">
-          <span class="flag green">月增 +6,550 度 (+24%)</span>
-          <span class="flag amber">5-8月累損 2.56萬度</span>
-          <span class="flag coral">⚠️ 1000V DC 帶載防弧</span>
+          <span class="flag coral">8/20–25 累計 1,130 mm</span>
+          <span class="flag coral">INV8 −25% ／ INV7 −22% ／ INV5 −19%</span>
+          <span class="flag blue">同儕 −12%（含資料假象約 5%）</span>
         </div>
       </div>
       <div class="slide-body">
         <div class="split-55">
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>月份</th>
-                  <th class="num">INV1</th>
-                  <th class="num">INV3</th>
-                  <th class="num">INV5</th>
-                  <th class="num">INV6</th>
-                  <th class="num">INV7</th>
-                  <th class="num">INV8</th>
-                  <th class="num">合計 (kWh)</th>
-                  <th class="ctr">占全場比例</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><b>05 月</b></td>
-                  <td class="num">938</td>
-                  <td class="num">256</td>
-                  <td class="num">662</td>
-                  <td class="num">1,386</td>
-                  <td class="num">1,939</td>
-                  <td class="num">760</td>
-                  <td class="num"><b>5,941</b></td>
-                  <td class="ctr">18%</td>
-                </tr>
-                <tr class="hl-row">
-                  <td><b>06 月</b></td>
-                  <td class="num">1,417</td>
-                  <td class="num">304</td>
-                  <td class="num">1,244</td>
-                  <td class="num">1,522</td>
-                  <td class="num">1,702</td>
-                  <td class="num">755</td>
-                  <td class="num"><b>6,944</b></td>
-                  <td class="ctr"><b>26%</b></td>
-                </tr>
-                <tr class="hl-row">
-                  <td><b>07 月</b></td>
-                  <td class="num">1,020</td>
-                  <td class="num">514</td>
-                  <td class="num">888</td>
-                  <td class="num">1,941</td>
-                  <td class="num">2,374</td>
-                  <td class="num">1,069</td>
-                  <td class="num"><b>7,806</b></td>
-                  <td class="ctr"><b>23%</b></td>
-                </tr>
-                <tr>
-                  <td><b>08 月</b></td>
-                  <td class="num">595</td>
-                  <td class="num">301</td>
-                  <td class="num">576</td>
-                  <td class="num">1,210</td>
-                  <td class="num">1,418</td>
-                  <td class="num">799</td>
-                  <td class="num"><b>4,899</b></td>
-                  <td class="ctr">25%</td>
-                </tr>
-                <tr>
-                  <td><b>09 月 (11天)</b></td>
-                  <td class="num">214</td>
-                  <td class="num">138</td>
-                  <td class="num">357</td>
-                  <td class="num">541</td>
-                  <td class="num">678</td>
-                  <td class="num">477</td>
-                  <td class="num"><b>2,405</b></td>
-                  <td class="ctr">29%</td>
-                </tr>
-                <tr class="good-row">
-                  <td><b>5–8 月累計</b></td>
-                  <td class="num"><b>3,970</b></td>
-                  <td class="num"><b>1,375</b></td>
-                  <td class="num"><b>3,370</b></td>
-                  <td class="num"><b>6,059</b></td>
-                  <td class="num"><b>7,433</b></td>
-                  <td class="num"><b>3,383</b></td>
-                  <td class="num"><b>25,590 度</b></td>
-                  <td class="ctr"><b>短收約 14.8 萬元</b></td>
-                </tr>
-              </tbody>
-            </table>
+          <div class="fig">
+            <div class="figtitle">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 16.58A5 5 0 0 0 18 7h-1.26A8 8 0 1 0 4 15.25"/><line x1="8" y1="19" x2="8" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/><line x1="16" y1="19" x2="16" y2="21"/></svg>
+              屏東站逐日雨量與日射量（2026/08/01–09/10）
+            </div>
+            <svg viewBox="0 0 540 260" role="img" aria-label="屏東站8月到9月逐日雨量與日射量">
+              <rect x="262.2" y="25" width="67.2" height="185" fill="#FBE3DD" opacity=".8"/>
+              <rect x="351.8" y="25" width="78.4" height="185" fill="#FBE3DD" opacity=".45"/>
+              <text x="295.8" y="38" text-anchor="middle" font-size="10" font-weight="800" fill="#b4432c">8/20–25 連續豪雨 1,130 mm</text>
+              <text x="391.0" y="52" text-anchor="middle" font-size="10" font-weight="700" fill="#b4432c">8/28–9/3 約 570 mm</text>
+              <text x="478" y="140" text-anchor="middle" font-size="10" font-weight="800" fill="#138a94">9/4 起轉晴</text>
+              <line x1="50" y1="165.0" x2="515" y2="165.0" stroke="#EDF1F5" stroke-width="1"/>
+              <text x="46" y="168.5" text-anchor="end" font-size="9.5" fill="#5B7285">100</text>
+              <line x1="50" y1="120.0" x2="515" y2="120.0" stroke="#EDF1F5" stroke-width="1"/>
+              <text x="46" y="123.5" text-anchor="end" font-size="9.5" fill="#5B7285">200</text>
+              <line x1="50" y1="75.0" x2="515" y2="75.0" stroke="#EDF1F5" stroke-width="1"/>
+              <text x="46" y="78.5" text-anchor="end" font-size="9.5" fill="#5B7285">300</text>
+              <text x="519" y="143.5" font-size="9.5" fill="#9a6a10">10</text>
+              <text x="519" y="73.5" font-size="9.5" fill="#9a6a10">20</text>
+              <line x1="396.6" y1="25" x2="396.6" y2="210" stroke="#9FB1C0" stroke-width="1" stroke-dasharray="3,3"/>
+              <rect x="62.2" y="209.8" width="8" height="0.2" fill="#1968AD" opacity=".78" rx="1"/>
+              <rect x="107.0" y="182.6" width="8" height="27.4" fill="#1968AD" opacity=".78" rx="1"/>
+              <rect x="140.6" y="209.8" width="8" height="0.2" fill="#1968AD" opacity=".78" rx="1"/>
+              <rect x="151.8" y="205.3" width="8" height="4.7" fill="#1968AD" opacity=".78" rx="1"/>
+              <rect x="163.0" y="209.3" width="8" height="0.7" fill="#1968AD" opacity=".78" rx="1"/>
+              <rect x="174.2" y="205.1" width="8" height="5.0" fill="#1968AD" opacity=".78" rx="1"/>
+              <rect x="185.4" y="190.7" width="8" height="19.4" fill="#1968AD" opacity=".78" rx="1"/>
+              <rect x="196.6" y="180.8" width="8" height="29.2" fill="#1968AD" opacity=".78" rx="1"/>
+              <rect x="207.8" y="195.4" width="8" height="14.6" fill="#1968AD" opacity=".78" rx="1"/>
+              <rect x="219.0" y="205.7" width="8" height="4.3" fill="#1968AD" opacity=".78" rx="1"/>
+              <rect x="230.2" y="207.5" width="8" height="2.5" fill="#1968AD" opacity=".78" rx="1"/>
+              <rect x="241.4" y="209.6" width="8" height="0.5" fill="#1968AD" opacity=".78" rx="1"/>
+              <rect x="252.6" y="200.3" width="8" height="9.7" fill="#1968AD" opacity=".78" rx="1"/>
+              <rect x="263.8" y="165.7" width="8" height="44.3" fill="#1968AD" opacity=".78" rx="1"/>
+              <rect x="275.0" y="156.2" width="8" height="53.8" fill="#1968AD" opacity=".78" rx="1"/>
+              <rect x="286.2" y="100.2" width="8" height="109.8" fill="#1968AD" opacity=".78" rx="1"/>
+              <rect x="297.4" y="62.8" width="8" height="147.2" fill="#1968AD" opacity=".78" rx="1"/>
+              <rect x="308.6" y="121.1" width="8" height="88.9" fill="#1968AD" opacity=".78" rx="1"/>
+              <rect x="319.8" y="145.4" width="8" height="64.6" fill="#1968AD" opacity=".78" rx="1"/>
+              <rect x="331.0" y="207.8" width="8" height="2.2" fill="#1968AD" opacity=".78" rx="1"/>
+              <rect x="342.2" y="186.6" width="8" height="23.4" fill="#1968AD" opacity=".78" rx="1"/>
+              <rect x="353.4" y="155.8" width="8" height="54.2" fill="#1968AD" opacity=".78" rx="1"/>
+              <rect x="364.6" y="165.4" width="8" height="44.6" fill="#1968AD" opacity=".78" rx="1"/>
+              <rect x="375.8" y="207.5" width="8" height="2.5" fill="#1968AD" opacity=".78" rx="1"/>
+              <rect x="387.0" y="176.5" width="8" height="33.5" fill="#1968AD" opacity=".78" rx="1"/>
+              <rect x="398.2" y="147.0" width="8" height="63.0" fill="#1968AD" opacity=".78" rx="1"/>
+              <rect x="409.4" y="194.7" width="8" height="15.3" fill="#1968AD" opacity=".78" rx="1"/>
+              <rect x="420.6" y="167.7" width="8" height="42.3" fill="#1968AD" opacity=".78" rx="1"/>
+              <rect x="443.0" y="209.8" width="8" height="0.2" fill="#1968AD" opacity=".78" rx="1"/>
+              <polyline points="55.0,135.3 66.2,117.4 77.4,112.6 88.6,80.5 99.8,71.3 111.0,102.2 122.2,100.1 133.4,81.2 144.6,153.4 155.8,166.5 167.0,136.9 178.2,128.4 189.4,113.8 200.6,146.3 211.8,183.8 223.0,156.2 234.2,106.0 245.4,93.1 256.6,145.2 267.8,169.3 279.0,200.8 290.2,204.5 301.4,204.7 312.6,193.9 323.8,202.5 335.0,144.6 346.2,143.2 357.4,177.3 368.6,140.2 379.8,148.8 391.0,180.0 402.2,191.1 413.4,110.1 424.6,191.9 435.8,159.4 447.0,119.8 458.2,63.8 469.4,101.0 480.6,77.1 491.8,63.3 503.0,67.1" fill="none" stroke="#E09A2B" stroke-width="2"/>
+              <line x1="50" y1="210" x2="515" y2="210" stroke="#D9E3EC" stroke-width="1.5"/>
+              <text x="55.0" y="225" text-anchor="middle" font-size="10" fill="#5B7285">8/1</text>
+              <text x="155.8" y="225" text-anchor="middle" font-size="10" fill="#5B7285">8/10</text>
+              <text x="267.8" y="225" text-anchor="middle" font-size="10" fill="#5B7285">8/20</text>
+              <text x="402.2" y="225" text-anchor="middle" font-size="10" fill="#5B7285">9/1</text>
+              <text x="503.0" y="225" text-anchor="middle" font-size="10" fill="#5B7285">9/10</text>
+              <text x="30" y="20" font-size="9.5" fill="#5B7285">雨量 mm</text>
+              <text x="540" y="20" text-anchor="end" font-size="9.5" fill="#9a6a10">日射 MJ/m²</text>
+              <rect x="150" y="240" width="10" height="9" fill="#1968AD" opacity=".78" rx="1"/>
+              <text x="164" y="248" font-size="10.5" fill="#12293D">逐日雨量 (mm)</text>
+              <line x1="280" y1="244.5" x2="296" y2="244.5" stroke="#E09A2B" stroke-width="2.5"/>
+              <text x="300" y="248" font-size="10.5" fill="#12293D">逐日日射量 (MJ/m²)</text>
+            </svg>
+            <div class="figcap">藍柱為逐日雨量，黃線為逐日日射量。8/20–25 有 4 天日射量不到 1.5 MJ/m²，屋頂長時間泡水；9/4 以後連續晴天，但發電沒有恢復。</div>
           </div>
 
           <div class="table-wrap">
             <table>
               <thead>
                 <tr>
-                  <th style="width:10%">順序</th>
-                  <th style="width:18%">優先對象</th>
-                  <th style="width:40%">IEC 62446-1 檢測項目</th>
-                  <th style="width:32%">現場判定與處置標準</th>
+                  <th>逆變器</th>
+                  <th class="num">6–8月 PR</th>
+                  <th class="num">9月 PR</th>
+                  <th class="num">變化</th>
+                  <th class="num">比同儕多掉</th>
+                  <th>研判</th>
                 </tr>
               </thead>
               <tbody>
                 <tr class="bad-row">
-                  <td class="ctr"><b>1</b></td>
-                  <td><b>INV7、INV6</b><br><small>(占可回收 50%)</small></td>
-                  <td>逐串量開路電壓 Voc，鉤表量工作電流；檢查保險絲、直流開關、MC4 接頭</td>
-                  <td>工作電流接近 0A 判定為斷路串；更換熔絲或重接即可立即恢復</td>
+                  <td><b>INV8</b></td>
+                  <td class="num">50.5</td>
+                  <td class="num">38.0</td>
+                  <td class="num"><b style="color:var(--coral)">−24.8%</b></td>
+                  <td class="num"><b>13 點</b></td>
+                  <td>新故障：組串脫落、接頭或接線盒進水</td>
+                </tr>
+                <tr class="bad-row">
+                  <td><b>INV7</b></td>
+                  <td class="num">35.4</td>
+                  <td class="num">27.7</td>
+                  <td class="num"><b style="color:var(--coral)">−21.8%</b></td>
+                  <td class="num"><b>10 點</b></td>
+                  <td>原有斷串之外再新增故障</td>
                 </tr>
                 <tr class="hl-row">
-                  <td class="ctr"><b>2</b></td>
-                  <td><b>INV8</b><br><small>(急遽惡化)</small></td>
-                  <td>同上檢測，並調出 8–9 月逐日發電日誌，鎖定陡降之起始日</td>
-                  <td>突然斷崖掉＝斷路串；慢慢平滑下滑＝嚴重積污或通風排氣阻隔</td>
+                  <td><b>INV5</b></td>
+                  <td class="num">52.2</td>
+                  <td class="num">42.2</td>
+                  <td class="num"><b style="color:var(--coral)">−19.2%</b></td>
+                  <td class="num"><b>7 點</b></td>
+                  <td>絕緣劣化造成停機，或組串問題</td>
                 </tr>
                 <tr>
-                  <td class="ctr"><b>3</b></td>
-                  <td><b>INV1、INV5</b><br><small>(受潮跳機)</small></td>
-                  <td>調閱逆變器 Riso/GFCI 警報紀錄；用 1000V DC 兆歐表逐串量測絕緣阻抗</td>
-                  <td>Riso ≥ 1 MΩ 為合格；重點查驗接線盒、浪板穿越處與接頭密封性</td>
+                  <td><b>INV6</b></td>
+                  <td class="num">40.4</td>
+                  <td class="num">34.5</td>
+                  <td class="num">−14.7%</td>
+                  <td class="num">3 點</td>
+                  <td>略多於同儕，持續觀察</td>
                 </tr>
                 <tr>
-                  <td class="ctr"><b>4</b></td>
-                  <td><b>全場陣列</b></td>
-                  <td>無人機紅外線熱像（IR）巡檢（IEC 62446-3），篩查熱斑與接點過熱</td>
-                  <td>熱斑溫差 ΔT > 10°C 或旁路二極體異常發熱者列管抽換</td>
+                  <td><b>INV3</b></td>
+                  <td class="num">57.8</td>
+                  <td class="num">50.4</td>
+                  <td class="num">−12.8%</td>
+                  <td class="num">—</td>
+                  <td rowspan="3">全場共同下降：約 5% 是資料假象，其餘待完整 9 月資料確認</td>
+                </tr>
+                <tr>
+                  <td><b>INV4</b></td>
+                  <td class="num">64.6</td>
+                  <td class="num">57.0</td>
+                  <td class="num">−11.8%</td>
+                  <td class="num">—</td>
+                </tr>
+                <tr>
+                  <td><b>INV2</b></td>
+                  <td class="num">63.7</td>
+                  <td class="num">56.2</td>
+                  <td class="num">−11.7%</td>
+                  <td class="num">—</td>
                 </tr>
                 <tr class="good-row">
-                  <td class="ctr"><b>5</b></td>
-                  <td><b>清洗試驗</b></td>
-                  <td>實施組件軟刷純水清洗；記錄清洗前後各一週 PR 走勢</td>
-                  <td>量化畜舍油垢透光損失係數，建立定期維護清洗週期</td>
+                  <td><b>INV1</b></td>
+                  <td class="num">51.2</td>
+                  <td class="num">48.3</td>
+                  <td class="num">−5.7%</td>
+                  <td class="num">—</td>
+                  <td>降幅小於同儕，無新增異常</td>
                 </tr>
               </tbody>
             </table>
@@ -2335,22 +2346,221 @@ td.ctr,th.ctr{text-align:center}
 
         <div class="three-col" style="margin-top:4px">
           <div class="card coral">
-            <h3>⚠️ 1000V DC 直流防弧生命安全規範</h3>
-            <p>光伏組串開路電壓最高可達 1000V DC，只要有光即持續帶電。<b>嚴禁在有負載狀態下拔插 MC4 接頭或拆保險絲</b>！必須遵守標準斷電 SOP：<b>先斷 AC 側 → 再切 DC 開關 → 鉤表測電流為 0A → 始得作業</b>。</p>
+            <h3>💧 進水故障的典型路徑</h3>
+            <p>雨水滲入接線盒、MC4 接頭或匯流箱，造成短路使保險絲熔斷，或絕緣阻抗下降讓逆變器停機。浪板屋頂的穿越處與低窪處最容易積水。</p>
           </div>
-          <div class="card green">
-            <h3>🎯 首波集中兵力於 INV7 與 INV6</h3>
-            <p>光是修復 INV7 與 INV6 之斷串問題，全場就能回收 <b>52.7%</b> 之損失發電量（每月增發約 3,450 度電）。投入工時僅需 1~2 工作天，邊際效益最高！</p>
+          <div class="card amber">
+            <h3>📅 資料假象要扣除</h3>
+            <p>9 月匯出時 9/11 只過了半天，平台卻當成一整天平均，約造成 5% 低估。月底再匯出完整 9 月資料，確認全場共同下降有多少是真的。</p>
           </div>
           <div class="card teal">
-            <h3>📊 日射計 POA vs GHI 校正</h3>
-            <p>8 月日射量僅 2.69 kWh/m²/日顯著低於常態。需確認日射計探頭是否累積畜舍油垢，並與中央氣象署屏東站日射讀值進行交叉檢核，以確保 PR 評估基準公正客觀。</p>
+            <h3>🔍 下一步：鎖定起始日</h3>
+            <p>取得 8/15–9/15 逐 5 分鐘或逐日資料，就能確認 INV5、INV7、INV8 是在哪一場雨後掉下去，並定位到 MPPT 與組串。</p>
           </div>
         </div>
       </div>
       <div class="slide-foot">
-        <div>來源：禾豐電廠發電分析.md ｜ IEC 62446-1 / IEC 62446-3 檢驗規範 ｜ 5.3</div>
+        <div>來源：中央氣象署 CODiS 屏東站 C2R170 逐日觀測 ｜ INV1-8變流器效率-禾豐.csv ｜ 5.3</div>
         <div class="pageno">5.3</div>
+      </div>
+    </section>
+
+    <!-- Slide 5.4 -->
+    <section class="slide">
+      <div class="slide-header">
+        <div>
+          <div class="eyebrow">Part 5 · 最新發電監控數據分析 5.4</div>
+          <h1>可回收量：保守每月 6,550 度、完整整改 12,300 度，豪雨後三台列第一優先</h1>
+          <p class="sub">只修異常逆變器（拉到 INV2 水準）每月可多發約 6,550 度；若全場整改到健康 PR 75%，每月約 12,300 度。以躉售 5.7976 元／度計，每年增收約 46–86 萬元（9 月豪雨後新增的損失尚未計入）。現場查修依 IEC 62446-1 檢測，並嚴守 1000V DC 與進水漏電安全。</p>
+        </div>
+        <div class="flags">
+          <span class="flag green">保守 +6,550 度/月</span>
+          <span class="flag green">完整 +12,300 度/月</span>
+          <span class="flag amber">年增收 46–86 萬</span>
+          <span class="flag coral">⚠️ 1000V DC 帶載防弧</span>
+        </div>
+      </div>
+      <div class="slide-body">
+        <div class="split-55">
+          <div style="display:flex; flex-direction:column; gap:12px">
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>月份</th>
+                    <th class="num">INV1</th>
+                    <th class="num">INV3</th>
+                    <th class="num">INV5</th>
+                    <th class="num">INV6</th>
+                    <th class="num">INV7</th>
+                    <th class="num">INV8</th>
+                    <th class="num">合計 (kWh)</th>
+                    <th class="ctr">占全場</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><b>05 月</b></td>
+                    <td class="num">938</td>
+                    <td class="num">256</td>
+                    <td class="num">662</td>
+                    <td class="num">1,386</td>
+                    <td class="num">1,939</td>
+                    <td class="num">760</td>
+                    <td class="num"><b>5,941</b></td>
+                    <td class="ctr">18%</td>
+                  </tr>
+                  <tr class="hl-row">
+                    <td><b>06 月</b></td>
+                    <td class="num">1,417</td>
+                    <td class="num">304</td>
+                    <td class="num">1,244</td>
+                    <td class="num">1,522</td>
+                    <td class="num">1,702</td>
+                    <td class="num">755</td>
+                    <td class="num"><b>6,944</b></td>
+                    <td class="ctr"><b>26%</b></td>
+                  </tr>
+                  <tr class="hl-row">
+                    <td><b>07 月</b></td>
+                    <td class="num">1,020</td>
+                    <td class="num">514</td>
+                    <td class="num">888</td>
+                    <td class="num">1,941</td>
+                    <td class="num">2,374</td>
+                    <td class="num">1,069</td>
+                    <td class="num"><b>7,806</b></td>
+                    <td class="ctr"><b>23%</b></td>
+                  </tr>
+                  <tr>
+                    <td><b>08 月</b></td>
+                    <td class="num">595</td>
+                    <td class="num">301</td>
+                    <td class="num">576</td>
+                    <td class="num">1,210</td>
+                    <td class="num">1,418</td>
+                    <td class="num">799</td>
+                    <td class="num"><b>4,899</b></td>
+                    <td class="ctr">25%</td>
+                  </tr>
+                  <tr>
+                    <td><b>09 月 (11天)</b></td>
+                    <td class="num">214</td>
+                    <td class="num">138</td>
+                    <td class="num">357</td>
+                    <td class="num">541</td>
+                    <td class="num">678</td>
+                    <td class="num">477</td>
+                    <td class="num"><b>2,405</b></td>
+                    <td class="ctr">29%</td>
+                  </tr>
+                  <tr class="good-row">
+                    <td><b>5–8 月累計</b></td>
+                    <td class="num"><b>3,970</b></td>
+                    <td class="num"><b>1,375</b></td>
+                    <td class="num"><b>3,370</b></td>
+                    <td class="num"><b>6,059</b></td>
+                    <td class="num"><b>7,433</b></td>
+                    <td class="num"><b>3,383</b></td>
+                    <td class="num"><b>25,590 度</b></td>
+                    <td class="ctr"><b>約 14.8 萬元</b></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>整改情境</th>
+                    <th class="num">每月增發</th>
+                    <th class="num">每年增發</th>
+                    <th class="num">每年增收</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><b>保守</b>：只修異常逆變器<br><small>拉到 INV2 的 PR（約 62%）</small></td>
+                    <td class="num">約 6,550 度</td>
+                    <td class="num">約 78,600 度</td>
+                    <td class="num"><b>約 45.6 萬元</b></td>
+                  </tr>
+                  <tr class="good-row">
+                    <td><b>完整整改</b>：全場恢復健康<br><small>整廠 PR 75%（以屏東站日射量）</small></td>
+                    <td class="num">約 12,300 度</td>
+                    <td class="num">約 148,000 度</td>
+                    <td class="num"><b>約 85.8 萬元</b></td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="figcap" style="padding:0 12px 10px">以 6–8 月平均 ×12 粗估；6–8 月為雨季，全年實際值應更高。躉售 5.7976 元／度（合約保障至 2033-12-22）。</div>
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width:9%">順序</th>
+                  <th style="width:19%">優先對象</th>
+                  <th style="width:40%">IEC 62446-1 檢測項目</th>
+                  <th style="width:32%">現場判定與處置標準</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="bad-row">
+                  <td class="ctr"><b>1</b></td>
+                  <td><b>INV8、INV7、INV5</b><br><small>(豪雨後新故障)</small></td>
+                  <td>檢查接線盒、MC4 接頭、匯流箱有沒有進水或積水痕跡；逐串量 Voc 與工作電流；1000V DC 兆歐表量絕緣阻抗 Riso</td>
+                  <td>電流接近 0A 為斷路串；Riso ≥ 1 MΩ 為合格</td>
+                </tr>
+                <tr class="bad-row">
+                  <td class="ctr"><b>2</b></td>
+                  <td><b>INV6、INV7</b><br><small>(固定斷串)</small></td>
+                  <td>逐串量開路電壓 Voc，鉤表量工作電流；檢查保險絲、直流開關、MC4 接頭</td>
+                  <td>電流接近 0A 為斷路串；Voc 比同陣列低 15–33% 表示旁路二極體導通</td>
+                </tr>
+                <tr class="hl-row">
+                  <td class="ctr"><b>3</b></td>
+                  <td><b>全場告警紀錄</b></td>
+                  <td>調閱 INV1、INV5 的 6 月紀錄，以及全場 8/20 以後的 ISO／Riso／GFCI 與停機紀錄</td>
+                  <td>對照停機時間與雨量事件，確認進水故障的範圍</td>
+                </tr>
+                <tr>
+                  <td class="ctr"><b>4</b></td>
+                  <td><b>全場陣列</b></td>
+                  <td>無人機紅外線熱像（IR）巡檢（IEC 62446-3），篩查熱斑與接點過熱</td>
+                  <td>熱斑溫差 ΔT > 10°C 或接點異常發熱者列管</td>
+                </tr>
+                <tr class="good-row">
+                  <td class="ctr"><b>5</b></td>
+                  <td><b>清洗對照</b></td>
+                  <td>選一台逆變器實施軟刷純水清洗，記錄清洗前後各一週 PR</td>
+                  <td>量化養豬場油污薄膜的影響，決定清洗週期</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="three-col" style="margin-top:4px">
+          <div class="card coral">
+            <h3>⚠️ 1000V DC 與進水漏電安全</h3>
+            <p>組串有光就帶電，<b>嚴禁在有載狀態下拔插 MC4 接頭或拆保險絲</b>。豪雨後進水設備可能漏電，接觸前先量對地電壓，箱內積水先斷電。SOP：<b>先斷 AC → 再切 DC → 鉤表確認 0A → 才作業</b>。</p>
+          </div>
+          <div class="card green">
+            <h3>🎯 首波集中 INV7、INV6、INV8</h3>
+            <p>INV7、INV6 占 5–8 月可回收量的 53%（每月約 3,400 度）。INV8 是 9 月新故障，越早處理損失越少；三台合計是投入工時最少、回收最快的一批。</p>
+          </div>
+          <div class="card teal">
+            <h3>📊 日射計已驗證，不需校正</h3>
+            <p>與氣象署屏東站比值 0.89–1.02，日射計可信，維持定期清潔即可。僅 6 月讀值偏低 11%，確認當月是否有斷線或遮蔽紀錄。</p>
+          </div>
+        </div>
+      </div>
+      <div class="slide-foot">
+        <div>來源：禾豐電廠發電分析.md v1.2 ｜ IEC 62446-1 / IEC 62446-3 檢驗規範 ｜ 躉售 5.7976 元/度 ｜ 5.4</div>
+        <div class="pageno">5.4</div>
       </div>
     </section>
   </div>
