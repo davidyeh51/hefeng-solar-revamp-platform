@@ -1401,7 +1401,7 @@ td.ctr,th.ctr{text-align:center}
               <!-- Stage 1 -->
               <rect x="20" y="70" width="220" height="70" rx="6" fill="#0C3A63"/>
               <text x="130" y="98" font-size="14" font-weight="900" fill="#fff">第 1 個月：雙軌前置行動</text>
-              <text x="130" y="122" font-size="11" fill="#8FD9E4">① 全場 IR/IV/EL 診斷 + 變流器清潔<br>② 修正財務模型 (修正維運費錯誤)</text>
+              <text x="130" y="116" font-size="11" fill="#8FD9E4"><tspan x="130" dy="0">① 全場 IR/IV/EL 診斷 + 變流器清潔</tspan><tspan x="130" dy="16">② 修正財務模型 (修正維運費錯誤)</tspan></text>
 
               <!-- Arrow to Gate -->
               <path d="M240 105 h70" stroke="#1968AD" stroke-width="2.5" marker-end="url(#ar4)"/>
@@ -1436,7 +1436,7 @@ td.ctr,th.ctr{text-align:center}
               <!-- Final Note -->
               <rect x="880" y="15" width="280" height="70" rx="5" fill="#F3E8FF" stroke="#6B46C1" stroke-width="1.5"/>
               <text x="1020" y="38" font-size="11.5" font-weight="800" fill="#6B46C1">全方案共通保障機制</text>
-              <text x="1020" y="56" font-size="10" fill="#5B7285">加裝串列監控與日照計、全面改簽<br>以 PR / 可用率 KPI 計價之運維合約</text>
+              <text x="1020" y="54" font-size="10" fill="#5B7285"><tspan x="1020" dy="0">加裝串列監控與日照計、全面改簽</tspan><tspan x="1020" dy="14">以 PR / 可用率 KPI 計價之運維合約</tspan></text>
             </g>
           </svg>
         </div>
@@ -1563,127 +1563,254 @@ td.ctr,th.ctr{text-align:center}
       </div>
     </section>
 
-    <!-- Slide 4.2 -->
+        <!-- Slide 4.2 -->
     <section class="slide">
       <div class="slide-header">
         <div>
           <div class="eyebrow">Part 4 · 空間圖資與方法論 4.2</div>
-          <h1>5 步可重用整改方法論與待補資料清單</h1>
-          <p class="sub">總結禾豐牧場整改診斷實戰經驗，提煉出進能服「整改光伏標準 5 步研判方法論」，可無縫複製至後續所有老舊電廠評估專案。同時列明現場尚缺之 9 大核心技術資料追蹤清單。</p>
+          <h1>5 步可重用整改方法論與 9 大待補資料清單</h1>
+          <p class="sub">總結禾豐牧場整改診斷實戰經驗，提煉出進能服「整改光伏標準 5 步研判方法論」，可無縫模組化複製至後續所有老舊電廠評估專案。同時建立現場技術資料調閱追蹤清單，以嚴謹工程證據支撐商業決策。</p>
         </div>
         <div class="flags">
           <span class="flag blue">整改標準 5 步法</span>
           <span class="flag green">模組化決策工具</span>
-          <span class="flag amber">9 大待補資料清單</span>
+          <span class="flag amber">附錄 B 待補清單</span>
+          <span class="flag purple">工程規範對齊</span>
         </div>
       </div>
       <div class="slide-body">
-        <!-- Reusable 5-step SVG -->
-        <div class="fig" style="padding:10px 14px">
-          <div class="figtitle">進能服 6692 整改光伏標準研判 5 步方法論 (Reusable Revamp Methodology)</div>
-          <svg viewBox="0 0 1180 110" role="img" aria-label="5步整改方法論">
+        <!-- Reusable 5-step Architecture SVG Diagram -->
+        <div class="fig" style="padding:14px 16px">
+          <div class="figtitle">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            進能服 6692 整改光伏標準研判 5 步方法論架構圖 (Reusable Revamp Methodology Pipeline)
+          </div>
+          <svg viewBox="0 0 1180 235" role="img" aria-label="整改光伏5步方法論完整圖解">
             <defs>
               <marker id="ar5" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8z" fill="#1968AD"/></marker>
+              <linearGradient id="g1" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#E8F1F9"/><stop offset="100%" stop-color="#fff"/></linearGradient>
+              <linearGradient id="g2" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#FBEAE5"/><stop offset="100%" stop-color="#fff"/></linearGradient>
+              <linearGradient id="g3" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#FCF2DE"/><stop offset="100%" stop-color="#fff"/></linearGradient>
+              <linearGradient id="g4" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#E8F5E9"/><stop offset="100%" stop-color="#fff"/></linearGradient>
+              <linearGradient id="g5" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#0C3A63"/><stop offset="100%" stop-color="#12518A"/></linearGradient>
             </defs>
-            <g text-anchor="middle">
-              <rect x="15" y="20" width="210" height="70" rx="5" fill="#E8F1F9" stroke="#1968AD" stroke-width="2"/>
-              <text x="120" y="46" font-size="13.5" font-weight="900" fill="#12293D">Step 1 能源局基準對照</text>
-              <text x="120" y="68" font-size="11" fill="#5B7285">以首年 kWh/kWp/日<br>排除原始先天設計瑕疵</text>
 
-              <rect x="250" y="20" width="210" height="70" rx="5" fill="#E2F5F7" stroke="#1BB1BF" stroke-width="2"/>
-              <text x="355" y="46" font-size="13.5" font-weight="900" fill="#12293D">Step 2 累計損失量化</text>
-              <text x="355" y="68" font-size="11" fill="#5B7285">對照 0.7% 合理衰退線<br>算出累計少發度數與金額</text>
+            <!-- Step 1 Card -->
+            <rect x="15" y="15" width="216" height="205" rx="6" fill="url(#g1)" stroke="#1968AD" stroke-width="1.8"/>
+            <rect x="15" y="15" width="216" height="34" rx="6" fill="#1968AD"/>
+            <rect x="15" y="38" width="216" height="11" fill="#1968AD"/>
+            <text x="123" y="37" text-anchor="middle" font-size="13" font-weight="900" fill="#fff">STEP 01 ｜ 能源局基準對照</text>
+            <text x="28" y="70" font-size="12" font-weight="800" fill="#12293D">【核心方法】</text>
+            <text x="28" y="90" font-size="11" fill="#5B7285">首年 kWh/kWp/日</text>
+            <text x="28" y="108" font-size="11" fill="#5B7285">對照能源局官方縣市統計值</text>
+            <text x="28" y="136" font-size="12" font-weight="800" fill="#1968AD">【禾豐實證】</text>
+            <text x="28" y="156" font-size="11" fill="#12293D">首年 3.29 完全吻合屏東基準</text>
+            <rect x="25" y="174" width="196" height="32" rx="4" fill="#E8F1F9" stroke="#1968AD" stroke-width="1"/>
+            <text x="123" y="195" text-anchor="middle" font-size="11.5" font-weight="800" fill="#12518A">✔ 排除先天原始設計瑕疵</text>
 
-              <rect x="485" y="20" width="210" height="70" rx="5" fill="#FCF2DE" stroke="#E09A2B" stroke-width="2"/>
-              <text x="590" y="46" font-size="13.5" font-weight="900" fill="#12293D">Step 3 同機同氣候解耦</text>
-              <text x="590" y="68" font-size="11" fill="#5B7285">比對同台 MPPT 差異<br>分出單路崩落/降載/連續</text>
+            <!-- Arrow 1->2 -->
+            <path d="M231 118 h19" stroke="#1968AD" stroke-width="2.2" marker-end="url(#ar5)"/>
 
-              <rect x="720" y="20" width="210" height="70" rx="5" fill="#E8F5E9" stroke="#2E7D32" stroke-width="2"/>
-              <text x="825" y="46" font-size="13.5" font-weight="900" fill="#12293D">Step 4 標竿反推預算上限</text>
-              <text x="825" y="68" font-size="11" fill="#5B7285">以健康路反推回收潛能<br>以 3 年回本嚴設 Capex 上限</text>
+            <!-- Step 2 Card -->
+            <rect x="256" y="15" width="216" height="205" rx="6" fill="url(#g2)" stroke="#D95F45" stroke-width="1.8"/>
+            <rect x="256" y="15" width="216" height="34" rx="6" fill="#D95F45"/>
+            <rect x="256" y="38" width="216" height="11" fill="#D95F45"/>
+            <text x="364" y="37" text-anchor="middle" font-size="13" font-weight="900" fill="#fff">STEP 02 ｜ 累計損失量化</text>
+            <text x="269" y="70" font-size="12" font-weight="800" fill="#12293D">【核心方法】</text>
+            <text x="269" y="90" font-size="11" fill="#5B7285">對照 0.7%/年 合理衰減線</text>
+            <text x="269" y="108" font-size="11" fill="#5B7285">算出累計少發度數與金流缺口</text>
+            <text x="269" y="136" font-size="12" font-weight="800" fill="#D95F45">【禾豐實證】</text>
+            <text x="269" y="156" font-size="11" fill="#12293D">少發 74.8 萬度 (損失 433 萬)</text>
+            <rect x="266" y="174" width="196" height="32" rx="4" fill="#FBEAE5" stroke="#D95F45" stroke-width="1"/>
+            <text x="364" y="195" text-anchor="middle" font-size="11.5" font-weight="800" fill="#b4432c">✔ 量化歷史總虧損與急迫性</text>
 
-              <rect x="955" y="20" width="210" height="70" rx="5" fill="#0C3A63"/>
-              <text x="1060" y="46" font-size="13.5" font-weight="900" fill="#fff">Step 5 財務模型嚴格審核</text>
-              <text x="1060" y="68" font-size="11" fill="#8FD9E4">檢查維運費公式單位<br>抓出不明加項與衰減矛盾</text>
+            <!-- Arrow 2->3 -->
+            <path d="M472 118 h19" stroke="#1968AD" stroke-width="2.2" marker-end="url(#ar5)"/>
 
-              <g stroke="#1968AD" stroke-width="2" marker-end="url(#ar5)">
-                <path d="M225 55 h25"/><path d="M460 55 h25"/><path d="M695 55 h25"/><path d="M930 55 h25"/>
-              </g>
-            </g>
+            <!-- Step 3 Card -->
+            <rect x="497" y="15" width="216" height="205" rx="6" fill="url(#g3)" stroke="#E09A2B" stroke-width="1.8"/>
+            <rect x="497" y="15" width="216" height="34" rx="6" fill="#E09A2B"/>
+            <rect x="497" y="38" width="216" height="11" fill="#E09A2B"/>
+            <text x="605" y="37" text-anchor="middle" font-size="13" font-weight="900" fill="#fff">STEP 03 ｜ 同機同氣候解耦</text>
+            <text x="510" y="70" font-size="12" font-weight="800" fill="#12293D">【核心方法】</text>
+            <text x="510" y="90" font-size="11" fill="#5B7285">同逆變器各 MPPT 天候一致</text>
+            <text x="510" y="108" font-size="11" fill="#5B7285">比對 RA 極差排除日照因素</text>
+            <text x="510" y="136" font-size="12" font-weight="800" fill="#E09A2B">【禾豐實證】</text>
+            <text x="510" y="156" font-size="11" fill="#12293D">分出崩落/降載/連續 3 大型態</text>
+            <rect x="507" y="174" width="196" height="32" rx="4" fill="#FCF2DE" stroke="#E09A2B" stroke-width="1"/>
+            <text x="605" y="195" text-anchor="middle" font-size="11.5" font-weight="800" fill="#9a6a10">✔ 精準鎖定設備與串列故障</text>
+
+            <!-- Arrow 3->4 -->
+            <path d="M713 118 h19" stroke="#1968AD" stroke-width="2.2" marker-end="url(#ar5)"/>
+
+            <!-- Step 4 Card -->
+            <rect x="738" y="15" width="216" height="205" rx="6" fill="url(#g4)" stroke="#2E7D32" stroke-width="1.8"/>
+            <rect x="738" y="15" width="216" height="34" rx="6" fill="#2E7D32"/>
+            <rect x="738" y="38" width="216" height="11" fill="#2E7D32"/>
+            <text x="846" y="37" text-anchor="middle" font-size="13" font-weight="900" fill="#fff">STEP 04 ｜ 標竿反推投入上限</text>
+            <text x="751" y="70" font-size="12" font-weight="800" fill="#12293D">【核心方法】</text>
+            <text x="751" y="90" font-size="11" fill="#5B7285">以場內健康路(87.6%)反推潛能</text>
+            <text x="751" y="108" font-size="11" fill="#5B7285">設定「3 年投資回收」邊界防線</text>
+            <text x="751" y="136" font-size="12" font-weight="800" fill="#2E7D32">【禾豐實證】</text>
+            <text x="751" y="156" font-size="11" fill="#12293D">年增 52.9 萬 → 預算上限 159 萬</text>
+            <rect x="748" y="174" width="196" height="32" rx="4" fill="#E8F5E9" stroke="#2E7D32" stroke-width="1"/>
+            <text x="846" y="195" text-anchor="middle" font-size="11.5" font-weight="800" fill="#2E7D32">✔ 確保持續獲利與風險下限</text>
+
+            <!-- Arrow 4->5 -->
+            <path d="M954 118 h19" stroke="#1968AD" stroke-width="2.2" marker-end="url(#ar5)"/>
+
+            <!-- Step 5 Card -->
+            <rect x="979" y="15" width="186" height="205" rx="6" fill="url(#g5)" stroke="#0C3A63" stroke-width="1.8"/>
+            <rect x="979" y="15" width="186" height="34" rx="6" fill="#0C3A63"/>
+            <rect x="979" y="38" width="186" height="11" fill="#0C3A63"/>
+            <text x="1072" y="37" text-anchor="middle" font-size="13" font-weight="900" fill="#fff">STEP 05 ｜ 財務模型嚴審</text>
+            <text x="990" y="70" font-size="12" font-weight="800" fill="#8FD9E4">【核心方法】</text>
+            <text x="990" y="90" font-size="11" fill="#E8F1F9">逐行審核 Item Master 公式</text>
+            <text x="990" y="108" font-size="11" fill="#E8F1F9">抓出維運費單位與不明加項</text>
+            <text x="990" y="136" font-size="12" font-weight="800" fill="#FCF2DE">【禾豐實證】</text>
+            <text x="990" y="156" font-size="11" fill="#fff">維運費多計5倍、913萬加項</text>
+            <rect x="987" y="174" width="170" height="32" rx="4" fill="#12518A" stroke="#8FD9E4" stroke-width="1"/>
+            <text x="1072" y="195" text-anchor="middle" font-size="11.5" font-weight="800" fill="#8FD9E4">✔ 還原真實 IRR (5.7%→10.3%)</text>
           </svg>
+          <div class="figcap" style="margin-top:6px"><b>方法論精髓</b>：將光電診斷從傳統模糊之「均勻老化論」，升級為「數據量化 ➔ 同儕解耦 ➔ 標竿反推 ➔ 財務防線」四維一體之標準化決策工具。</div>
         </div>
 
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th style="width:6%">項次</th>
-                <th style="width:34%">附錄 B：現場資料缺漏項目</th>
-                <th style="width:38%">資料核心用途與工程分析價值</th>
-                <th style="width:22%">調閱追蹤窗口與現況</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="bad-row">
-                <td class="ctr">1</td>
-                <td><b>2014–2025 逐月（逐日）發電量明細</b></td>
-                <td>區分 2016 與 2020 年發電波動究竟為氣候日照還是設備跳脫；釐清 2025 統計截止月份</td>
-                <td>進金生監控維運伺服器 / 台電抄表單</td>
-              </tr>
-              <tr class="bad-row">
-                <td class="ctr">2</td>
-                <td><b>各 MPPT / 串列電流歷史資料與 RA 定義</b></td>
-                <td>精準定位 Type A 單路崩落發生之確切起點日（何時熔絲斷裂？）；確認 RA 分母定義</td>
-                <td>維運部門監控系統匯出檔</td>
-              </tr>
-              <tr>
-                <td class="ctr">3</td>
-                <td><b>模組型號分布圖與原廠功率保固書</b></td>
-                <td>確認 1,932 片混接型號規格；若衰退超出保固曲線（10年90%/25年80%），啟動原廠求償</td>
-                <td>合約設備請購單與出廠檢驗證明</td>
-              </tr>
-              <tr>
-                <td class="ctr">4</td>
-                <td><b>變流器型號、AC 額定與故障紀錄</b></td>
-                <td>檢核 DC/AC 容量比是否超配；讀取 INV6 過溫降載警報代碼與內部結溫</td>
-                <td>現場機銘板實拍 / 原廠維修日誌</td>
-              </tr>
-              <tr class="hl-row">
-                <td class="ctr">5</td>
-                <td><b>完整單線圖（SLD）與串列組態圖</b></td>
-                <td>掌握每路 MPPT 併接串數與保護熔絲規格，核對是否存在不對稱串接失配</td>
-                <td>機電竣工圖面資料庫</td>
-              </tr>
-              <tr>
-                <td class="ctr">6</td>
-                <td><b>INV5 改設計之工程內容與履歷</b></td>
-                <td>釐清為何 2025.04 現勘排除 INV5；確認所更換單晶模組之規格與運轉表現</td>
-                <td>工程設計變更聯絡單（ECO）</td>
-              </tr>
-              <tr>
-                <td class="ctr">7</td>
-                <td><b>歷年清洗與每半年巡檢工作單</b></td>
-                <td>量化過去清洗頻率對發電之即時提升幅度；查驗是否有定期除塵除油紀錄</td>
-                <td>業主聿豐保養紀錄 / 進金生巡檢工單</td>
-              </tr>
-              <tr class="hl-row">
-                <td class="ctr">8</td>
-                <td><b>屋頂結構現況安全鑑定報告</b></td>
-                <td>測定浪板厚度與 C 型鋼鏽蝕率，提供方案 B 整新 20 年契約可行性之絕對依據</td>
-                <td>委請結構技師進行現場探傷測厚</td>
-              </tr>
-              <tr>
-                <td class="ctr">9</td>
-                <td><b>氣象署屏東測站逐時日照資料</b></td>
-                <td>建立標準溫度修正後 PR 基準線，作為整改工程完成前後驗收績效（KPI）之客觀標竿</td>
-                <td>交通部中央氣象署觀測資料庫（CODiS）</td>
-              </tr>
-            </tbody>
-          </table>
+        <!-- Split Tables: Methodology Detail vs Appendix B Checklist -->
+        <div class="two-col">
+          <!-- Table 1: Methodology Detailed Guide -->
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width:14%">步驟編號</th>
+                  <th style="width:34%">診斷維度與工程方法</th>
+                  <th style="width:26%">禾豐牧場實戰結論</th>
+                  <th style="width:26%">下個整改案複製防呆</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="good-row">
+                  <td><b>STEP 01</b><br><small>能源局對照</small></td>
+                  <td>用首年 kWh/kWp/日 對照能源局縣市歷史統計值</td>
+                  <td>2014 年 3.29 完全吻合，確認無原始容量低報或設計重大缺陷</td>
+                  <td>若首年即低於縣市值 15% 以上，須先查配電變壓器與方位角設計</td>
+                </tr>
+                <tr class="bad-row">
+                  <td><b>STEP 02</b><br><small>損失量化</small></td>
+                  <td>以 0.7%/年 合理衰減基準線，逐年計算發電缺口與金額</td>
+                  <td>累計少發 74.8 萬度（短收 433.6 萬），近兩年加速至 -9.4%</td>
+                  <td>以金額呈現給業主董事會，能立即凸顯「維持現況放任」之昂貴代價</td>
+                </tr>
+                <tr class="hl-row">
+                  <td><b>STEP 03</b><br><small>同機解耦</small></td>
+                  <td>利用同逆變器內天候一致特性，比較各 MPPT 極差與同儕表現</td>
+                  <td>分出單路崩落 20.1%（斷串）、INV6 偏低（降載）與連續老化</td>
+                  <td>徹底打破維護廠商「日照不好、天氣差」之推託藉口，精準定位故障</td>
+                </tr>
+                <tr class="good-row">
+                  <td><b>STEP 04</b><br><small>標竿反推</small></td>
+                  <td>取同場最健康 MPPT 為標竿，依「3 年回本」嚴格反推 Capex 上限</td>
+                  <td>目標 RA 拉回 75%，年增 52.9 萬元，A+ 投入上限為 124~159 萬元</td>
+                  <td>防止工程團隊過度設計或盲目更換所有模組，確保商業投資回報率</td>
+                </tr>
+                <tr class="bad-row">
+                  <td><b>STEP 05</b><br><small>財務除錯</small></td>
+                  <td>稽核試算檔公式：檢查年費是否逐年重複乘、隱藏加項、衰減假設</td>
+                  <td>抓出維運費每年多計 5 倍、913 萬加項，更正後 IRR 由 5.7% 躍升至 10.3%</td>
+                  <td>不同簡報版本的假設必須完全對齊（如 1% vs 10%），避免治理爭議</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Table 2: Appendix B Data Gaps Checklist -->
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width:10%">項次</th>
+                  <th style="width:36%">附錄 B：現場 9 大待補技術資料</th>
+                  <th style="width:34%">工程用途與分析價值</th>
+                  <th style="width:20%">調閱窗口</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="bad-row">
+                  <td class="ctr">1</td>
+                  <td><b>2014–2025 逐月/逐日發電明細</b></td>
+                  <td>區分 2016/2020 波動為日照或跳機；確認統計截止月</td>
+                  <td>監控伺服器/台電</td>
+                </tr>
+                <tr class="bad-row">
+                  <td class="ctr">2</td>
+                  <td><b>各 MPPT/串列歷史資料與 RA 定義</b></td>
+                  <td>精準定位單路崩落確切起始日；明確 RA 計算分母</td>
+                  <td>維運部門系統</td>
+                </tr>
+                <tr>
+                  <td class="ctr">3</td>
+                  <td><b>模組型號分布圖與原廠功率保固書</b></td>
+                  <td>核對 1,932 片混接型號；若超標劣化則向原廠求償</td>
+                  <td>出廠檢驗證明</td>
+                </tr>
+                <tr>
+                  <td class="ctr">4</td>
+                  <td><b>變流器型號、AC 額定與故障日誌</b></td>
+                  <td>檢核 DC/AC 容量比；讀取 INV6 過溫降載故障碼</td>
+                  <td>機銘板實拍/日誌</td>
+                </tr>
+                <tr class="hl-row">
+                  <td class="ctr">5</td>
+                  <td><b>完整單線圖（SLD）與串列組態圖</b></td>
+                  <td>掌握各路併接串數與熔絲規格，查核不對稱失配</td>
+                  <td>機電竣工圖庫</td>
+                </tr>
+                <tr>
+                  <td class="ctr">6</td>
+                  <td><b>INV5 改設計之工程內容與履歷</b></td>
+                  <td>釐清現勘排除 INV5 原因；確認單晶模組運轉狀況</td>
+                  <td>設計變更單 (ECO)</td>
+                </tr>
+                <tr>
+                  <td class="ctr">7</td>
+                  <td><b>歷年清洗與每半年巡檢工作單</b></td>
+                  <td>量化歷史清洗頻率之增發效應；查核除油除塵紀錄</td>
+                  <td>聿豐/進金生工單</td>
+                </tr>
+                <tr class="hl-row">
+                  <td class="ctr">8</td>
+                  <td><b>屋頂結構現況安全鑑定報告</b></td>
+                  <td>測定浪板厚度與鋼構鏽蝕，決定方案 B 整新可行性</td>
+                  <td>結構技師簽證</td>
+                </tr>
+                <tr>
+                  <td class="ctr">9</td>
+                  <td><b>氣象署屏東測站逐時日照資料</b></td>
+                  <td>建立標準溫度修正後 PR 基準線，作為驗收 KPI 標竿</td>
+                  <td>氣象署觀測庫</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="three-col" style="margin-top:4px">
+          <div class="card blue">
+            <h3>📋 模組化整改評估標準 SOP</h3>
+            <p>將個人技術經驗昇華為進能服 6692 標準作戰體系。未來承接任何中南部老舊光電整改案（農棚、畜舍、工廠），均可直接套用此 5 步流水線，於 3 週內產出具公信力之整改研判。</p>
+          </div>
+          <div class="card amber">
+            <h3>🔍 同儕解耦戳破「天氣差」之推託</h3>
+            <p>傳統維運常以「今年日照不如往年」掩蓋設備老化與斷串。同機同氣候比對法直接在相同日照條件下抓出 40~60 個百分點之極端落差，是最強而有力的故障鐵證。</p>
+          </div>
+          <div class="card green">
+            <h3>💡 商業與工程聯動之財務防線</h3>
+            <p>Step 4 與 Step 5 將工程檢修緊密扣合「3 年投資回收」與「真實 IRR 敏感度」。確保進能服投入的每一分整改預算都能在躉售契約保障期內全數轉化為扎實的現金流回報。</p>
+          </div>
         </div>
       </div>
       <div class="slide-foot">
-        <div>來源：禾豐牧場整改診斷報告 v1 附錄 A 與附錄 B ｜ 整改標準方法論</div>
+        <div>來源：禾豐牧場整改診斷報告 v1 附錄 A、B ｜ 整改標準化 5 步方法論手冊</div>
         <div class="pageno">4.2</div>
       </div>
     </section>
