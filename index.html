@@ -589,81 +589,456 @@ td.ctr,th.ctr{text-align:center}
       <div class="slide-header">
         <div>
           <div class="eyebrow">Part 1 · 電廠現況與劣化診斷 1.3</div>
-          <h1>PR 檢核與 MPPT 離散熱圖：落差達 60%</h1>
-          <p class="sub">文件記載之 PR 由 80% 跌至 60% 存在數據自相矛盾（依發電量推算實質 PR 僅 52~58%）。現勘 21 路 MPPT 發電比（RA）呈現極端離散：最高 87.6%、最低僅 20.1%，證實並非日照天候問題，而是設備層級故障！</p>
+          <h1>逆變器 2025 vs 2026 時間移動位移比較與 PR 檢核</h1>
+          <p class="sub">結合 2025.04 現勘 MPPT 基線與 2026.05–09 最新 5 個月實測：以「時間移動」視角追蹤 8 台逆變器演變軌跡，證實衰退非均勻靜止，而是「未修復慢性加劇」與「豪雨突發重創」！INV8 標竿失守（72%→38%）、INV7 探底（28%），整改刻不容緩。</p>
         </div>
         <div class="flags">
-          <span class="flag amber">文件 PR 存在矛盾</span>
-          <span class="flag coral">RA 最低僅 20.1%</span>
-          <span class="flag blue">同台落差 60%</span>
+          <span class="flag coral">INV8 標竿急墜 (−34%)</span>
+          <span class="flag amber">INV7/6 慢性探底 (28~35%)</span>
+          <span class="flag blue">時間移動軌跡</span>
         </div>
       </div>
       <div class="slide-body">
-        <div class="split-55">
-          <div class="fig">
-            <div class="figtitle">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-              圖2 各逆變器 MPPT 發電比 (RA) 矩陣熱度圖（2025.04 現勘）
+
+        <!-- Mode Tabs -->
+        <div class="s13-tabs">
+          <span style="font-size:11px; font-weight:800; color:var(--text-sub); letter-spacing:.5px; text-transform:uppercase;">切換分析視角：</span>
+          <button type="button" class="s13-tab-btn active" data-s13-target="pane-shift">🕒 2025 ➔ 2026 時間移動位移對比（8 台演變全景）</button>
+          <button type="button" class="s13-tab-btn" data-s13-target="pane-mppt">📊 2025.04 現勘 21 路 MPPT 熱圖基線</button>
+          <button type="button" class="s13-tab-btn" data-s13-target="pane-inv2026">📈 2026.05–09 最新實測評比（含豪雨衝擊）</button>
+        </div>
+
+        <!-- PANE 1: 2025 -> 2026 時間移動位移對比 (Active) -->
+        <div class="s13-pane active" id="pane-shift">
+          <div class="split-55">
+            <div class="fig">
+              <div class="figtitle">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                圖 2-A 8 台逆變器 2025 現勘 ➔ 2026 最新實測時間移動斜率圖
+              </div>
+              <svg viewBox="0 0 540 285" style="width:100%; height:285px; background:#fff; border-radius:6px; display:block;">
+                <!-- Background Grid -->
+                <defs>
+                  <marker id="arr-red" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9 z" fill="#D95F45"/></marker>
+                  <marker id="arr-darkred" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9 z" fill="#9E2A2B"/></marker>
+                  <marker id="arr-amber" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9 z" fill="#E09A2B"/></marker>
+                  <marker id="arr-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9 z" fill="#1968AD"/></marker>
+                </defs>
+
+                <!-- Grid lines & labels -->
+                <line x1="65" y1="35" x2="490" y2="35" stroke="#EBF0F5" stroke-width="1"/>
+                <text x="55" y="39" text-anchor="end" font-size="10" fill="#8FA0AE">80%</text>
+
+                <line x1="65" y1="71" x2="490" y2="71" stroke="#EBF0F5" stroke-width="1"/>
+                <text x="55" y="75" text-anchor="end" font-size="10" fill="#8FA0AE">70%</text>
+
+                <line x1="65" y1="107" x2="490" y2="107" stroke="#EBF0F5" stroke-width="1"/>
+                <text x="55" y="111" text-anchor="end" font-size="10" fill="#8FA0AE">60%</text>
+
+                <line x1="65" y1="143" x2="490" y2="143" stroke="#EBF0F5" stroke-width="1"/>
+                <text x="55" y="147" text-anchor="end" font-size="10" fill="#8FA0AE">50%</text>
+
+                <line x1="65" y1="179" x2="490" y2="179" stroke="#EBF0F5" stroke-width="1"/>
+                <text x="55" y="183" text-anchor="end" font-size="10" fill="#8FA0AE">40%</text>
+
+                <line x1="65" y1="215" x2="490" y2="215" stroke="#EBF0F5" stroke-width="1"/>
+                <text x="55" y="219" text-anchor="end" font-size="10" fill="#8FA0AE">30%</text>
+
+                <line x1="65" y1="250" x2="490" y2="250" stroke="#EBF0F5" stroke-width="1"/>
+                <text x="55" y="254" text-anchor="end" font-size="10" fill="#8FA0AE">20%</text>
+
+                <!-- Vertical Stage Axis -->
+                <line x1="110" y1="25" x2="110" y2="255" stroke="#CBD8E2" stroke-width="1.5" stroke-dasharray="3,3"/>
+                <text x="110" y="18" text-anchor="middle" font-size="11" font-weight="800" fill="#12293D">2025.04 現勘</text>
+
+                <line x1="280" y1="25" x2="280" y2="255" stroke="#CBD8E2" stroke-width="1.5" stroke-dasharray="3,3"/>
+                <text x="280" y="18" text-anchor="middle" font-size="11" font-weight="800" fill="#12293D">2026 6–8月</text>
+
+                <line x1="435" y1="25" x2="435" y2="255" stroke="#CBD8E2" stroke-width="1.5" stroke-dasharray="3,3"/>
+                <text x="435" y="18" text-anchor="middle" font-size="11" font-weight="800" fill="#D95F45">2026 09月(豪雨)</text>
+
+                <!-- Inverter Slope Lines -->
+                <!-- INV8: 72.1% (y=63.4) -> 50.5% (y=141.2) -> 38.0% (y=186.2) -->
+                <polyline points="110,63.4 280,141.2 435,186.2" fill="none" stroke="#D95F45" stroke-width="3" marker-end="url(#arr-red)"/>
+                <circle cx="110" cy="63.4" r="4.5" fill="#D95F45"/>
+                <circle cx="280" cy="141.2" r="4.5" fill="#D95F45"/>
+                <circle cx="435" cy="186.2" r="4.5" fill="#D95F45"/>
+                <text x="444" y="190" font-size="10.5" font-weight="900" fill="#D95F45">INV8 72%→38% (−34%)</text>
+
+                <!-- INV7: 52.6% (y=133.6) -> 35.4% (y=195.6) -> 27.7% (y=223.3) -->
+                <polyline points="110,133.6 280,195.6 435,223.3" fill="none" stroke="#9E2A2B" stroke-width="2.5" marker-end="url(#arr-darkred)"/>
+                <circle cx="110" cy="133.6" r="3.5" fill="#9E2A2B"/>
+                <circle cx="280" cy="195.6" r="3.5" fill="#9E2A2B"/>
+                <circle cx="435" cy="223.3" r="3.5" fill="#9E2A2B"/>
+                <text x="444" y="227" font-size="10.5" font-weight="900" fill="#9E2A2B">INV7 53%→28% (全場墊底)</text>
+
+                <!-- INV6: 51.2% (y=138.7) -> 40.4% (y=177.6) -> 34.5% (y=198.8) -->
+                <polyline points="110,138.7 280,177.6 435,198.8" fill="none" stroke="#E09A2B" stroke-width="2.5" marker-end="url(#arr-amber)"/>
+                <circle cx="110" cy="138.7" r="3.5" fill="#E09A2B"/>
+                <circle cx="280" cy="177.6" r="3.5" fill="#E09A2B"/>
+                <circle cx="435" cy="198.8" r="3.5" fill="#E09A2B"/>
+                <text x="444" y="204" font-size="10" font-weight="800" fill="#E09A2B">INV6 51%→35% (風扇降載)</text>
+
+                <!-- INV5: N/A -> 52.2% (y=135.1) -> 42.2% (y=171.1) -->
+                <polyline points="280,135.1 435,171.1" fill="none" stroke="#E67E22" stroke-width="2" stroke-dasharray="4,3"/>
+                <circle cx="280" cy="135.1" r="3.5" fill="#E67E22"/>
+                <circle cx="435" cy="171.1" r="3.5" fill="#E67E22"/>
+                <text x="444" y="174" font-size="10" font-weight="800" fill="#E67E22">INV5 52%→42% (豪雨受災)</text>
+
+                <!-- INV1: 62.0% (y=99.8) -> 51.2% (y=138.7) -> 48.3% (y=149.1) -->
+                <polyline points="110,99.8 280,138.7 435,149.1" fill="none" stroke="#5B7285" stroke-width="1.8"/>
+                <circle cx="110" cy="99.8" r="3" fill="#5B7285"/>
+                <circle cx="280" cy="138.7" r="3" fill="#5B7285"/>
+                <circle cx="435" cy="149.1" r="3" fill="#5B7285"/>
+                <text x="444" y="152" font-size="9.5" fill="#5B7285">INV1 62%→48%</text>
+
+                <!-- INV3: 65.5% (y=87.2) -> 57.8% (y=114.9) -> 50.4% (y=141.6) -->
+                <polyline points="110,87.2 280,114.9 435,141.6" fill="none" stroke="#7F95A8" stroke-width="1.8"/>
+                <circle cx="110" cy="87.2" r="3" fill="#7F95A8"/>
+                <circle cx="280" cy="114.9" r="3" fill="#7F95A8"/>
+                <circle cx="435" cy="141.6" r="3" fill="#7F95A8"/>
+                <text x="444" y="139" font-size="9.5" fill="#7F95A8">INV3 66%→50%</text>
+
+                <!-- INV2: 56.9% (y=118.2) -> 63.7% (y=93.7) -> 56.2% (y=120.7) -->
+                <polyline points="110,118.2 280,93.7 435,120.7" fill="none" stroke="#1BB1BF" stroke-width="2.2"/>
+                <circle cx="110" cy="118.2" r="3.5" fill="#1BB1BF"/>
+                <circle cx="280" cy="93.7" r="3.5" fill="#1BB1BF"/>
+                <circle cx="435" cy="120.7" r="3.5" fill="#1BB1BF"/>
+                <text x="444" y="123" font-size="10" font-weight="700" fill="#12818C">INV2 57%→56% (抗跌)</text>
+
+                <!-- INV4: 53.0% (y=132.2) -> 64.6% (y=90.4) -> 57.0% (y=117.8) -->
+                <polyline points="110,132.2 280,90.4 435,117.8" fill="none" stroke="#1968AD" stroke-width="2.8" marker-end="url(#arr-blue)"/>
+                <circle cx="110" cy="132.2" r="4" fill="#1968AD"/>
+                <circle cx="280" cy="90.4" r="4" fill="#1968AD"/>
+                <circle cx="435" cy="117.8" r="4" fill="#1968AD"/>
+                <text x="444" y="112" font-size="10.5" font-weight="900" fill="#1968AD">INV4 53%→57% (躍升第1)</text>
+
+                <!-- Annotation on start -->
+                <text x="100" y="63" text-anchor="end" font-size="9.5" font-weight="800" fill="#D95F45">INV8 (72%)</text>
+                <text x="100" y="87" text-anchor="end" font-size="9" fill="#7F95A8">INV3 (66%)</text>
+                <text x="100" y="100" text-anchor="end" font-size="9" fill="#5B7285">INV1 (62%)</text>
+                <text x="100" y="118" text-anchor="end" font-size="9" fill="#1BB1BF">INV2 (57%)</text>
+                <text x="100" y="132" text-anchor="end" font-size="9" fill="#1968AD">INV4 (53%)</text>
+                <text x="100" y="142" text-anchor="end" font-size="9" fill="#9E2A2B">INV7 (53%)</text>
+                <text x="100" y="152" text-anchor="end" font-size="9" fill="#E09A2B">INV6 (51%)</text>
+              </svg>
+              <div class="figcap">時間移動斜率軌跡：<b>INV8 斷崖墜落</b>（紅粗線）、<b>INV7/6 慢性沉淪探底</b>；INV4/2 則在其他機台加速崩壞中逆勢成為相對標竿。</div>
             </div>
-            <img src="assets/chart-mppt-ra-heatmap.png" alt="MPPT RA 發電比熱圖" style="height:270px; object-fit:contain; background:#fff">
-            <div class="figcap">21 路 MPPT 實測發電比矩陣：深藍為健康路（>70%），淡藍與粗體字為嚴重異常路（&lt;50%）。INV5 曾因改設計未列入測試。</div>
-          </div>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>型態類別</th>
-                  <th>代表路數與數值</th>
-                  <th>核心病徵特徵</th>
-                  <th>最可能工程成因研判</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="bad-row">
-                  <td><b>A 單路崩落</b></td>
-                  <td><b>INV4-M3 (20.1%)</b><br><b>INV2-M1 (36.9%)</b></td>
-                  <td>同一台逆變器其他路正常，單一路落差達 40~60 百分點</td>
-                  <td><b>離散型故障</b>：串列斷線、熔絲熔斷、MC4 接頭燒燬或整串模組開路。<b>修復成本極低、效益最大！</b></td>
-                </tr>
-                <tr class="hl-row">
-                  <td><b>B 整台均勻偏低</b></td>
-                  <td><b>INV6 (49.2~52.6%)</b><br>極差僅 3.5%</td>
-                  <td>全機 3 路 MPPT 一致性低落於 50% 上下</td>
-                  <td><b>逆變器本體故障</b>：散熱風扇嚴重堵塞引發過溫降載、內部參數設定偏差或 AC 側限流。</td>
-                </tr>
-                <tr>
-                  <td><b>C 多路中度偏低</b></td>
-                  <td>INV1-M2/M3 (57/52%)<br>INV7-M2/M3 (47/49%)</td>
-                  <td>發電比普遍落於 45%~60% 區間</td>
-                  <td><b>連續型衰退</b>：EVA 褐化、隱裂蝸牛紋、畜舍排風油垢積累等物理性老化。需清洗試驗與重組。</td>
-                </tr>
-                <tr class="good-row">
-                  <td><b>D 健康標竿</b></td>
-                  <td><b>INV8-M1 (87.6%)</b><br>INV3-M1 (85.2%)</td>
-                  <td>同屋頂、同氣候條件下依然維持 80%~88% 高效發電</td>
-                  <td><b>關鍵鐵證</b>：強烈證明案場發電下滑完全來自「設備與串列故障」，絕非地理日照不佳！</td>
-                </tr>
-              </tbody>
-            </table>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th style="width:14%">逆變器</th>
+                    <th style="width:18%">2025.04 現勘<br><small>平均 RA / 特徵</small></th>
+                    <th style="width:15%">2026 6–8月<br><small>實測 PR%</small></th>
+                    <th style="width:15%">2026 09月<br><small>豪雨後 PR%</small></th>
+                    <th style="width:14%" class="ctr">時空位移<br><small>2025➔2026</small></th>
+                    <th style="width:24%">時間移動病徵與動態診斷</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="bad-row">
+                    <td><b>🔴 INV8</b></td>
+                    <td><b>72.1%</b><br><small>健康標竿(M1:88%)</small></td>
+                    <td>50.5%</td>
+                    <td><b style="color:var(--coral)">38.0%</b></td>
+                    <td class="ctr"><b style="color:var(--coral);font-size:.95rem">−34.1%</b><br><small>跌幅 −47%</small></td>
+                    <td><b>標竿急墜</b>：2025 原為全場最佳，1.5 年後由標竿跌至倒數第二；9 月豪雨後更疑進水漏電跳水。</td>
+                  </tr>
+                  <tr class="bad-row">
+                    <td><b>🔴 INV7</b></td>
+                    <td>52.6%<br><small>M2/M3偏低(&lt;49%)</small></td>
+                    <td><b>35.4%</b></td>
+                    <td><b style="color:var(--coral)">27.7%</b></td>
+                    <td class="ctr"><b style="color:var(--coral);font-size:.95rem">−24.9%</b><br><small>探底腰斬</small></td>
+                    <td><b>深淵探底（全場最慘）</b>：2025 已見斷串未修，2026 演變成多串斷線（固定少發 45%），豪雨後再重挫。</td>
+                  </tr>
+                  <tr class="bad-row">
+                    <td><b>🔴 INV6</b></td>
+                    <td>51.2%<br><small>三路一致低(~51%)</small></td>
+                    <td>40.4%</td>
+                    <td><b>34.5%</b></td>
+                    <td class="ctr"><b style="color:var(--coral);font-size:.95rem">−16.7%</b><br><small>慢性失血</small></td>
+                    <td><b>風扇降載持續惡化</b>：油垢堵死散熱濾網未曾清潔，持續高溫熱降載，固定少發 37~45%。</td>
+                  </tr>
+                  <tr class="hl-row">
+                    <td><b>🟠 INV5</b></td>
+                    <td><i>缺測</i><br><small>改設計未列入</small></td>
+                    <td>52.2%</td>
+                    <td><b>42.2%</b></td>
+                    <td class="ctr"><b>−10.0%</b><br><small>豪雨受災</small></td>
+                    <td><b>豪雨突發故障</b>：6–8 月約 52% 正常運轉，8 月下旬連續 1,750mm 豪雨後驟降 19%，疑進水或絕緣劣化。</td>
+                  </tr>
+                  <tr>
+                    <td><b>🟡 INV1</b></td>
+                    <td>62.0%<br><small>M1正常/M2/3偏低</small></td>
+                    <td>51.2%</td>
+                    <td>48.3%</td>
+                    <td class="ctr">−13.7%</td>
+                    <td><b>中度常態衰退</b>：無劇烈單串脫落，衰退由模組高溫劣化與積污油膜累積所致，降幅與全場同步。</td>
+                  </tr>
+                  <tr>
+                    <td><b>🟢 INV3</b></td>
+                    <td>65.5%<br><small>M1達85%/M2偏低</small></td>
+                    <td>57.8%</td>
+                    <td>50.4%</td>
+                    <td class="ctr">−15.1%</td>
+                    <td><b>平緩隨全場下滑</b>：2025 年 M2 偏低 (47.5%)，整體隨案場老化與氣候均勻下降。</td>
+                  </tr>
+                  <tr class="good-row">
+                    <td><b>⭐ INV2</b></td>
+                    <td>56.9%<br><small>M1崩落(36.9%)</small></td>
+                    <td>63.7%</td>
+                    <td>56.2%</td>
+                    <td class="ctr"><b style="color:var(--green)">−0.7%</b><br><small>同儕抗跌</small></td>
+                    <td><b>相對抗跌第二梯隊</b>：2025 年因 M1 單路斷串拉低，在其他機台加速崩毀下，2026 躍居全場第二名。</td>
+                  </tr>
+                  <tr class="good-row">
+                    <td><b>⭐ INV4</b></td>
+                    <td>53.0%<br><small>M3崩落(20.1%)</small></td>
+                    <td><b>64.6%</b></td>
+                    <td><b>57.0%</b></td>
+                    <td class="ctr"><b style="color:var(--green)">+4.0%</b><br><small>逆勢躍升</small></td>
+                    <td><b>躍升全場第一標竿</b>：2025 年因 M3 極端斷串拉低，在全場老化下，憑藉 M1/M2 優質體質成為 2026 標竿機台。</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
+
+        <!-- PANE 2: 2025.04 現勘 MPPT 熱圖基線 -->
+        <div class="s13-pane" id="pane-mppt">
+          <div class="split-55">
+            <div class="fig">
+              <div class="figtitle">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                圖 2-B 各逆變器 MPPT 發電比 (RA) 矩陣熱度圖（2025.04 現勘基線）
+              </div>
+              <img src="assets/chart-mppt-ra-heatmap.png" alt="MPPT RA 發電比熱圖" style="height:270px; object-fit:contain; background:#fff">
+              <div class="figcap">21 路 MPPT 實測發電比矩陣：深藍為健康路（>70%），淡藍與粗體字為嚴重異常路（&lt;50%）。INV5 曾因改設計未列入測試。</div>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>型態類別</th>
+                    <th>代表路數與數值</th>
+                    <th>核心病徵特徵</th>
+                    <th>最可能工程成因研判</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="bad-row">
+                    <td><b>A 單路崩落</b></td>
+                    <td><b>INV4-M3 (20.1%)</b><br><b>INV2-M1 (36.9%)</b></td>
+                    <td>同一台逆變器其他路正常，單一路落差達 40~60 百分點</td>
+                    <td><b>離散型故障</b>：串列斷線、熔絲熔斷、MC4 接頭燒燬或整串模組開路。<b>修復成本極低、效益最大！</b></td>
+                  </tr>
+                  <tr class="hl-row">
+                    <td><b>B 整台均勻偏低</b></td>
+                    <td><b>INV6 (49.2~52.6%)</b><br>極差僅 3.5%</td>
+                    <td>全機 3 路 MPPT 一致性低落於 50% 上下</td>
+                    <td><b>逆變器本體故障</b>：散熱風扇嚴重堵塞引發過溫降載、內部參數設定偏差或 AC 側限流。</td>
+                  </tr>
+                  <tr>
+                    <td><b>C 多路中度偏低</b></td>
+                    <td>INV1-M2/M3 (57/52%)<br>INV7-M2/M3 (47/49%)</td>
+                    <td>發電比普遍落於 45%~60% 區間</td>
+                    <td><b>連續型衰退</b>：EVA 褐化、隱裂蝸牛紋、畜舍排風油垢積累等物理性老化。需清洗試驗與重組。</td>
+                  </tr>
+                  <tr class="good-row">
+                    <td><b>D 健康標竿</b></td>
+                    <td><b>INV8-M1 (87.6%)</b><br>INV3-M1 (85.2%)</td>
+                    <td>同屋頂、同氣候條件下依然維持 80%~88% 高效發電</td>
+                    <td><b>關鍵鐵證</b>：強烈證明案場發電下滑完全來自「設備與串列故障」，絕非地理日照不佳！</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- PANE 3: 2026.05-09 最新實測評比 (Part 5.2 整合) -->
+        <div class="s13-pane" id="pane-inv2026">
+          <div class="split-55">
+            <div class="fig">
+              <div class="figtitle">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                圖 2-C 各逆變器 2026 年 6–8 月平均 vs 9 月 PR（屏東站日射量）
+              </div>
+              <svg viewBox="0 0 440 260" style="width:100%; height:260px; background:#fff; border-radius:6px; display:block">
+                <text x="68" y="42" text-anchor="end" font-size="11" font-weight="700" fill="#12293D">INV4</text>
+                <rect x="75" y="28" width="258.4" height="9" fill="#1968AD" rx="2"/>
+                <rect x="75" y="38" width="228" height="9" fill="#9FB1C0" rx="2"/>
+                <text x="339" y="42" font-size="10.5" fill="#5B7285">64.6 → 57.0（−12%）</text>
+
+                <text x="68" y="67" text-anchor="end" font-size="11" font-weight="700" fill="#12293D">INV2</text>
+                <rect x="75" y="53" width="254.8" height="9" fill="#1968AD" rx="2"/>
+                <rect x="75" y="63" width="224.8" height="9" fill="#9FB1C0" rx="2"/>
+                <text x="336" y="67" font-size="10.5" fill="#5B7285">63.7 → 56.2（−12%）</text>
+
+                <text x="68" y="92" text-anchor="end" font-size="11" font-weight="700" fill="#12293D">INV3</text>
+                <rect x="75" y="78" width="231.2" height="9" fill="#1968AD" rx="2"/>
+                <rect x="75" y="88" width="201.6" height="9" fill="#9FB1C0" rx="2"/>
+                <text x="312" y="92" font-size="10.5" fill="#5B7285">57.8 → 50.4（−13%）</text>
+
+                <text x="68" y="117" text-anchor="end" font-size="11" font-weight="700" fill="#12293D">INV5</text>
+                <rect x="75" y="103" width="208.8" height="9" fill="#1968AD" rx="2"/>
+                <rect x="75" y="113" width="168.8" height="9" fill="#D95F45" rx="2"/>
+                <text x="290" y="117" font-size="10.5" font-weight="800" fill="#D95F45">52.2 → 42.2（−19%）</text>
+
+                <text x="68" y="142" text-anchor="end" font-size="11" font-weight="700" fill="#12293D">INV1</text>
+                <rect x="75" y="128" width="204.8" height="9" fill="#1968AD" rx="2"/>
+                <rect x="75" y="138" width="193.2" height="9" fill="#9FB1C0" rx="2"/>
+                <text x="286" y="142" font-size="10.5" fill="#5B7285">51.2 → 48.3（−6%）</text>
+
+                <text x="68" y="167" text-anchor="end" font-size="11" font-weight="700" fill="#12293D">INV8</text>
+                <rect x="75" y="153" width="202" height="9" fill="#1968AD" rx="2"/>
+                <rect x="75" y="163" width="152" height="9" fill="#D95F45" rx="2"/>
+                <text x="283" y="167" font-size="10.5" font-weight="800" fill="#D95F45">50.5 → 38.0（−25%）</text>
+
+                <text x="68" y="192" text-anchor="end" font-size="11" font-weight="700" fill="#12293D">INV6</text>
+                <rect x="75" y="178" width="161.6" height="9" fill="#1968AD" rx="2"/>
+                <rect x="75" y="188" width="138" height="9" fill="#9FB1C0" rx="2"/>
+                <text x="243" y="192" font-size="10.5" fill="#5B7285">40.4 → 34.5（−15%）</text>
+
+                <text x="68" y="217" text-anchor="end" font-size="11" font-weight="700" fill="#12293D">INV7</text>
+                <rect x="75" y="203" width="141.6" height="9" fill="#1968AD" rx="2"/>
+                <rect x="75" y="213" width="110.8" height="9" fill="#D95F45" rx="2"/>
+                <text x="223" y="217" font-size="10.5" font-weight="800" fill="#D95F45">35.4 → 27.7（−22%）</text>
+
+                <rect x="120" y="240" width="10" height="9" fill="#1968AD" rx="2"/>
+                <text x="134" y="248" font-size="10.5" fill="#12293D">6–8 月平均</text>
+                <rect x="220" y="240" width="10" height="9" fill="#D95F45" rx="2"/>
+                <text x="234" y="248" font-size="10.5" fill="#12293D">9 月（異常突降）</text>
+                <rect x="340" y="240" width="10" height="9" fill="#9FB1C0" rx="2"/>
+                <text x="354" y="248" font-size="10.5" fill="#12293D">9 月全場基準</text>
+              </svg>
+              <div class="figcap">2026 實測：INV2/INV4 相對抗跌（PR>56%）；INV5/7/8 豪雨後出現超額急降。</div>
+            </div>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>逆變器</th>
+                    <th class="num">06月</th>
+                    <th class="num">07月</th>
+                    <th class="num">08月</th>
+                    <th class="num">09月</th>
+                    <th class="num">6–8月均</th>
+                    <th class="ctr">相對 INV4</th>
+                    <th>2026 最新研判</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="bad-row">
+                    <td><b>🔴 INV7</b></td>
+                    <td class="num">35.5</td>
+                    <td class="num">34.8</td>
+                    <td class="num">35.9</td>
+                    <td class="num"><b>27.7</b></td>
+                    <td class="num"><b>35.4</b></td>
+                    <td class="ctr"><b style="color:var(--coral)">0.55→0.49</b></td>
+                    <td><b>組串斷路＋豪雨重創</b>：多組串未併入，9 月再掉</td>
+                  </tr>
+                  <tr class="bad-row">
+                    <td><b>🔴 INV8</b></td>
+                    <td class="num">50.4</td>
+                    <td class="num">50.1</td>
+                    <td class="num">51.0</td>
+                    <td class="num"><b>38.0</b></td>
+                    <td class="num">50.5</td>
+                    <td class="ctr"><b style="color:var(--coral)">0.78→0.67</b></td>
+                    <td><b>9 月突降</b>：豪雨後組串脫落或進水漏電</td>
+                  </tr>
+                  <tr class="bad-row">
+                    <td><b>🔴 INV6</b></td>
+                    <td class="num">40.4</td>
+                    <td class="num">38.3</td>
+                    <td class="num">42.6</td>
+                    <td class="num">34.5</td>
+                    <td class="num"><b>40.4</b></td>
+                    <td class="ctr"><b style="color:var(--coral)">0.63→0.61</b></td>
+                    <td><b>風扇堵塞＋斷串</b>：固定少發 37~45%</td>
+                  </tr>
+                  <tr class="hl-row">
+                    <td><b>🟠 INV5</b></td>
+                    <td class="num">49.9</td>
+                    <td class="num">52.5</td>
+                    <td class="num">54.3</td>
+                    <td class="num"><b>42.2</b></td>
+                    <td class="num">52.2</td>
+                    <td class="ctr">0.81→0.74</td>
+                    <td><b>接地／絕緣故障</b>：豪雨後絕緣劣化跳脫</td>
+                  </tr>
+                  <tr>
+                    <td><b>🟡 INV1</b></td>
+                    <td class="num">47.6</td>
+                    <td class="num">51.7</td>
+                    <td class="num">54.3</td>
+                    <td class="num">48.3</td>
+                    <td class="num">51.2</td>
+                    <td class="ctr">0.79→0.85</td>
+                    <td><b>中度次要</b>：常態老化與油垢，降幅與全場同步</td>
+                  </tr>
+                  <tr class="good-row">
+                    <td><b>🟢 INV3</b></td>
+                    <td class="num">57.3</td>
+                    <td class="num">56.5</td>
+                    <td class="num">59.6</td>
+                    <td class="num">50.4</td>
+                    <td class="num">57.8</td>
+                    <td class="ctr">0.89→0.88</td>
+                    <td><b>輕微損失</b>：中度偏高，穩定運轉</td>
+                  </tr>
+                  <tr class="good-row">
+                    <td><b>⭐ INV2</b></td>
+                    <td class="num">63.3</td>
+                    <td class="num">62.7</td>
+                    <td class="num">65.2</td>
+                    <td class="num">56.2</td>
+                    <td class="num">63.7</td>
+                    <td class="ctr">0.99→0.99</td>
+                    <td><b>同儕基準台</b>：抗跌前段班</td>
+                  </tr>
+                  <tr class="good-row">
+                    <td><b>⭐ INV4</b></td>
+                    <td class="num">64.9</td>
+                    <td class="num">62.4</td>
+                    <td class="num">66.4</td>
+                    <td class="num">57.0</td>
+                    <td class="num">64.6</td>
+                    <td class="ctr">1.00</td>
+                    <td><b>最高效率基準台</b>：全場表現最優</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3 Diagnostic Cards -->
         <div class="three-col" style="margin-top:4px">
           <div class="card coral">
-            <h3>🔬 PR 數值矛盾深度解構</h3>
-            <p>簡報宣稱 PR 由 80% 降至 60%（比例 0.75），但發電量比實為 35.5/54.4 = 0.653！若 2014 PR=80%，反推 2025 實質 PR 僅約 <b>52%~58%</b>。數據不可追溯，整改前須建立屏東氣象測站基準線。</p>
+            <h3>📉 標竿急墜：INV8 突發重創（72% ➔ 38%）</h3>
+            <p>2025 年 INV8 為全場健康標竿（RA 達 87.6%、平均 72.1%），但 1.5 年後跌至 50.5%，9 月豪雨後更跳水至 38.0%（−47%！）。鐵證「健康陣列若無串列告警保護，隨時可能因豪雨進水或熔絲燒毀而突發癱瘓」！</p>
           </div>
           <div class="card amber">
-            <h3>⚡ MPPT1 普遍優於 MPPT2/3</h3>
-            <p>統計顯示 MPPT1 平均 RA 達 68.6%，而 MPPT2/3 平均僅 54.2%！高度懷疑各 MPPT 併接之串數不對稱，或是初期更換不同模組型號時混接失配所導致，需調閱串列單線圖核實。</p>
+            <h3>⏳ 慢性探底：INV7（28%）與 INV6（35%）不作為代價</h3>
+            <p>2025 年 INV6 散熱風扇油垢與 INV7 斷串早已成疾，因巡檢間隔 4 個月無即時告警而放任未修，2026 年雙雙探底至 28%~35%（固定少發 37~45%），成為全場最大失血黑洞，印證「放任衰退只會加速失血」。</p>
           </div>
-          <div class="card green">
-            <h3>🎯 鎖定 A、B 類為優先整改目標</h3>
-            <p>單路崩落（A 類）與 INV6 降載（B 類）合計占所有可回收發電量的 <b>45.1%</b>！這兩類屬於「低成本、高槓桿」之離散型維修，僅需幾萬至十餘萬元即可大幅釋放被壓抑的綠電收益。</p>
+          <div class="card teal">
+            <h3>⚡ 時間移動的整改啟示：故障動態蔓延</h3>
+            <p>跨年度時間移動清楚顯示：電廠加速衰退（−9.44%/年）並非均勻老化，而是「未修復故障慢性加劇」加上「天候誘發突發災情」雙重擴散！推動【A+ 精準整改】刻不容緩，每延後一個月，就多承擔新增機台跳機的巨大風險！</p>
           </div>
         </div>
+
       </div>
       <div class="slide-foot">
-        <div>來源：案場現勘-禾豐.pptx (2025.04) RA 監控實測數據 ｜ 統計回歸分析</div>
+        <div>來源：案場現勘-禾豐 (2025.04) ｜ 電站運轉效率-禾豐.csv (2026.05–09) ｜ CODiS 屏東測站日射量交叉回歸</div>
         <div class="pageno">1.3</div>
       </div>
     </section>
@@ -2746,6 +3121,18 @@ td.ctr,th.ctr{text-align:center}
 
     goHash(location.hash);
   })();
+
+  
+  /* Slide 1.3 Tabs Toggle */
+  document.querySelectorAll('.s13-tab-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var target = btn.getAttribute('data-s13-target');
+      document.querySelectorAll('.s13-tab-btn').forEach(function(b){ b.classList.toggle('active', b===btn); });
+      document.querySelectorAll('.s13-pane').forEach(function(p){
+        p.classList.toggle('active', p.id === target);
+      });
+    });
+  });
 
   /* Table expansion toggle */
   document.querySelectorAll('.table-wrap').forEach(function(wrap){
